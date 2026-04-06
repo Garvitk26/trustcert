@@ -74,7 +74,7 @@ export default function CertificateManagement() {
       if (error) throw new Error(error);
 
       // 3. Sign with Freighter
-      const signed = await signTransaction(xdr, { network: "TESTNET" });
+      const signed = await signTransaction(xdr, { networkPassphrase: "Test SDF Network ; September 2015" });
       
       // 4. Update Database
       const finalRes = await fetch("/api/certificates/revoke", {

@@ -19,14 +19,16 @@ import {
   Globe,
   Settings
 } from "lucide-react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { isConnected, getPublicKey } from "@stellar/freighter-api";
+import { isConnected, getAddress } from "@stellar/freighter-api";
 import { useToast } from "@/lib/context/ToastContext";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import CertificateCard from "@/components/shared/CertificateCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -66,8 +68,8 @@ export default function StudentPortal() {
 
   const checkWallet = async () => {
     if (await isConnected()) {
-      const pk = await getPublicKey();
-      setWallet(pk);
+      const { address } = await getAddress();
+      setWallet(address);
     }
   };
 

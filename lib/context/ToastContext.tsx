@@ -1,7 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
-import { v4 as uuidv4 } from "uuid";
+
+// Using native crypto.randomUUID() for client-side ID generation
 
 export type ToastType = "success" | "error" | "info" | "warning";
 
@@ -23,7 +24,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const showToast = useCallback((message: string, type: ToastType = "info") => {
-    const id = uuidv4();
+    const id = crypto.randomUUID();
     setToasts((prev) => [...prev.slice(-2), { id, message, type }]); // Max 3 toasts
 
     setTimeout(() => {

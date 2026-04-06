@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy instantiate Resend to avoid build-time errors when API key is missing
+const getResend = () => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey && process.env.NODE_ENV === "production") {
+    console.warn("RESEND_API_KEY is missing in production.");
+  }
+  return new Resend(apiKey || "re_123");
+};
 
 export async function sendIssuanceEmail(
   to: string, 
@@ -9,6 +16,7 @@ export async function sendIssuanceEmail(
   verificationUrl: string
 ) {
   try {
+    const resend = getResend();
     const { data, error } = await resend.emails.send({
       from: "TrustCert <notifications@trustcert.app>",
       to: [to],

@@ -19,7 +19,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export default function InstitutionDashboard() {
-  const { currentInstitution, loading } = useInstitution();
+  const { activeInstitution, loading } = useInstitution();
 
   if (loading) return <DashboardSkeleton />;
 
@@ -29,7 +29,7 @@ export default function InstitutionDashboard() {
         <div className="space-y-1">
           <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Command Center</h1>
           <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.4em] italic leading-none">
-             Established for {currentInstitution?.name}
+             Established for {activeInstitution?.name}
           </p>
         </div>
         <Button asChild className="h-14 px-8 btn-primary rounded-2xl shadow-lg shadow-indigo-500/20 font-black uppercase tracking-widest italic text-xs">

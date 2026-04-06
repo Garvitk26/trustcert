@@ -6,7 +6,8 @@ import Institution from "@/lib/models/Institution";
 import Invite from "@/lib/models/Invite";
 import crypto from "crypto";
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
@@ -17,7 +18,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
 
   // Validate admin+ access
   const institution = await Institution.findOne({
-    _id: params.id,
+    _id: id,
     members: { $elemMatch: { userId: session.user.id, role: { $in: ["owner", "admin"] } } }
   });
 
@@ -28,7 +29,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   expiresAt.setHours(expiresAt.getHours() + 72);
 
   await Invite.create({
-    institutionId: params.id,
+    institutionId: id,
     email,
     role,
     token,

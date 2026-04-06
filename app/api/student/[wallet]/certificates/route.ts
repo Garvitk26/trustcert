@@ -5,10 +5,10 @@ import Institution from "@/lib/models/Institution";
 
 export async function GET(
   req: Request,
-  { params }: { params: { wallet: string } }
+  { params }: { params: Promise<{ wallet: string }> }
 ) {
   try {
-    const { wallet } = params;
+    const { wallet } = await params;
     await dbConnect();
 
     // Fetch public certificates linked to this wallet

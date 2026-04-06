@@ -3,11 +3,12 @@ import dbConnect from "@/lib/db";
 import Invite from "@/lib/models/Invite";
 import Institution from "@/lib/models/Institution";
 
-export async function GET(req: Request, { params }: { params: { token: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
   await dbConnect();
 
   const invite = await Invite.findOne({ 
-    token: params.token,
+    token: token,
     usedAt: { $exists: false },
     expiresAt: { $gt: new Date() }
   });

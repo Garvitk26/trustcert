@@ -4,17 +4,17 @@ import Certificate from "@/lib/models/Certificate";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const certId = params.id;
-    if (!certId) {
+    const { id } = await params;
+    if (!id) {
       return NextResponse.json({ error: "Missing Certificate ID" }, { status: 400 });
     }
 
     await dbConnect();
 
-    const certificate = await Certificate.findOne({ certId }).populate("institutionId");
+    const certificate = await Certificate.findOne({ certId: id }).populate("institutionId");
 
     if (!certificate) {
       return NextResponse.json({ error: "Certificate not found" }, { status: 404 });

@@ -60,4 +60,4 @@ TrustCert uses the **Stellar Testnet** for alpha development.
 
 ---
 
-### Built with 💜 by Antigravity in the 3001v-Enrolled Context.
+

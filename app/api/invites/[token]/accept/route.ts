@@ -5,14 +5,15 @@ import dbConnect from "@/lib/db";
 import Invite from "@/lib/models/Invite";
 import Institution from "@/lib/models/Institution";
 
-export async function POST(req: Request, { params }: { params: { token: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   await dbConnect();
 
   const invite = await Invite.findOne({ 
-    token: params.token,
+    token: token,
     usedAt: { $exists: false },
     expiresAt: { $gt: new Date() }
   });
