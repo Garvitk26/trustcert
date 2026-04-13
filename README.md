@@ -1,85 +1,146 @@
-# TrustCert — Decentralized Institutional Registry
+# TrustCert — On-chain Certificate Verification
 
-![TrustCert Hero Banner](./public/screenshots/hero.png)
+![CI](https://github.com/parth1241/trustcert/actions/workflows/ci.yml/badge.svg)
+![Vercel](https://img.shields.io/badge/deployed-vercel-black)
+![Stellar](https://img.shields.io/badge/blockchain-Stellar%20Testnet-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-TrustCert is a high-fidelity academic credentialing platform built on the **Stellar Blockchain** and **Next.js 14**. It provides institutions with an immutable command center for issuing, verifying, and managing professional certifications.
+## 🌐 Live Demo
+**[YOUR_VERCEL_URL]**
+
+> Built on **Stellar Testnet** — no real funds used.
+
+## 📱 Screenshots
+
+### Wallet Connected + Balance Display
+> Screenshot of WalletStatusBar showing connected address + XLM balance.
+
+### Successful Testnet Transaction
+> Screenshot of TransactionSuccessCard after issuing a certificate.
+> Shows: txHash, amount, wallet address, updated balance, Stellar Expert link.
+
+### Mobile Responsive View
+> Screenshot of the app on 375px mobile width.
+
+### CI/CD Pipeline
+> GitHub Actions tab showing green CI run.
 
 ---
 
-## 🖼️ Application Preview
+## 📋 What It Does
+TrustCert is a decentralized platform for issuing and verifying academic and professional certificates. By leveraging the Stellar blockchain, TrustCert ensures that every certificate is immutable, verifiable, and globally accessible. Issuers can create certificates as on-chain records, and verifiers can instantly validate authenticity by checking the blockchain, eliminating credential fraud and the need for manual background checks.
 
-<table border="0">
-  <tr>
-    <td width="50%">
-      <p align="center"><b>Institutional Dashboard</b></p>
-      <img src="./public/screenshots/homepage.png" alt="Homepage" width="100%">
-    </td>
-    <td width="50%">
-      <p align="center"><b>Student Management Hub</b></p>
-      <img src="./public/screenshots/student_portal.png" alt="Student Portal" width="100%">
-    </td>
-  </tr>
-</table>
+## ⚙️ Tech Stack
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 14 App Router + TypeScript |
+| Styling | TailwindCSS + shadcn/ui |
+| Blockchain | Stellar SDK + Freighter Wallet |
+| Database | MongoDB Atlas |
+| Auth | NextAuth.js (JWT) |
+| Deployment | Vercel |
+| Network | Stellar Testnet |
 
----
+## 🔗 Blockchain Details
 
-## 🚀 Quick Start
+### Network
+- **Network:** Stellar Testnet
+- **Horizon:** https://horizon-testnet.stellar.org
+- **Explorer:** https://stellar.expert/explorer/testnet
 
-### 1. Prerequisites
-- **Node.js** 18.x or later
-- **MongoDB Atlas** account
-- **Freighter Wallet** extension (for institutional signing)
+### Wallet Addresses Used
+| Role | Address | Purpose |
+|------|---------|---------|
+| Issuer | [WALLET_ADDRESS] | Minting/Issuing certificates |
+| Recipient | [WALLET_ADDRESS] | Receiving certificate proof |
 
-### 2. Installation
+### Asset / Token Details
+- **Asset Code:** XLM (Native)
+- **Explorer Link:** https://stellar.expert/explorer/testnet/asset/XLM
+
+## 🚀 Setup Instructions (Run Locally)
+
+### Prerequisites
+- [ ] Node.js 18+
+- [ ] MongoDB Atlas account
+- [ ] Freighter wallet extension
+- [ ] Git
+
+### Step 1 — Clone Repository
 ```bash
-git clone https://github.com/your-username/trustcert.git
+git clone https://github.com/parth1241/trustcert.git
 cd trustcert
+```
+
+### Step 2 — Install Dependencies
+```bash
 npm install
 ```
 
-### 3. Environment Setup
-Create a `.env.local` file in the root directory:
-```env
-# Database & Auth
-MONGODB_URI=mongodb+srv://...
-NEXTAUTH_SECRET=your_secret_hash
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-
-# Stellar Configuration
-NEXT_PUBLIC_STELLAR_NETWORK=testnet
-NEXT_PUBLIC_HORIZON_URL=https://horizon-testnet.stellar.org
-
-# Optional
-ENABLE_ANALYTICS=true
+### Step 3 — Configure Environment Variables
+```bash
+cp .env.example .env.local
 ```
 
-### 4. Run Development Server
+### Step 4 — Set Up MongoDB Atlas
+1. Visit https://cloud.mongodb.com and create a free M0 cluster.
+2. Add a database user and allow network access (0.0.0.0/0).
+3. Copy the driver connection string into `MONGODB_URI` in `.env.local`.
+
+### Step 5 — Set Up Freighter Wallet
+1. Install Freighter and switch to **Testnet**.
+2. Fund your wallet at https://friendbot.stellar.org/?addr=YOUR_PUBLIC_KEY.
+
+### Step 6 — Run Development Server
 ```bash
 npm run dev
 ```
 
-## 🛠️ Key Features
+### Step 7 — Create Account + Connect Wallet
+1. Visit http://localhost:3000/signup
+2. After login, click "Connect Wallet" and approve in Freighter.
 
-- **Stellar Settlement**: All credentials are hash-settled on the Stellar ledger via `ManageData` operations.
-- **Institutional Command Center**: Real-time analytics, verification trends, and geographic insights.
-- **Headless API**: Public endpoints (`/api/v1/verify`) with CORS support for third-party HR portals.
-- **Phishing Protection**: High-fidelity coordination between registered domains and verification hostnames.
-- **Master Registry**: A searchable, indexed ledger of all issued and revoked credentials.
+### Step 8 — Test a Transaction
+1. Sign up as Issuer.
+2. Certificates → Issue New Certificate.
+3. Fill details and click "Publish to Stellar".
+4. Approve in Freighter → transaction confirmed.
 
-## 🔒 Security & Performance
+## 📁 Project Structure
+```
+/src
+  /app
+    /(auth)          → Login + signup pages
+    /issuer          → Issuer dashboard
+    /verify          → Public verification portal
+    /api             → Next.js API routes
+  /components
+    /shared          → Reusable components
+    /ui              → shadcn/ui components
+  /lib
+    db.ts            ← MongoDB connection
+    stellar.ts       ← Stellar SDK functions
+  /hooks
+    useWallet.ts     ← Centralized wallet state
+/middleware.ts       ← Route protection
+```
 
-- **Zero-Emerald Branding**: Strict Indigo/Violet/Fuchsia visual system with 3001v-Enrolled coordination.
-- **Hashed API Keys**: Institutional secret keys are SHA-256 hashed on the identity registry.
-- **Optimized Indexing**: MongoDB text indexes on recipient names and unique indexes on certificate IDs.
-- **HSTS & CSP**: Hardened production headers enforced via `vercel.json`.
+## 🔒 Security
+- Client-side signing via Freighter.
+- No storage of private keys.
+- Role-based access control via NextAuth middleware.
 
-## 🌐 Blockchain Integration
+## 🌱 Deployment (Vercel)
+1. Push to GitHub.
+2. Import to Vercel and add environment variables.
+3. Update `NEXTAUTH_URL` to your Vercel URL.
 
-TrustCert uses the **Stellar Testnet** for alpha development.
-- **Institution Account**: Create an account on the [Stellar Laboratory](https://laboratory.stellar.org/#account-creator?network=testnet) and fund it via **Friendbot**.
-- **Signing**: All administrative actions (Issuance/Revocation) require a cryptographic signature from the institution's primary wallet.
+## 📝 Commit History
+10+ meaningful commits following conventional format.
 
----
+## 🏆 Hackathon
+Built for the **Antigravity x Stellar Builder Track Belt Progression**.
+- Level 1-4 Complete ✅
 
-
-
+## 📄 License
+MIT — see LICENSE file

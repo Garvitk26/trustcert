@@ -1,210 +1,210 @@
-import * as StellarSdk from "@stellar/stellar-sdk";
+import {
+  Server,
+  Networks,
+  Operation,
+  TransactionBuilder,
+  BASE_FEE,
+  Memo,
+  Asset,
+  Keypair
+} from '@stellar/stellar-sdk'
+import { 
+  isConnected, 
+  getPublicKey, 
+  getNetworkDetails,
+  signTransaction 
+} from '@stellar/freighter-api'
 
-/**
- * Stellar SDK Configuration
- */
-const NETWORK_PASSPHRASE = 
-  process.env.NEXT_PUBLIC_STELLAR_NETWORK === "mainnet" 
-    ? StellarSdk.Networks.PUBLIC 
-    : StellarSdk.Networks.TESTNET;
+const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON 
+  || 'https://horizon-testnet.stellar.org'
+const NETWORK_PASSPHRASE = Networks.TESTNET
+const server = new Server(HORIZON_URL)
 
-const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON || "https://horizon-testnet.stellar.org";
+// ── 1. WALLET SETUP ──────────────────────────────────────────
 
-export const server = new StellarSdk.Horizon.Server(HORIZON_URL);
-
-/**
- * Get the current Stellar Network configuration
- */
-export function getNetworkConfig() {
-  return {
-    network: process.env.NEXT_PUBLIC_STELLAR_NETWORK || "testnet",
-    horizon: HORIZON_URL,
-    passphrase: NETWORK_PASSPHRASE,
-  };
+export async function isFreighterInstalled(): Promise<boolean> {
+  const result = await isConnected();
+  return !result.error && result.isConnected;
 }
 
-/**
- * Fetch account details from Horizon
- */
-export async function getAccount(publicKey: string) {
+export async function isFreighterConnected(): Promise<boolean> {
+  const result = await isConnected();
+  return !result.error && result.isConnected;
+}
+
+export async function getFreighterNetwork(): Promise<string> {
   try {
-    const account = await server.loadAccount(publicKey);
-    return account;
-  } catch (error) {
-    console.error("Error loading Stellar account:", error);
-    return null;
+    const details = await getNetworkDetails();
+    if (details.networkPassphrase === Networks.PUBLIC) return 'PUBLIC';
+    if (details.networkPassphrase === Networks.TESTNET) return 'TESTNET';
+    if (details.networkPassphrase === Networks.FUTURENET) return 'FUTURENET';
+    return 'UNKNOWN';
+  } catch {
+    return 'UNKNOWN';
   }
 }
 
-export interface CertMetadataInput {
-  recipientName: string;
-  recipientEmail: string;
-  courseTitle: string;
-  issueDate: string | Date;
-  certId: string;
-}
+// ── 2. WALLET CONNECT / DISCONNECT ───────────────────────────
 
-/**
- * Get the native (XLM) balance of an account
- */
-export async function getAccountBalance(publicKey: string) {
+export async function connectFreighter(): Promise<{
+  publicKey: string
+  network: string
+}> {
+  const installed = await isFreighterInstalled();
+  if (!installed) throw new Error('Freighter not installed');
+
   try {
-    const account = await getAccount(publicKey);
-    if (!account) return "0";
-    
-    const nativeBalance = account.balances.find((b) => b.asset_type === "native") as StellarSdk.Horizon.HorizonApi.BalanceLineNative;
-    return nativeBalance ? nativeBalance.balance : "0";
-  } catch (error) {
-    console.error("Error fetching balance:", error);
-    return "0";
-  }
-}
-
-/**
- * Check if the account is funded on the current network
- */
-export async function isAccountFunded(publicKey: string) {
-  const account = await getAccount(publicKey);
-  return account !== null;
-}
-
-/**
- * Verify a Certificate on the Stellar Blockchain
- * Checks for a ManageData operation matching the certificate hash
- * 
- * @param institutionAddress The public key of the issuing institution
- * @param certHash The unique hash of the certificate to verify
- */
-export async function verifyCertificateOnChain(institutionAddress: string, certHash: string) {
-  try {
-    const account = await server.loadAccount(institutionAddress);
-    
-    // We expect the certHash to be stored as a key in the account data
-    // Key: cert_[hash_prefix], Value: full_hash_timestamp
-    const dataEntry = account.data_attr[certHash];
-    
-    if (dataEntry) {
-      // Data entries are base64 encoded strings
-      const decodedValue = Buffer.from(dataEntry, "base64").toString();
-      return {
-        verified: true,
-        data: decodedValue,
-        institution: institutionAddress
-      };
-    }
-    
-    return { verified: false, institution: institutionAddress };
-  } catch (error) {
-    console.error("Stellar Verification Error:", error);
-    return { verified: false, error: "Account not found or ledger error" };
-  }
-}
-
-/**
- * Prepare a Certificate Issuance Transaction
- * Note: The actual signing must be done by the client (Freighter) 
- * but the backend provides the transaction structure.
- */
-/**
- * Prepare a Certificate Issuance Transaction
- * Includes:
- * 1. Payment (micro-amount) to student wallet or self-payment
- * 2. ManageData for immutable cert hash
- * 3. Memo.text for Cert UUID
- */
-export async function buildIssuanceTransaction(
-  issuerPublicKey: string, 
-  studentPublicKey: string | undefined,
-  certId: string, 
-  certHash: string
-) {
-  try {
-    const account = await server.loadAccount(issuerPublicKey);
-    const destination = studentPublicKey || issuerPublicKey; // Self-payment fallback
-    
-    const transaction = new StellarSdk.TransactionBuilder(account, {
-      fee: StellarSdk.BASE_FEE,
-      networkPassphrase: NETWORK_PASSPHRASE,
-    })
-      .addOperation(
-        StellarSdk.Operation.payment({
-          destination,
-          asset: StellarSdk.Asset.native(),
-          amount: "0.00001", // Micro-payment
-        })
-      )
-      .addOperation(
-        StellarSdk.Operation.manageData({
-          name: `cert_${certId.substring(0, 10)}`,
-          value: certHash,
-        })
-      )
-      .addMemo(StellarSdk.Memo.text(certId.substring(0, 28))) // Memo limit is 28 chars
-      .setTimeout(StellarSdk.TimeoutInfinite)
-      .build();
-
-    return transaction.toXDR();
-  } catch (error) {
-    console.error("Error building transaction:", error);
+    const publicKey = await getPublicKey();
+    const network = await getFreighterNetwork();
+    if (network !== 'TESTNET') throw new Error('Please switch Freighter to Stellar Testnet');
+    return { publicKey, network };
+  } catch (error: any) {
+    if (error.message.includes('User rejected')) throw new Error('User rejected connection');
     throw error;
   }
 }
 
-/**
- * Helper to compact cert data into a JSON string
- */
-/**
- * Fetch raw transaction data from Horizon using a hash
- */
-export async function fetchStellarTransaction(txHash: string) {
+export function disconnectWallet(): { success: boolean } {
+  return { success: true };
+}
+
+// ── 3. BALANCE HANDLING ───────────────────────────────────────
+
+export async function getXLMBalance(address: string): Promise<number> {
+  try {
+    const account = await server.loadAccount(address);
+    const nativeBalance = account.balances.find(b => b.asset_type === 'native');
+    return nativeBalance ? parseFloat(nativeBalance.balance) : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export async function fundWithFriendbot(address: string): Promise<{
+  success: boolean,
+  message: string
+}> {
+  try {
+    const response = await fetch(`https://friendbot.stellar.org?addr=${address}`);
+    if (response.ok) return { success: true, message: 'Wallet funded with 10,000 XLM' };
+    const data = await response.json();
+    return { success: false, message: data.detail || 'Friendbot funding failed' };
+  } catch {
+    return { success: false, message: 'Network error funding wallet' };
+  }
+}
+
+// ── 4. TRANSACTION FLOW ───────────────────────────────────────
+
+export type SendXLMResult = 
+  | {
+      success: true
+      txHash: string
+      ledger: number
+      timestamp: string
+      amount: string
+      destination: string
+      fee: string
+    }
+  | {
+      success: false
+      error: string
+      code?: string
+    }
+
+export async function sendXLM(params: {
+  sourcePublicKey: string
+  destinationAddress: string
+  amountXLM: string
+  memo?: string
+}): Promise<SendXLMResult> {
+  try {
+    const sourceAccount = await server.loadAccount(params.sourcePublicKey);
+    const builder = new TransactionBuilder(sourceAccount, {
+      fee: BASE_FEE,
+      networkPassphrase: NETWORK_PASSPHRASE,
+    }).addOperation(
+      Operation.payment({
+        destination: params.destinationAddress,
+        asset: Asset.native(),
+        amount: params.amountXLM,
+      })
+    );
+
+    if (params.memo) builder.addMemo(Memo.text(params.memo));
+    const transaction = builder.setTimeout(30).build();
+    const xdr = transaction.toXDR();
+    const signedXdr = await signTransaction(xdr, { network: 'TESTNET' });
+    const result = await server.submitTransaction(signedXdr);
+
+    return {
+      success: true,
+      txHash: result.hash,
+      ledger: result.ledger,
+      timestamp: new Date().toISOString(),
+      amount: params.amountXLM,
+      destination: params.destinationAddress,
+      fee: (parseFloat(BASE_FEE) / 10000000).toString(),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      error: parseStellarError(error),
+      code: error.response?.data?.extras?.result_codes?.transaction || 'error',
+    };
+  }
+}
+
+export function validateStellarAddress(address: string): {
+  valid: boolean,
+  error?: string
+} {
+  try {
+    Keypair.fromPublicKey(address);
+    return { valid: true };
+  } catch {
+    return { valid: false, error: 'Invalid Stellar address format' };
+  }
+}
+
+export async function getTransactionByHash(txHash: string): Promise<{
+  txHash: string
+  ledger: number
+  createdAt: string
+  sourceAccount: string
+  fee: string
+  memo?: string
+  successful: boolean
+} | null> {
   try {
     const tx = await server.transactions().transaction(txHash).call();
-    return tx;
-  } catch (error) {
-    console.error("Error fetching Stellar transaction:", error);
+    return {
+      txHash: tx.hash,
+      ledger: tx.ledger_attr,
+      createdAt: tx.created_at,
+      sourceAccount: tx.source_account,
+      fee: tx.fee_value,
+      memo: tx.memo,
+      successful: tx.successful,
+    };
+  } catch {
     return null;
   }
 }
 
-/**
- * Revoke a Certificate on the Stellar Blockchain
- * Deletes the ManageData entry for the certificate
- */
-export async function buildRevocationTransaction(issuerPublicKey: string, certId: string) {
-  try {
-    const account = await server.loadAccount(issuerPublicKey);
-    
-    const transaction = new StellarSdk.TransactionBuilder(account, {
-      fee: StellarSdk.BASE_FEE,
-      networkPassphrase: NETWORK_PASSPHRASE,
-    })
-      .addOperation(
-        StellarSdk.Operation.manageData({
-          name: `cert_${certId.substring(0, 10)}`,
-          value: null as unknown as string, // Null deletes the key
-        })
-      )
-      .addMemo(StellarSdk.Memo.text(`REVOKE_${certId.substring(0, 20)}`))
-      .setTimeout(StellarSdk.TimeoutInfinite)
-      .build();
+export function parseStellarError(error: any): string {
+  const resultCodes = error.response?.data?.extras?.result_codes;
+  const mainCode = resultCodes?.transaction;
+  const opCode = resultCodes?.operations?.[0];
 
-    return transaction.toXDR();
-  } catch (error) {
-    console.error("Error building revocation transaction:", error);
-    throw error;
+  const errorMap: Record<string, string> = {
+    'op_underfunded': 'Insufficient XLM balance for this transaction',
+    'op_no_destination': 'Destination wallet does not exist on Stellar yet',
+    'tx_bad_seq': 'Transaction sequence error. Please try again.',
+    'op_low_reserve': 'Your wallet needs more XLM to meet the minimum reserve',
+    'tx_insufficient_fee': 'Transaction fee too low. Please try again.',
   }
-}
 
-/**
- * Helper to compact cert data into a JSON string
- */
-export function createCertMetadata(data: CertMetadataInput) {
-  return JSON.stringify({
-    n: data.recipientName,
-    e: data.recipientEmail,
-    c: data.courseTitle,
-    d: data.issueDate,
-    i: data.certId
-  });
+  if (error.message === 'User rejected') return 'Transaction rejected in Freighter';
+  return errorMap[opCode] || errorMap[mainCode] || error.message || 'An unexpected Stellar error occurred';
 }
-
