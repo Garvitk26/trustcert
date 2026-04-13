@@ -82,8 +82,8 @@ export default function Home() {
                 <span>Next-Gen Academic Infrastructure</span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-[1.1]">
-                <span className="block">Decentralized Trust.</span>
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.1]">
+                <span className="block italic">Decentralized Trust.</span>
                 <TypewriterHeadline 
                   phrases={[
                     "Verify Academic Credentials", 

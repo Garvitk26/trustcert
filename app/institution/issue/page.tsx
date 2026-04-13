@@ -24,6 +24,8 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import CertificatePreview from "@/components/shared/CertificatePreview";
 import IssuanceProgress from "@/components/shared/IssuanceProgress";
+import TransactionSuccessCard from "@/components/shared/TransactionSuccessCard";
+import { getAccountBalance } from "@/lib/stellar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -56,6 +58,9 @@ export default function IssuanceWizard() {
   const [isIssuing, setIsIssuing] = useState(false);
   const [issuanceStage, setIssuanceStage] = useState(1);
   const [issuanceError, setIssuanceError] = useState<string | null>(null);
+  const [showSuccessCard, setShowSuccessCard] = useState(false);
+  const [lastTxHash, setLastTxHash] = useState("");
+  const [updatedBalance, setUpdatedBalance] = useState("0");
 
   // Bulk Upload
   const handleCSVUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,8 +165,17 @@ export default function IssuanceWizard() {
       });
 
       if (!finalRes.ok) throw new Error("Ledger settlement failed.");
+      const { txHash: confirmedHash } = await finalRes.json();
       
+      // Fetch fresh balance after tx
+      if (activeInstitution?.walletAddress) {
+        const bal = await getAccountBalance(activeInstitution.walletAddress);
+        setUpdatedBalance(bal);
+      }
+
+      setLastTxHash(confirmedHash);
       setIssuanceStage(5); // Success!
+      setShowSuccessCard(true);
       showToast("Certificates issued effectively on-chain.", "success");
       
     } catch (err: any) {
@@ -176,11 +190,35 @@ export default function IssuanceWizard() {
       
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
         <AnimatePresence>
-          {isIssuing && (
+          {isIssuing && !showSuccessCard && (
             <IssuanceProgress 
               currentStage={issuanceStage} 
               error={issuanceError} 
               onClose={() => setIsIssuing(false)} 
+            />
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {showSuccessCard && (
+            <TransactionSuccessCard 
+              title="Certificates Issued!"
+              subtitle={`${data.length} credential${data.length > 1 ? 's' : ''} effectively anchored to Stellar`}
+              txHash={lastTxHash}
+              amount={(data.length * 0.00001).toString()}
+              walletAddress={activeInstitution?.walletAddress}
+              walletBalance={updatedBalance}
+              extraDetails={[
+                { label: "Institution", value: activeInstitution?.name || "" },
+                { label: "Template", value: template },
+                { label: "Records", value: data.length.toString() }
+              ]}
+              onClose={() => {
+                setShowSuccessCard(false);
+                setIsIssuing(false);
+                setStep(1);
+                setData([]);
+              }}
             />
           )}
         </AnimatePresence>

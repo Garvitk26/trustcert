@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import { 
@@ -12,18 +12,26 @@ import {
   Settings, 
   LogOut, 
   Clock,
-  User
+  User,
+  AlertTriangle,
+  Menu,
+  X
 } from "lucide-react";
+import { MobilePreviewBanner } from "@/src/components/shared/MobilePreviewBanner";
 import Link from "next/link";
 import { InstitutionProvider, useInstitution } from "@/lib/context/InstitutionContext";
 import DashboardSkeleton from "@/components/shared/DashboardSkeleton";
 import InstitutionSwitcher from "@/components/shared/InstitutionSwitcher";
+import WalletStatusBar from "@/src/components/shared/WalletStatusBar";
+import Level1StatusBadge from "@/src/components/shared/Level1StatusBadge";
 import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
+import { Networks } from "@stellar/stellar-sdk";
 
 export default function InstitutionLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [wrongNetwork, setWrongNetwork] = useState(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -33,46 +41,83 @@ export default function InstitutionLayout({ children }: { children: React.ReactN
     }
   }, [status, session, router]);
 
+  useEffect(() => {
+    async function checkNetwork() {
+      if (typeof window === 'undefined') return
+      try {
+        const { getNetworkDetails } = await import('@stellar/freighter-api')
+        const details = await getNetworkDetails()
+        if (details.networkPassphrase !== Networks.TESTNET) {
+          setWrongNetwork(true)
+        } else {
+          setWrongNetwork(false)
+        }
+      } catch {
+        // Freighter not installed
+      }
+    }
+    checkNetwork()
+    const interval = setInterval(checkNetwork, 10000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   if (status === "loading") return <DashboardSkeleton />;
   if (!session || session.user.role !== "institution") return null;
 
   return (
     <InstitutionProvider>
-      <div className="flex min-h-screen bg-[#020d0a] selection:bg-indigo-500/30">
-        <Sidebar session={session} />
-        <main className="flex-1 flex flex-col relative z-10">
+      <div className="flex min-h-screen bg-[#020d0a] selection:bg-indigo-500/30 relative">
+        <Sidebar session={session} isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
+        
+        {/* Mobile Toggle Button */}
+        <button 
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="fixed top-20 left-4 z-[60] bg-indigo-600 text-white p-2 rounded-lg lg:hidden shadow-lg border border-indigo-400/50"
+        >
+          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        <main className="flex-1 flex flex-col relative z-10 w-full overflow-x-hidden">
+          {wrongNetwork && (
+            <div className="w-full bg-rose-600 text-white py-2 px-4 flex items-center justify-center gap-2 z-[100] animate-in slide-in-from-top duration-300">
+              <AlertTriangle className="h-4 w-4" />
+              <span className="text-xs font-bold uppercase tracking-wider text-center">
+                Wrong Network: Switch Freighter to Stellar Testnet to use TrustCert
+              </span>
+            </div>
+          )}
+          <WalletStatusBar />
           <div className="absolute inset-0 bg-dot-grid opacity-50 pointer-events-none" />
-          <div className="relative flex-1 p-8 md:p-12 overflow-y-auto">
+          <div className="relative flex-1 p-4 sm:p-8 md:p-12 overflow-y-auto w-full">
              {children}
           </div>
         </main>
+        <Level1StatusBadge />
+        <MobilePreviewBanner />
       </div>
     </InstitutionProvider>
   );
 }
 
-function Sidebar({ session }: { session: any }) {
+function Sidebar({ session, isOpen, setIsOpen }: { session: any, isOpen: boolean, setIsOpen: (o: boolean) => void }) {
   const pathname = usePathname();
   
-  const navItems = [
-    { label: "Dashboard", icon: LayoutDashboard, href: "/institution/dashboard", color: "indigo" },
-    { label: "Issue Certificate", icon: FilePlus, href: "/institution/issue", color: "violet" },
-    { label: "Certificates", icon: Award, href: "/institution/certificates", color: "fuchsia" },
-    { label: "Analytics", icon: BarChart3, href: "/institution/analytics", color: "amber" },
-    { label: "Settings", icon: Settings, href: "/institution/settings/account", color: "slate" },
-  ];
-
-  const colors: Record<string, string> = {
-    indigo: "hover:text-indigo-400 group-hover:bg-indigo-500/10 text-indigo-400 border-indigo-500",
-    violet: "hover:text-violet-400 group-hover:bg-violet-500/10 text-violet-400 border-violet-500",
-    fuchsia: "hover:text-fuchsia-400 group-hover:bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500",
-    amber: "hover:text-amber-400 group-hover:bg-amber-500/10 text-amber-400 border-amber-500",
-    slate: "hover:text-slate-400 group-hover:bg-slate-500/10 text-slate-400 border-slate-500",
-  };
-
   return (
-    <aside className="w-64 bg-[#0a1a14] border-r border-white/5 flex flex-col h-screen sticky top-0 z-50 shrink-0">
-      {/* Logo Section */}
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] lg:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <aside className={cn(
+        "w-64 bg-[#0a1a14] border-r border-white/5 flex flex-col h-screen sticky top-0 md:relative md:top-0 z-50 shrink-0 transition-transform duration-300 lg:translate-x-0",
+        isOpen ? "translate-x-0 fixed" : "-translate-x-full fixed lg:relative"
+      )}>
       <div className="p-8">
         <Link href="/" className="flex items-center gap-2 group">
           <div className="h-8 w-8 bg-gradient-to-tr from-indigo-600 to-violet-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -82,12 +127,10 @@ function Sidebar({ session }: { session: any }) {
         </Link>
       </div>
 
-      {/* Institution Switcher Section */}
       <div className="px-6 mb-8">
         <InstitutionSwitcher />
       </div>
 
-      {/* Navigation Section */}
       <nav className="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
@@ -110,7 +153,6 @@ function Sidebar({ session }: { session: any }) {
         })}
       </nav>
 
-      {/* User Footer Section */}
       <div className="p-6 border-t border-white/5 bg-black/20">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20 shadow-inner">

@@ -15,10 +15,11 @@ import {
   CheckCircle2,
   Link as LinkIcon,
   Plus,
-  Zap,
-  Globe,
+  History,
   Settings
 } from "lucide-react";
+import WalletManager from "@/src/components/shared/WalletManager";
+import SendXLMPanel from "@/src/components/shared/SendXLMPanel";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { isConnected, getAddress } from "@stellar/freighter-api";
@@ -138,6 +139,27 @@ export default function StudentPortal() {
                  </div>
               </div>
            </div>
+        </div>
+
+        {/* Stellar Wallet Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <WalletManager />
+          <div className="space-y-8">
+            <SendXLMPanel compact />
+            <div className="card-surface border-indigo-500/10 p-8 rounded-[2rem] bg-indigo-500/[0.02] relative overflow-hidden group">
+               <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-sm font-black text-white italic tracking-widest uppercase flex items-center gap-2">
+                    <History size={16} className="text-indigo-400" />
+                    Ledger Events
+                  </h3>
+               </div>
+               <div className="space-y-4 opacity-40 group-hover:opacity-100 transition-opacity">
+                  <p className="text-[10px] text-muted-foreground font-bold italic text-center py-4">
+                    Synchronize Freighter wallet to decode<br/>on-chain identity events
+                  </p>
+               </div>
+            </div>
+          </div>
         </div>
 
         {/* Dashboard Actions */}

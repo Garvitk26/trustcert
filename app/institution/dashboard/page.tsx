@@ -17,6 +17,9 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import WalletManager from "@/src/components/shared/WalletManager";
+import SendXLMPanel from "@/src/components/shared/SendXLMPanel";
+import { History } from "lucide-react";
 
 export default function InstitutionDashboard() {
   const { activeInstitution, loading } = useInstitution();
@@ -74,6 +77,32 @@ export default function InstitutionDashboard() {
           trendUp={true} 
           color="sky"
         />
+      </div>
+
+      {/* Stellar Wallet Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1">
+          <WalletManager />
+        </div>
+        <div className="lg:col-span-1">
+          <SendXLMPanel compact />
+        </div>
+        <div className="lg:col-span-1">
+          <div className="p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-sm h-full flex flex-col">
+            <h3 className="text-sm font-black text-white italic tracking-tighter uppercase mb-6 flex items-center gap-2">
+              <History size={16} className="text-indigo-400" />
+              On-Chain Ledger
+            </h3>
+            <div className="flex-1 flex flex-col items-center justify-center gap-4 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all">
+                <div className="p-4 rounded-full bg-indigo-500/10 border border-indigo-500/20">
+                    <Activity size={32} className="text-indigo-400 animate-pulse" />
+                </div>
+                <p className="text-[10px] font-black uppercase tracking-widest italic text-center leading-relaxed">
+                    Connect wallet to decode<br/>live transaction stream
+                </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
