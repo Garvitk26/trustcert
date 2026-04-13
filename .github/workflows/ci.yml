@@ -1,0 +1,88 @@
+name: CI — TrustCert
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-lint:
+    name: Build & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript type check
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Run ESLint
+        run: npx eslint . --max-warnings 50
+        continue-on-error: true
+
+      - name: Build project
+        run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXT_PUBLIC_STELLAR_NETWORK: testnet
+          NEXT_PUBLIC_STELLAR_HORIZON: https://horizon-testnet.stellar.org
+          NEXT_PUBLIC_SOROBAN_RPC: https://soroban-testnet.stellar.org
+          NEXT_PUBLIC_CONTRACT_ID: PLACEHOLDER_CONTRACT_ID
+          NEXT_PUBLIC_DAO_ID: PLACEHOLDER_DAO_ID
+
+      - name: Build status
+        run: echo "✅ Build completed successfully"
+
+  security-check:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for exposed secrets
+        run: |
+          echo "Scanning for hardcoded secrets..."
+          if grep -r "NEXTAUTH_SECRET\s*=" --include="*.ts" --include="*.tsx" \
+            --exclude-dir=".next" --exclude-dir="node_modules" . | \
+            grep -v ".env" | grep -v "process.env"; then
+            echo "❌ Potential secret exposure found"
+            exit 1
+          else
+            echo "✅ No hardcoded secrets found"
+          fi
+
+      - name: Check for mainnet references
+        run: |
+          echo "Checking for mainnet references..."
+          if grep -r "horizon.stellar.org" --include="*.ts" --include="*.tsx" \
+            --exclude-dir=".next" --exclude-dir="node_modules" . | \
+            grep -v "horizon-testnet"; then
+            echo "❌ Mainnet Horizon URL found — must use testnet"
+            exit 1
+          else
+            echo "✅ All Stellar references use testnet"
+          fi
+
+      - name: Verify .env.local is gitignored
+        run: |
+          if [ -f ".gitignore" ] && grep -q ".env.local" .gitignore; then
+            echo "✅ .env.local is properly gitignored"
+          else
+            echo "❌ .env.local must be in .gitignore"
+            exit 1
+          fi

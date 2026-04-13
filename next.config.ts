@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  reactStrictMode: true,
   images: {
+    domains: ['stellar.expert', 'horizon-testnet.stellar.org'],
     remotePatterns: [
       {
          protocol: 'https',
@@ -18,9 +20,19 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    }
+    return config
+  },
   experimental: {
     // any experimental features needed for serverless
   }
 };
 
 export default nextConfig;
+
