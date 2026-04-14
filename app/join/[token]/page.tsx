@@ -62,7 +62,7 @@ export default function JoinPage() {
         animate={{ opacity: 1, scale: 1 }}
         className="max-w-md w-full bg-[#0a1a14] border border-cyan-500/15 rounded-3xl p-10 text-center shadow-2xl backdrop-blur-xl relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-amber-500 to-orange-500" />
         
         <div className="h-20 w-20 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mx-auto mb-8 shadow-inner">
           <GraduationCap size={40} />
@@ -77,7 +77,7 @@ export default function JoinPage() {
           <Button 
             onClick={handleAccept}
             disabled={accepting}
-            className="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold h-14 rounded-2xl shadow-[0_4px_25px_rgba(34,211,238,0.2)] transition-all flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-cyan-600 to-amber-600 hover:from-cyan-500 hover:to-amber-500 text-white font-bold h-14 rounded-2xl shadow-[0_4px_25px_rgba(34,211,238,0.2)] transition-all flex items-center justify-center gap-2"
           >
             {accepting ? <Loader2 className="animate-spin" size={20} /> : status === "unauthenticated" ? "Sign in to Join" : "Join Institution"}
             {!accepting && <ArrowRight size={18} />}

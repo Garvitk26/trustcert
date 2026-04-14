@@ -35,7 +35,7 @@ export default function InstitutionSeal({
         onClick={() => setIsOpen(true)}
         className={cn(
           "inline-flex items-center rounded-xl font-black uppercase tracking-[0.2em] italic transition-all",
-          "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20 shadow-lg shadow-indigo-500/5",
+          "bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 shadow-lg shadow-amber-500/5",
           sizes[size]
         )}
       >
@@ -58,15 +58,15 @@ export default function InstitutionSeal({
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-md card-surface border-indigo-500/10 bg-bg-surface p-10 md:p-12 rounded-[3rem] space-y-10 shadow-[0_50px_100px_rgba(0,0,0,0.8)]"
+              className="relative w-full max-w-md card-surface border-amber-500/10 bg-bg-surface p-10 md:p-12 rounded-[3rem] space-y-10 shadow-[0_50px_100px_rgba(0,0,0,0.8)]"
             >
                <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="h-20 w-20 bg-indigo-500/10 text-indigo-500 rounded-3xl flex items-center justify-center shadow-inner shadow-indigo-500/10">
+                  <div className="h-20 w-20 bg-amber-500/10 text-amber-500 rounded-3xl flex items-center justify-center shadow-inner shadow-amber-500/10">
                      <ShieldCheck size={44} />
                   </div>
                   <div className="space-y-2">
                      <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase leading-none">{institutionName}</h3>
-                     <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-[0.3em] italic">Identity Validated Effectively</p>
+                     <p className="text-[10px] text-amber-400 font-bold uppercase tracking-[0.3em] italic">Identity Validated Effectively</p>
                   </div>
                </div>
 
@@ -92,7 +92,7 @@ export default function InstitutionSeal({
                </div>
 
                <div className="flex items-center justify-center gap-2 pt-4 opacity-30">
-                  <CheckCircle2 size={12} className="text-indigo-500" />
+                  <CheckCircle2 size={12} className="text-amber-500" />
                   <span className="text-[8px] font-bold text-white uppercase tracking-widest italic">Identity Settlement Consensus Confined</span>
                </div>
             </motion.div>
@@ -106,13 +106,13 @@ export default function InstitutionSeal({
 function SealField({ icon: Icon, label, value, secondary, active = true }: any) {
    return (
       <div className="flex items-start gap-4">
-         <div className={cn("p-2 rounded-xl shrink-0", active ? "bg-indigo-500/10 text-indigo-400" : "bg-white/5 text-muted-foreground/30")}>
+         <div className={cn("p-2 rounded-xl shrink-0", active ? "bg-amber-500/10 text-amber-400" : "bg-white/5 text-muted-foreground/30")}>
             <Icon size={18} />
          </div>
          <div className="space-y-1 flex-1 overflow-hidden">
             <label className="text-[8px] font-black text-slate-500 uppercase tracking-widest">{label}</label>
             <p className={cn("text-xs font-bold truncate transition-colors", active ? "text-white" : "text-muted-foreground/20 italic")}>{value}</p>
-            {secondary && <p className="text-[8px] font-bold text-indigo-400/40 uppercase tracking-tight">{secondary}</p>}
+            {secondary && <p className="text-[8px] font-bold text-amber-400/40 uppercase tracking-tight">{secondary}</p>}
          </div>
       </div>
    );

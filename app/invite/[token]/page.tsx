@@ -60,24 +60,24 @@ export default function InvitePage() {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-md w-full bg-[#0a1a14] border border-indigo-500/15 rounded-3xl p-10 text-center shadow-2xl backdrop-blur-xl relative overflow-hidden"
+        className="max-w-md w-full bg-[#0a1a14] border border-amber-500/15 rounded-3xl p-10 text-center shadow-2xl backdrop-blur-xl relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500" />
         
-        <div className="h-20 w-20 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mx-auto mb-8 shadow-inner">
+        <div className="h-20 w-20 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 mx-auto mb-8 shadow-inner">
           <Building2 size={40} />
         </div>
 
         <h1 className="text-3xl font-black text-white mb-2 tracking-tight">Team Invitation</h1>
         <p className="text-muted-foreground mb-10 leading-relaxed">
-          You've been invited to join <span className="text-white font-bold">{invite.institutionName}</span> as a <span className="text-indigo-400 font-bold uppercase tracking-widest text-xs">{invite.role}</span>.
+          You've been invited to join <span className="text-white font-bold">{invite.institutionName}</span> as a <span className="text-amber-400 font-bold uppercase tracking-widest text-xs">{invite.role}</span>.
         </p>
 
         <div className="space-y-4">
           <Button 
             onClick={handleAccept}
             disabled={accepting}
-            className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold h-14 rounded-2xl shadow-[0_4px_25px_rgba(99,102,241,0.3)] transition-all flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold h-14 rounded-2xl shadow-[0_4px_25px_rgba(99,102,241,0.3)] transition-all flex items-center justify-center gap-2"
           >
             {accepting ? <Loader2 className="animate-spin" size={20} /> : status === "unauthenticated" ? "Sign in to Accept" : "Accept Invitation"}
             {!accepting && <ArrowRight size={18} />}
@@ -95,8 +95,8 @@ export default function InvitePage() {
 function FullScreenLoader() {
   return (
     <div className="min-h-screen bg-[#020d0a] flex flex-col items-center justify-center gap-6">
-      <Loader2 className="animate-spin text-indigo-500" size={48} />
-      <p className="text-indigo-500/50 font-mono text-sm animate-pulse uppercase tracking-[0.3em]">Validating Credentials</p>
+      <Loader2 className="animate-spin text-amber-500" size={48} />
+      <p className="text-amber-500/50 font-mono text-sm animate-pulse uppercase tracking-[0.3em]">Validating Credentials</p>
     </div>
   );
 }

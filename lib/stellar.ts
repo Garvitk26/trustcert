@@ -1,5 +1,5 @@
 import {
-  Server,
+  Horizon,
   Networks,
   Operation,
   TransactionBuilder,
@@ -10,7 +10,7 @@ import {
 } from '@stellar/stellar-sdk'
 import { 
   isConnected, 
-  getPublicKey, 
+  getAddress, 
   getNetworkDetails,
   signTransaction 
 } from '@stellar/freighter-api'
@@ -18,7 +18,7 @@ import {
 const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON 
   || 'https://horizon-testnet.stellar.org'
 const NETWORK_PASSPHRASE = Networks.TESTNET
-const server = new Server(HORIZON_URL)
+export const server = new Horizon.Server(HORIZON_URL)
 
 // ── 1. WALLET SETUP ──────────────────────────────────────────
 
@@ -54,10 +54,10 @@ export async function connectFreighter(): Promise<{
   if (!installed) throw new Error('Freighter not installed');
 
   try {
-    const publicKey = await getPublicKey();
+    const { address } = await getAddress();
     const network = await getFreighterNetwork();
     if (network !== 'TESTNET') throw new Error('Please switch Freighter to Stellar Testnet');
-    return { publicKey, network };
+    return { publicKey: address, network };
   } catch (error: any) {
     if (error.message.includes('User rejected')) throw new Error('User rejected connection');
     throw error;
@@ -78,6 +78,10 @@ export async function getXLMBalance(address: string): Promise<number> {
   } catch {
     return 0;
   }
+}
+
+export async function getAccountBalance(address: string): Promise<number> {
+  return getXLMBalance(address);
 }
 
 export async function fundWithFriendbot(address: string): Promise<{
@@ -134,8 +138,12 @@ export async function sendXLM(params: {
     if (params.memo) builder.addMemo(Memo.text(params.memo));
     const transaction = builder.setTimeout(30).build();
     const xdr = transaction.toXDR();
-    const signedXdr = await signTransaction(xdr, { network: 'TESTNET' });
-    const result = await server.submitTransaction(signedXdr);
+    const { signedTxXdr, error: signError } = await signTransaction(xdr, { networkPassphrase: NETWORK_PASSPHRASE });
+    
+    if (signError) throw new Error(signError);
+    if (!signedTxXdr) throw new Error('Failed to sign transaction');
+
+    const result = await server.submitTransaction(TransactionBuilder.fromXDR(signedTxXdr, NETWORK_PASSPHRASE));
 
     return {
       success: true,
@@ -183,7 +191,7 @@ export async function getTransactionByHash(txHash: string): Promise<{
       ledger: tx.ledger_attr,
       createdAt: tx.created_at,
       sourceAccount: tx.source_account,
-      fee: tx.fee_value,
+      fee: (tx as any).fee_value || (tx as any).fee_charged || "0",
       memo: tx.memo,
       successful: tx.successful,
     };
@@ -207,4 +215,49 @@ export function parseStellarError(error: any): string {
 
   if (error.message === 'User rejected') return 'Transaction rejected in Freighter';
   return errorMap[opCode] || errorMap[mainCode] || error.message || 'An unexpected Stellar error occurred';
+}
+
+export interface CertMetadataInput {
+  studentName: string;
+  courseName: string;
+  issueDate: string;
+  expiryDate?: string;
+  grade?: string;
+  institutionName: string;
+}
+
+export async function buildRevocationTransaction(
+  institutionAddress: string,
+  certHash: string
+): Promise<string> {
+  const account = await server.loadAccount(institutionAddress);
+  const tx = new TransactionBuilder(account, {
+    fee: BASE_FEE,
+    networkPassphrase: NETWORK_PASSPHRASE,
+  })
+    .addOperation(Operation.manageData({ name: `rev_ ${certHash.slice(0, 16)}`, value: 'true' }))
+    .setTimeout(60)
+    .build();
+  return tx.toXDR();
+}
+
+export async function buildIssuanceTransaction(
+  institutionAddress: string,
+  studentAddress: string,
+  certHash: string
+): Promise<string> {
+  const account = await server.loadAccount(institutionAddress);
+  const tx = new TransactionBuilder(account, {
+    fee: BASE_FEE,
+    networkPassphrase: NETWORK_PASSPHRASE,
+  })
+    .addOperation(Operation.payment({
+      destination: studentAddress,
+      asset: Asset.native(),
+      amount: "0.00001"
+    }))
+    .addMemo(Memo.text(`TC-${certHash.slice(0, 20)}`))
+    .setTimeout(60)
+    .build();
+  return tx.toXDR();
 }

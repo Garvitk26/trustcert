@@ -69,7 +69,7 @@ export default function InstitutionSwitcher() {
       >
         <div 
           className="h-10 w-10 shrink-0 rounded-lg flex items-center justify-center font-bold text-sm text-white shadow-lg"
-          style={{ backgroundColor: activeInstitution?.accentColor || "#6366f1" }}
+          style={{ backgroundColor: activeInstitution?.accentColor || "#f59e0b" }}
         >
           {activeInstitution ? getInitials(activeInstitution.name) : <Loader2 className="animate-spin" />}
         </div>
@@ -108,7 +108,7 @@ export default function InstitutionSwitcher() {
                     {inst.name}
                   </span>
                   {activeInstitution?._id === inst._id && (
-                    <div className="absolute right-3 h-1.5 w-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
+                    <div className="absolute right-3 h-1.5 w-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
                   )}
                 </button>
               ))}
@@ -117,7 +117,7 @@ export default function InstitutionSwitcher() {
             <div className="pt-2 border-t border-white/5">
               <button
                 onClick={() => setShowCreate(true)}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-indigo-500/10 text-indigo-400 text-sm font-bold transition-all"
+                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-amber-500/10 text-amber-400 text-sm font-bold transition-all"
               >
                 <Plus size={16} /> Create Institution
               </button>
@@ -146,14 +146,14 @@ export default function InstitutionSwitcher() {
                         autoFocus
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}
-                        className="bg-black/20 border-white/5 focus:border-indigo-500/50 h-10"
+                        className="bg-black/20 border-white/5 focus:border-amber-500/50 h-10"
                         placeholder="Harvard University"
                       />
                     </div>
                     <Button 
                       type="submit" 
                       disabled={isCreating}
-                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold h-10 rounded-xl"
+                      className="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold h-10 rounded-xl"
                     >
                       {isCreating ? <Loader2 className="animate-spin" size={16} /> : "Create & Launch"}
                     </Button>

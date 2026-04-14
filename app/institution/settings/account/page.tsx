@@ -28,7 +28,7 @@ export default function AccountSettingsPage() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    accentColor: "#6366f1",
+    accentColor: "#f59e0b",
     certPrefix: "CERT",
     verifiedDomain: ""
   });
@@ -37,7 +37,7 @@ export default function AccountSettingsPage() {
     if (activeInstitution) {
       setFormData({
         name: activeInstitution.name || "",
-        accentColor: activeInstitution.accentColor || "#6366f1",
+        accentColor: activeInstitution.accentColor || "#f59e0b",
         certPrefix: (activeInstitution as any).certPrefix || "CERT",
         verifiedDomain: (activeInstitution as any).verifiedDomain || ""
       });
@@ -70,8 +70,8 @@ export default function AccountSettingsPage() {
       {/* HEADER */}
       <div className="space-y-3">
          <div className="flex items-center gap-2">
-            <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Institutional Identity</span>
+            <div className="h-2 w-12 bg-amber-500 rounded-full" />
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Institutional Identity</span>
          </div>
          <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Brand Registry</h1>
          <p className="text-xs text-muted-foreground italic uppercase tracking-widest leading-relaxed italic">
@@ -84,38 +84,38 @@ export default function AccountSettingsPage() {
          {/* MAIN CONFIGURATION */}
          <div className="lg:col-span-2 space-y-8">
             <form onSubmit={handleSubmit} className="space-y-8">
-               <Card className="card-surface border-indigo-500/10 rounded-[2.5rem] bg-indigo-500/[0.01] overflow-hidden">
-                  <CardHeader className="p-10 border-b border-indigo-500/5">
+               <Card className="card-surface border-amber-500/10 rounded-[2.5rem] bg-amber-500/[0.01] overflow-hidden">
+                  <CardHeader className="p-10 border-b border-amber-500/5">
                      <CardTitle className="text-xl font-black text-white uppercase italic tracking-widest">Base Identity</CardTitle>
                   </CardHeader>
                   <CardContent className="p-10 space-y-10">
                      
                      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         <div className="space-y-3">
-                           <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
+                           <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
                               <Building2 size={12} /> Institutional Title
                            </label>
                            <Input 
                              value={formData.name}
                              onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-indigo-500/40 text-lg font-black italic tracking-tight"
+                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-amber-500/40 text-lg font-black italic tracking-tight"
                            />
                         </div>
 
                         <div className="space-y-3">
-                           <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
+                           <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
                               <Type size={12} /> Certification Prefix
                            </label>
                            <Input 
                              value={formData.certPrefix}
                              onChange={(e) => setFormData(prev => ({ ...prev, certPrefix: e.target.value }))}
-                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-indigo-500/40 text-lg font-black uppercase tracking-widest"
+                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-amber-500/40 text-lg font-black uppercase tracking-widest"
                            />
                         </div>
                      </div>
 
                      <div className="space-y-3">
-                        <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
+                        <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
                            <Palette size={12} /> Institutional Accent Color
                         </label>
                         <div className="flex items-center gap-6">
@@ -135,13 +135,13 @@ export default function AccountSettingsPage() {
                   </CardContent>
                </Card>
 
-               <Card className="card-surface border-indigo-500/10 rounded-[2.5rem] bg-indigo-500/[0.01] overflow-hidden">
-                  <CardHeader className="p-10 border-b border-indigo-500/5">
+               <Card className="card-surface border-amber-500/10 rounded-[2.5rem] bg-amber-500/[0.01] overflow-hidden">
+                  <CardHeader className="p-10 border-b border-amber-500/5">
                      <CardTitle className="text-xl font-black text-white uppercase italic tracking-widest">Network Verification</CardTitle>
                   </CardHeader>
                   <CardContent className="p-10 space-y-6">
                      <div className="space-y-3">
-                        <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
+                        <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block flex items-center gap-2 italic">
                            <Globe size={12} /> Verified Network Domain
                         </label>
                         <div className="relative">
@@ -149,9 +149,9 @@ export default function AccountSettingsPage() {
                              value={formData.verifiedDomain}
                              onChange={(e) => setFormData(prev => ({ ...prev, verifiedDomain: e.target.value }))}
                              placeholder="identity.institution.edu"
-                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-indigo-500/40 pl-12 font-mono text-indigo-300"
+                             className="h-14 bg-black/40 border-white/5 rounded-2xl focus:border-amber-500/40 pl-12 font-mono text-amber-300"
                            />
-                           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-500/40">
+                           <div className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500/40">
                               <LinkIcon size={18} />
                            </div>
                         </div>
@@ -175,14 +175,14 @@ export default function AccountSettingsPage() {
 
          {/* SIDEBAR: STATUS & STATS */}
          <div className="space-y-8">
-            <Card className="card-surface border-indigo-500/10 p-8 rounded-[2.5rem] bg-indigo-500/[0.02] space-y-8">
+            <Card className="card-surface border-amber-500/10 p-8 rounded-[2.5rem] bg-amber-500/[0.02] space-y-8">
                <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                     <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Network Status</span>
-                     <span className="badge-violet animate-pulse text-[8px]">ACTIVE</span>
+                     <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Network Status</span>
+                     <span className="badge-orange animate-pulse text-[8px]">ACTIVE</span>
                   </div>
-                  <div className="h-1 w-full bg-indigo-500/10 rounded-full overflow-hidden">
-                     <div className="h-full bg-indigo-500 w-3/4 shadow-[0_0_10px_#6366f1]" />
+                  <div className="h-1 w-full bg-amber-500/10 rounded-full overflow-hidden">
+                     <div className="h-full bg-amber-500 w-3/4 shadow-[0_0_10px_#f59e0b]" />
                   </div>
                </div>
 
@@ -219,7 +219,7 @@ function StatRow({ icon: Icon, label, value }: any) {
   return (
     <div className="flex items-center justify-between group">
        <div className="flex items-center gap-3">
-          <Icon size={14} className="text-indigo-400 group-hover:scale-110 transition-transform" />
+          <Icon size={14} className="text-amber-400 group-hover:scale-110 transition-transform" />
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{label}</span>
        </div>
        <span className="text-xs font-black text-white italic">{value}</span>

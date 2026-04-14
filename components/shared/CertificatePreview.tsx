@@ -19,24 +19,24 @@ export default function CertificatePreview({
   institutionName, 
   date, 
   template,
-  color = "#6366f1"
+  color = "#f59e0b"
 }: CertificatePreviewProps) {
   
   const templates: Record<string, React.JSX.Element> = {
     Academic: (
-      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-col items-center justify-center p-12 text-center border-[8px] border-double border-indigo-500/15 m-2 overflow-hidden">
-         <div className="absolute top-4 left-4 right-4 bottom-4 border border-indigo-500/10 pointer-events-none" />
-         <div className="h-14 w-14 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-500 mb-8">
+      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-col items-center justify-center p-12 text-center border-[8px] border-double border-amber-500/15 m-2 overflow-hidden">
+         <div className="absolute top-4 left-4 right-4 bottom-4 border border-amber-500/10 pointer-events-none" />
+         <div className="h-14 w-14 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 mb-8">
             <Building2 size={32} />
          </div>
          <h4 className="text-[10px] uppercase font-bold tracking-[0.4em] text-muted-foreground/60 mb-6 font-serif">Certificate of Scholarship</h4>
          <p className="text-sm font-serif italic text-muted-foreground">This is to certify that</p>
-         <h2 className="text-3xl font-black text-white mt-2 mb-6 font-serif underline decoration-indigo-500/40 underline-offset-8">
+         <h2 className="text-3xl font-black text-white mt-2 mb-6 font-serif underline decoration-amber-500/40 underline-offset-8">
             {recipientName || "Recipient Name"}
          </h2>
          <p className="text-sm font-serif italic text-muted-foreground">has successfully fulfilled the requirement for</p>
-         <h3 className="text-xl font-bold text-indigo-400 mt-2 mb-10">{courseName || "Course Name"}</h3>
-         <div className="flex justify-between w-full pt-8 border-t border-indigo-500/10">
+         <h3 className="text-xl font-bold text-amber-400 mt-2 mb-10">{courseName || "Course Name"}</h3>
+         <div className="flex justify-between w-full pt-8 border-t border-amber-500/10">
             <div className="text-left">
                <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/40">Institution</p>
                <p className="text-sm font-bold text-white">{institutionName || "TrustCert UI"}</p>
@@ -49,15 +49,15 @@ export default function CertificatePreview({
       </div>
     ),
     Corporate: (
-      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-row items-center border border-indigo-500/15 rounded-xl overflow-hidden shadow-2xl">
-         <div className="w-1.5 h-full bg-indigo-500" style={{ backgroundColor: color }} />
-         <div className="flex-1 p-10 flex flex-col h-full bg-gradient-to-br from-indigo-500/5 to-transparent">
+      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-row items-center border border-amber-500/15 rounded-xl overflow-hidden shadow-2xl">
+         <div className="w-1.5 h-full bg-amber-500" style={{ backgroundColor: color }} />
+         <div className="flex-1 p-10 flex flex-col h-full bg-gradient-to-br from-amber-500/5 to-transparent">
             <div className="flex justify-between items-start mb-10">
                <div className="bg-white/5 p-2 rounded-lg flex items-center gap-2">
-                 <ShieldCheck size={20} className="text-indigo-400" style={{ color }} />
+                 <ShieldCheck size={20} className="text-amber-400" style={{ color }} />
                  <span className="text-xs font-bold text-white">{institutionName || "TrustCert Corp"}</span>
                </div>
-               <div className="badge badge-indigo" style={{ backgroundColor: `${color}20`, borderColor: `${color}40`, color }}>Corporate Verified</div>
+               <div className="badge badge-amber" style={{ backgroundColor: `${color}20`, borderColor: `${color}40`, color }}>Corporate Verified</div>
             </div>
             <div className="space-y-4">
               <h1 className="text-3xl font-black text-white leading-tight">{courseName || "Operational Excellence"}</h1>
@@ -76,19 +76,19 @@ export default function CertificatePreview({
                  <p className="text-[9px] uppercase font-bold tracking-widest text-muted-foreground/40">Credential Issued</p>
                  <p className="text-sm font-bold text-white mb-1">{date || "Jan 01, 2025"}</p>
               </div>
-              <Award size={40} className="text-indigo-500 opacity-20" style={{ color }} />
+              <Award size={40} className="text-amber-500 opacity-20" style={{ color }} />
             </div>
          </div>
       </div>
     ),
     Digital: (
-      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-col items-center justify-center p-12 text-center border border-violet-500/20 rounded-3xl group overflow-hidden">
+      <div className="relative w-full h-full bg-[#0d0d1f] flex flex-col items-center justify-center p-12 text-center border border-orange-500/20 rounded-3xl group overflow-hidden">
          {/* Hex Pattern Overlay */}
-         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #8b5cf6 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-         <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-transparent to-fuchsia-500/10 pointer-events-none" />
+         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #f97316 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+         <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 via-transparent to-yellow-500/10 pointer-events-none" />
          
          <div className="relative z-10 space-y-6">
-            <div className="h-16 w-16 bg-gradient-to-tr from-indigo-500 to-fuchsia-500 rounded-2xl flex items-center justify-center text-white mx-auto shadow-[0_0_20px_rgba(99,102,241,0.3)]">
+            <div className="h-16 w-16 bg-gradient-to-tr from-amber-500 to-yellow-500 rounded-2xl flex items-center justify-center text-white mx-auto shadow-[0_0_20px_rgba(99,102,241,0.3)]">
                <Hexagon size={32} />
             </div>
             <div className="space-y-2">

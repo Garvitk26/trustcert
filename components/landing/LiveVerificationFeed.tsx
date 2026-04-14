@@ -32,10 +32,10 @@ export default function LiveVerificationFeed() {
   }, []);
 
   return (
-    <div className="card-surface border-indigo-500/10 rounded-3xl p-6 overflow-hidden relative">
+    <div className="card-surface border-amber-500/10 rounded-3xl p-6 overflow-hidden relative">
       <div className="flex items-center gap-2 mb-6 border-b border-white/5 pb-4">
-        <div className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-400">Live Verification Feed</h3>
+        <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400">Live Verification Feed</h3>
       </div>
 
       <div className="space-y-4">
@@ -49,18 +49,18 @@ export default function LiveVerificationFeed() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors group"
             >
-              <div className="mt-1 p-1.5 rounded-lg bg-violet-500/10 text-violet-400">
+              <div className="mt-1 p-1.5 rounded-lg bg-orange-500/10 text-orange-400">
                 <ShieldCheck size={16} />
               </div>
               <div className="flex-1 space-y-1">
                 <p className="text-sm text-slate-300 leading-tight">
-                  <span className="text-white font-bold">{feed.institution}</span> verified <span className="text-indigo-400">{feed.student}</span>'s {feed.course}
+                  <span className="text-white font-bold">{feed.institution}</span> verified <span className="text-amber-400">{feed.student}</span>'s {feed.course}
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">
                     {formatDistanceToNow(feed.time, { addSuffix: true })}
                   </span>
-                  <div className="px-2 py-0.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-[8px] font-black uppercase text-violet-400">
+                  <div className="px-2 py-0.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-[8px] font-black uppercase text-orange-400">
                     On-Chain
                   </div>
                 </div>

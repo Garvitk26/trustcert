@@ -4,8 +4,15 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   reactStrictMode: true,
   images: {
-    domains: ['stellar.expert', 'horizon-testnet.stellar.org'],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'stellar.expert',
+      },
+      {
+        protocol: 'https',
+        hostname: 'horizon-testnet.stellar.org',
+      },
       {
          protocol: 'https',
          hostname: '*.stellar.org',
@@ -20,6 +27,7 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  turbopack: {}, // Enable custom webpack logic with Turbopack
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,

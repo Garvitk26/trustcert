@@ -3,29 +3,26 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { isConnected, getAddress } from '@stellar/freighter-api'
 import { getAccountBalance } from '@/lib/stellar'
-import { RefreshCw, ExternalLink, Copy, Check, Wallet } from 'lucide-react'
+import { RefreshCw, ExternalLink, Copy, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { motion, AnimatePresence } from 'framer-motion'
 
 export default function WalletStatusBar() {
   const [address, setAddress] = useState<string | null>(null)
   const [balance, setBalance] = useState<string>("0.00")
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
   const [copied, setCopied] = useState(false)
 
   const fetchWalletData = useCallback(async () => {
     setLoading(true)
-    setError(false)
     try {
-      if (await isConnected()) {
+      const { isConnected: connected } = await isConnected()
+      if (connected) {
         const res = await getAddress()
-        const userAddress = typeof res === 'object' && 'address' in res ? res.address : res as string
         
-        if (userAddress) {
-          setAddress(userAddress)
-          const bal = await getAccountBalance(userAddress)
-          setBalance(bal)
+        if (res && res.address) {
+          setAddress(res.address)
+          const bal = await getAccountBalance(res.address)
+          setBalance(bal.toString())
         } else {
           setAddress(null)
           setBalance("0.00")
@@ -36,7 +33,6 @@ export default function WalletStatusBar() {
       }
     } catch (err) {
       console.error("Failed to fetch wallet data", err)
-      setError(true)
     } finally {
       setTimeout(() => setLoading(false), 500)
     }
@@ -60,7 +56,6 @@ export default function WalletStatusBar() {
     <div className="sticky top-0 z-40 w-full h-12 bg-[#0d0d1f]/80 backdrop-blur-md border-b border-primary/20 transition-all duration-300">
       <div className="max-w-[1400px] mx-auto px-4 h-full flex items-center justify-between gap-4 overflow-x-auto no-scrollbar">
         
-        {/* Left Side: Connection Status */}
         <div className="flex items-center gap-3 shrink-0">
           <div className={cn(
             "w-2 h-2 rounded-full",
@@ -81,7 +76,6 @@ export default function WalletStatusBar() {
           </div>
         </div>
 
-        {/* Center: XLM Balance */}
         <div className="flex items-center gap-4 bg-white/5 px-4 py-1.5 rounded-full border border-white/5">
           <div className="flex items-center gap-3">
             <span className="text-[10px] uppercase text-muted-foreground font-semibold">Balance</span>
@@ -108,7 +102,6 @@ export default function WalletStatusBar() {
           </div>
         </div>
 
-        {/* Right Side: Quick Actions */}
         <div className="flex items-center gap-2 shrink-0">
           {address && (
             <>
@@ -116,7 +109,7 @@ export default function WalletStatusBar() {
                 onClick={copyAddress}
                 className="p-1.5 text-muted-foreground hover:text-white transition-colors rounded-lg hover:bg-white/5 flex items-center gap-2 text-xs"
               >
-                {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                {copied ? <Check size={14} className="text-amber-400" /> : <Copy size={14} />}
                 <span className="hidden lg:inline">Copy Address</span>
               </button>
               <a 

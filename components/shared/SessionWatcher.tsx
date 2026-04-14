@@ -92,7 +92,7 @@ export default function SessionWatcher() {
       <motion.div 
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="relative min-h-[320px] w-full max-w-sm bg-[#0d0d1f] border border-indigo-500/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col items-center justify-center p-8 text-center"
+        className="relative min-h-[320px] w-full max-w-sm bg-[#0d0d1f] border border-amber-500/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col items-center justify-center p-8 text-center"
       >
         <div className="h-16 w-16 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 mb-6 animate-pulse">
            <ShieldAlert size={32} />
@@ -106,7 +106,7 @@ export default function SessionWatcher() {
         <div className="grid grid-cols-1 gap-3 w-full">
            <Button 
             onClick={resetTimer}
-            className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold h-12 rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all active:scale-95"
+            className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-bold h-12 rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all active:scale-95"
            >
              Stay Signed In
            </Button>

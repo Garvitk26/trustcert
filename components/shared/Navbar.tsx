@@ -35,12 +35,12 @@ export default function Navbar() {
   return (
     <nav className={cn(
       "sticky top-0 w-full h-[64px] z-[50] transition-all duration-300 border-b",
-      scrolled ? "bg-[#08080f]/85 backdrop-blur-md border-indigo-500/10" : "bg-transparent border-transparent"
+      scrolled ? "bg-[#08080f]/85 backdrop-blur-md border-amber-500/10" : "bg-transparent border-transparent"
     )}>
       <div className="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="h-8 w-8 bg-gradient-to-tr from-indigo-600 to-violet-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+          <div className="h-8 w-8 bg-gradient-to-tr from-amber-600 to-orange-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
              <ShieldCheck size={20} className="text-white" />
           </div>
           <span className="text-xl font-black gradient-text">TrustCert</span>
@@ -61,7 +61,7 @@ export default function Navbar() {
               {isActive(link.href) && (
                 <motion.div 
                   layoutId="navUnderline" 
-                  className="absolute -bottom-[22px] left-0 right-0 h-[2px] bg-indigo-500" 
+                  className="absolute -bottom-[22px] left-0 right-0 h-[2px] bg-amber-500" 
                 />
               )}
             </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#08080f] border-b border-indigo-500/10 overflow-hidden"
+            className="md:hidden bg-[#08080f] border-b border-amber-500/10 overflow-hidden"
           >
             <div className="p-6 flex flex-col gap-6">
               {navLinks.map((link) => (

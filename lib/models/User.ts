@@ -7,7 +7,7 @@ const UserSchema = new Schema(
     passwordHash: { type: String, required: true },
     role: { type: String, enum: ["institution", "student"], required: true },
     linkedWallet: { type: String, unique: true, sparse: true }, // Stellar public key
-    avatarColor: { type: String, default: "#6366f1" },
+    avatarColor: { type: String, default: "#f59e0b" },
     createdAt: { type: Date, default: Date.now },
     lastLogin: { type: Date },
     rememberMe: { type: Boolean, default: false },

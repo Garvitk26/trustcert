@@ -28,6 +28,21 @@ import { cn } from "@/lib/utils";
 import { formatDistanceToNow } from "date-fns";
 import { Networks } from "@stellar/stellar-sdk";
 
+const navItems = [
+  { href: "/institution/dashboard", label: "Dashboard", icon: LayoutDashboard, color: "amber" },
+  { href: "/institution/issue", label: "Issue Certificate", icon: FilePlus, color: "orange" },
+  { href: "/institution/certificates", label: "Manage All", icon: Award, color: "amber" },
+  { href: "/institution/analytics", label: "Analytics", icon: BarChart3, color: "cyan" },
+  { href: "/institution/settings", label: "Settings", icon: Settings, color: "amber" },
+];
+
+const colors: Record<string, string> = {
+  amber: "text-amber-400",
+  orange: "text-orange-400",
+  amber: "text-amber-400",
+  cyan: "text-cyan-400",
+};
+
 export default function InstitutionLayout({ children }: { children: React.ReactNode }) {
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -68,13 +83,13 @@ export default function InstitutionLayout({ children }: { children: React.ReactN
 
   return (
     <InstitutionProvider>
-      <div className="flex min-h-screen bg-[#020d0a] selection:bg-indigo-500/30 relative">
+      <div className="flex min-h-screen bg-[#020d0a] selection:bg-amber-500/30 relative">
         <Sidebar session={session} isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         
         {/* Mobile Toggle Button */}
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="fixed top-20 left-4 z-[60] bg-indigo-600 text-white p-2 rounded-lg lg:hidden shadow-lg border border-indigo-400/50"
+          className="fixed top-20 left-4 z-[60] bg-amber-600 text-white p-2 rounded-lg lg:hidden shadow-lg border border-amber-400/50"
         >
           {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
@@ -120,7 +135,7 @@ function Sidebar({ session, isOpen, setIsOpen }: { session: any, isOpen: boolean
       )}>
       <div className="p-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="h-8 w-8 bg-gradient-to-tr from-indigo-600 to-violet-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+          <div className="h-8 w-8 bg-gradient-to-tr from-amber-600 to-orange-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
              <ShieldCheck size={20} className="text-white" />
           </div>
           <span className="text-xl font-black gradient-text">TrustCert</span>
@@ -155,7 +170,7 @@ function Sidebar({ session, isOpen, setIsOpen }: { session: any, isOpen: boolean
 
       <div className="p-6 border-t border-white/5 bg-black/20">
         <div className="flex items-center gap-3 mb-4">
-          <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20 shadow-inner">
+          <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20 shadow-inner">
              <User size={20} />
           </div>
           <div className="overflow-hidden">
@@ -170,7 +185,8 @@ function Sidebar({ session, isOpen, setIsOpen }: { session: any, isOpen: boolean
           <LogOut size={14} /> Sign Out
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
 

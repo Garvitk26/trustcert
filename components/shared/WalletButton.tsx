@@ -76,9 +76,9 @@ export default function WalletButton() {
       <div className="relative">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          className="flex items-center gap-2 h-10 px-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-xs font-bold transition-all hover:bg-indigo-500/20"
+          className="flex items-center gap-2 h-10 px-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-bold transition-all hover:bg-amber-500/20"
         >
-          <div className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
+          <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
           {address.slice(0, 4)}...{address.slice(-4)}
           <ChevronDown size={14} className={cn("transition-transform duration-200", isDropdownOpen && "rotate-180")} />
         </button>

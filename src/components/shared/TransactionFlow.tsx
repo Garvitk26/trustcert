@@ -36,7 +36,7 @@ export function TransactionFlow({ step, title = "Transaction Protocol", error, t
         <div className="flex items-center gap-2 px-2 py-0.5 rounded-full bg-white/5 border border-white/10">
           <div className={cn(
             "h-1.5 w-1.5 rounded-full animate-pulse",
-            step === "confirmed" ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" : 
+            step === "confirmed" ? "bg-amber-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" : 
             step === "failed" ? "bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]" : 
             "bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
           )} />
@@ -56,7 +56,7 @@ export function TransactionFlow({ step, title = "Transaction Protocol", error, t
             <div key={s.id} className="relative flex flex-col items-center">
               <div className={cn(
                 "w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-500",
-                isCompleted ? "bg-emerald-500/10 border-emerald-500/50 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]" :
+                isCompleted ? "bg-amber-500/10 border-amber-500/50 text-amber-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]" :
                 isActive ? "bg-sky-500/20 border-sky-400 text-sky-400 shadow-[0_0_15px_rgba(56,189,248,0.3)] scale-110" :
                 "bg-white/5 border-white/10 text-muted-foreground"
               )}>
@@ -68,7 +68,7 @@ export function TransactionFlow({ step, title = "Transaction Protocol", error, t
               </div>
               <span className={cn(
                 "mt-3 text-[10px] font-bold uppercase tracking-widest",
-                isCompleted ? "text-emerald-500" : isActive ? "text-sky-400" : "text-muted-foreground"
+                isCompleted ? "text-amber-500" : isActive ? "text-sky-400" : "text-muted-foreground"
               )}>
                 {s.label}
               </span>
@@ -77,7 +77,7 @@ export function TransactionFlow({ step, title = "Transaction Protocol", error, t
                 <div className="absolute top-5 left-1/2 w-full h-[1px] -z-10 bg-white/5">
                   <div className={cn(
                     "h-full transition-all duration-1000",
-                    isCompleted ? "w-full bg-emerald-500/50" : "w-0 bg-sky-400/50"
+                    isCompleted ? "w-full bg-amber-500/50" : "w-0 bg-sky-400/50"
                   )} />
                 </div>
               )}
@@ -94,10 +94,10 @@ export function TransactionFlow({ step, title = "Transaction Protocol", error, t
       )}
 
       {step === "confirmed" && txHash && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex flex-col gap-3 animate-page-enter">
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 flex flex-col gap-3 animate-page-enter">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />
-            <p className="text-xs text-emerald-200 font-bold tracking-tight uppercase">Ledger Settlement Success</p>
+            <CheckCircle2 className="h-5 w-5 text-amber-500 shrink-0" />
+            <p className="text-xs text-amber-200 font-bold tracking-tight uppercase">Ledger Settlement Success</p>
           </div>
           <div className="flex items-center justify-between gap-4 p-2 bg-black/20 rounded border border-white/5">
             <code className="text-[10px] font-mono text-muted-foreground truncate">{txHash}</code>

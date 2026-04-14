@@ -24,8 +24,8 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Dynamic Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-indigo-500/5 to-transparent -z-10" />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-fuchsia-500/5 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-amber-500/5 to-transparent -z-10" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[120px] -z-10" />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-20 lg:py-32">
         
@@ -34,7 +34,7 @@ export default function AboutPage() {
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
-             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[0.4em] backdrop-blur-md"
+             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-[0.4em] backdrop-blur-md"
            >
              <ShieldCheck size={14} />
              <span>The Network of Trust</span>
@@ -46,7 +46,7 @@ export default function AboutPage() {
              transition={{ delay: 0.1 }}
              className="text-5xl md:text-8xl font-black text-white italic tracking-tighter uppercase leading-[0.9]"
            >
-              Architecting <br /> <span className="text-indigo-500">Immutability</span>.
+              Architecting <br /> <span className="text-amber-500">Immutability</span>.
            </motion.h1>
 
            <motion.p 
@@ -92,9 +92,9 @@ export default function AboutPage() {
            </motion.div>
 
            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-500 to-fuchsia-500 rounded-[3rem] blur-2xl opacity-10 group-hover:opacity-20 transition-all duration-1000" />
-              <div className="relative p-12 aspect-square card-surface border-indigo-500/10 rounded-[3rem] bg-indigo-500/[0.02] flex flex-col items-center justify-center text-center space-y-10">
-                 <div className="h-32 w-32 bg-indigo-500/10 rounded-3xl flex items-center justify-center text-indigo-400 animate-pulse">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-amber-500 to-yellow-500 rounded-[3rem] blur-2xl opacity-10 group-hover:opacity-20 transition-all duration-1000" />
+              <div className="relative p-12 aspect-square card-surface border-amber-500/10 rounded-[3rem] bg-amber-500/[0.02] flex flex-col items-center justify-center text-center space-y-10">
+                 <div className="h-32 w-32 bg-amber-500/10 rounded-3xl flex items-center justify-center text-amber-400 animate-pulse">
                     <Globe size={64} />
                  </div>
                  <div className="space-y-4">
@@ -106,8 +106,8 @@ export default function AboutPage() {
         </section>
 
         {/* --- CTA --- */}
-        <section className="p-12 md:p-24 rounded-[4rem] bg-gradient-to-br from-indigo-500/10 to-violet-500/10 border border-indigo-500/20 text-center space-y-10 relative overflow-hidden">
-           <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+        <section className="p-12 md:p-24 rounded-[4rem] bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-center space-y-10 relative overflow-hidden">
+           <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full -mr-32 -mt-32 blur-3xl" />
            <div className="relative z-10 space-y-6">
               <h2 className="text-4xl md:text-6xl font-black text-white italic tracking-tighter uppercase leading-none">Ready to join the network?</h2>
               <p className="text-lg text-slate-400 max-w-xl mx-auto italic">Start issuing blockchain-verified certificates today with zero infrastructure overhead.</p>
@@ -136,7 +136,7 @@ export default function AboutPage() {
 function AdvantageItem({ icon: Icon, title, desc }: any) {
   return (
     <div className="flex gap-6 group">
-       <div className="h-14 w-14 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-indigo-400 border border-white/5 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-500">
+       <div className="h-14 w-14 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center text-amber-400 border border-white/5 group-hover:bg-amber-500 group-hover:text-white transition-all duration-500">
           <Icon size={28} />
        </div>
        <div className="space-y-1">

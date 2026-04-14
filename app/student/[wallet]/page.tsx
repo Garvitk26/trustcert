@@ -48,8 +48,8 @@ export default function StudentPublicProfile() {
   if (loading) {
     return (
       <div className="min-h-screen bg-bg-base flex flex-col items-center justify-center">
-        <Loader2 className="animate-spin text-indigo-500 mb-4" size={40} />
-        <p className="text-sm font-mono text-indigo-500/50 uppercase tracking-[0.2em] animate-pulse">Fetching Public Identity...</p>
+        <Loader2 className="animate-spin text-amber-500 mb-4" size={40} />
+        <p className="text-sm font-mono text-amber-500/50 uppercase tracking-[0.2em] animate-pulse">Fetching Public Identity...</p>
       </div>
     );
   }
@@ -72,7 +72,7 @@ export default function StudentPublicProfile() {
       <Navbar />
       
       {/* Ambience */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-indigo-500/5 to-transparent -z-10" />
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-amber-500/5 to-transparent -z-10" />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 lg:py-20">
         
@@ -80,27 +80,27 @@ export default function StudentPublicProfile() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 mb-20">
            <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="relative group">
-                 <div className="absolute -inset-1 bg-gradient-to-tr from-indigo-500 to-fuchsia-500 rounded-full blur-lg opacity-40 group-hover:opacity-70 transition-all duration-700" />
+                 <div className="absolute -inset-1 bg-gradient-to-tr from-amber-500 to-yellow-500 rounded-full blur-lg opacity-40 group-hover:opacity-70 transition-all duration-700" />
                  <div className="relative h-32 w-32 rounded-full border-4 border-white/5 bg-[#0d0d1f] flex items-center justify-center overflow-hidden">
-                    <ShieldCheck size={64} className="text-indigo-400 group-hover:scale-110 transition-transform duration-500" />
+                    <ShieldCheck size={64} className="text-amber-400 group-hover:scale-110 transition-transform duration-500" />
                  </div>
               </div>
               <div className="text-center md:text-left space-y-2">
                  <div className="flex items-center justify-center md:justify-start gap-2">
-                    <div className="h-2 w-8 bg-indigo-500 rounded-full" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Verified On-Chain Resume</span>
+                    <div className="h-2 w-8 bg-amber-500 rounded-full" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">Verified On-Chain Resume</span>
                  </div>
                  <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Identity Portfolio</h1>
                  <p className="text-xs font-mono text-muted-foreground/60 break-all select-all flex items-center gap-2">
-                   {wallet} <LinkIcon size={12} className="text-indigo-500/40" />
+                   {wallet} <LinkIcon size={12} className="text-amber-500/40" />
                  </p>
               </div>
            </div>
 
            <div className="flex items-center gap-4">
-              <div className="card-surface border-indigo-500/10 p-6 rounded-[2rem] flex flex-col items-center justify-center text-center w-36">
+              <div className="card-surface border-amber-500/10 p-6 rounded-[2rem] flex flex-col items-center justify-center text-center w-36">
                  <p className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/60 mb-1">Trust Score</p>
-                 <p className="text-3xl font-black text-indigo-400 italic leading-none uppercase">{stats.trustScore}</p>
+                 <p className="text-3xl font-black text-amber-400 italic leading-none uppercase">{stats.trustScore}</p>
               </div>
               <Button className="btn-primary h-14 px-8 rounded-2xl shadow-[0_10px_30px_rgba(99,102,241,0.2)]">
                  <Share2 size={18} className="mr-3" /> Share Portfolio
@@ -110,9 +110,9 @@ export default function StudentPublicProfile() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-           <StatCard icon={Award} label="Identity Credentials" value={stats.totalCerts} color="indigo" />
-           <StatCard icon={Globe} label="Unique Issuers" value={stats.uniqueIssuers} color="violet" />
-           <StatCard icon={TrendingUp} label="Institutional Trust" value={`${stats.trustScore}%`} color="fuchsia" />
+           <StatCard icon={Award} label="Identity Credentials" value={stats.totalCerts} color="amber" />
+           <StatCard icon={Globe} label="Unique Issuers" value={stats.uniqueIssuers} color="orange" />
+           <StatCard icon={TrendingUp} label="Institutional Trust" value={`${stats.trustScore}%`} color="yellow" />
         </div>
 
         {/* Portfolio Grid */}
@@ -123,8 +123,8 @@ export default function StudentPublicProfile() {
                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold italic">Confined to established ledger consensus</p>
               </div>
               <div className="flex gap-2 p-1 bg-white/5 rounded-xl">
-                 <button onClick={() => setFilter("all")} className={cn("px-4 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all", filter === "all" ? "bg-indigo-500 text-white" : "text-muted-foreground")}>All</button>
-                 <button onClick={() => setFilter("recent")} className={cn("px-4 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all", filter === "recent" ? "bg-indigo-500 text-white" : "text-muted-foreground")}>Recent</button>
+                 <button onClick={() => setFilter("all")} className={cn("px-4 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all", filter === "all" ? "bg-amber-500 text-white" : "text-muted-foreground")}>All</button>
+                 <button onClick={() => setFilter("recent")} className={cn("px-4 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all", filter === "recent" ? "bg-amber-500 text-white" : "text-muted-foreground")}>Recent</button>
               </div>
            </div>
 
@@ -151,7 +151,7 @@ export default function StudentPublicProfile() {
            {certificates.length === 0 && (
              <div className="p-20 text-center space-y-4 bg-white/[0.02] border border-white/5 rounded-[3rem]">
                 <p className="text-muted-foreground italic">No public credentials effectively found in this portfolio.</p>
-                <div className="h-1 w-24 bg-indigo-500/20 mx-auto rounded-full" />
+                <div className="h-1 w-24 bg-amber-500/20 mx-auto rounded-full" />
              </div>
            )}
         </div>
@@ -164,9 +164,9 @@ export default function StudentPublicProfile() {
 
 function StatCard({ icon: Icon, label, value, color }: any) {
   const colors: any = {
-    indigo: "text-indigo-400 bg-indigo-500/10",
-    violet: "text-violet-400 bg-violet-500/10",
-    fuchsia: "text-fuchsia-400 bg-fuchsia-500/10"
+    amber: "text-amber-400 bg-amber-500/10",
+    orange: "text-orange-400 bg-orange-500/10",
+    yellow: "text-yellow-400 bg-yellow-500/10"
   };
 
   return (

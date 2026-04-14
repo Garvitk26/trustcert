@@ -170,7 +170,7 @@ export default function IssuanceWizard() {
       // Fetch fresh balance after tx
       if (activeInstitution?.walletAddress) {
         const bal = await getAccountBalance(activeInstitution.walletAddress);
-        setUpdatedBalance(bal);
+        setUpdatedBalance(bal.toString());
       }
 
       setLastTxHash(confirmedHash);
@@ -227,8 +227,8 @@ export default function IssuanceWizard() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-2">
-               <div className="h-2 w-10 bg-indigo-500 rounded-full" />
-               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Credential Pipeline</span>
+               <div className="h-2 w-10 bg-amber-500 rounded-full" />
+               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">Credential Pipeline</span>
             </div>
             <h1 className="text-4xl font-black text-white italic tracking-tight uppercase">Issuance Wizard</h1>
           </div>
@@ -240,8 +240,8 @@ export default function IssuanceWizard() {
                 key={s} 
                 className={cn(
                   "h-10 w-10 rounded-xl flex items-center justify-center transition-all duration-500",
-                  step === s ? "bg-indigo-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]" : 
-                  step > s ? "bg-indigo-500/10 text-indigo-400" : "bg-white/5 text-muted-foreground"
+                  step === s ? "bg-amber-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.4)]" : 
+                  step > s ? "bg-amber-500/10 text-amber-400" : "bg-white/5 text-muted-foreground"
                 )}
               >
                 {step > s ? <CheckCircle2 size={18} /> : <span className="font-bold">{s}</span>}
@@ -263,18 +263,18 @@ export default function IssuanceWizard() {
                   key={t.id}
                   onClick={() => setTemplate(t.id as Template)}
                   className={cn(
-                    "card-surface border-indigo-500/10 p-8 rounded-3xl text-left transition-all duration-500 group relative overflow-hidden",
-                    template === t.id && "border-indigo-500/40 bg-indigo-500/5 ring-1 ring-indigo-500/20 shadow-2xl"
+                    "card-surface border-amber-500/10 p-8 rounded-3xl text-left transition-all duration-500 group relative overflow-hidden",
+                    template === t.id && "border-amber-500/40 bg-amber-500/5 ring-1 ring-amber-500/20 shadow-2xl"
                   )}
                 >
                   {template === t.id && (
-                    <div className="absolute top-4 right-4 h-6 w-6 bg-indigo-500 rounded-full flex items-center justify-center text-white">
+                    <div className="absolute top-4 right-4 h-6 w-6 bg-amber-500 rounded-full flex items-center justify-center text-white">
                        <CheckCircle2 size={14} />
                     </div>
                   )}
                   <div className={cn(
                     "h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110",
-                    template === t.id ? "bg-indigo-500/10 text-indigo-400" : "bg-white/5 text-muted-foreground"
+                    template === t.id ? "bg-amber-500/10 text-amber-400" : "bg-white/5 text-muted-foreground"
                   )}>
                     <t.icon size={32} />
                   </div>
@@ -297,7 +297,7 @@ export default function IssuanceWizard() {
                    <div className="flex p-1 bg-white/5 border border-white/5 rounded-2xl w-fit relative z-30">
                       <button 
                         onClick={() => setInputMode("bulk")} 
-                        className={cn("px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all", inputMode === "bulk" ? "bg-indigo-500 text-white shadow-lg" : "text-muted-foreground hover:text-white")}
+                        className={cn("px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all", inputMode === "bulk" ? "bg-amber-500 text-white shadow-lg" : "text-muted-foreground hover:text-white")}
                       >
                         Bulk CSV
                       </button>
@@ -308,7 +308,7 @@ export default function IssuanceWizard() {
                                addSingleRow();
                             }
                          }} 
-                         className={cn("px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all", inputMode === "single" ? "bg-indigo-500 text-white shadow-lg" : "text-muted-foreground hover:text-white")}
+                         className={cn("px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all", inputMode === "single" ? "bg-amber-500 text-white shadow-lg" : "text-muted-foreground hover:text-white")}
                       >
                          Single Entry
                       </button>
@@ -316,8 +316,8 @@ export default function IssuanceWizard() {
 
                    {inputMode === "bulk" ? (
                      <div className="space-y-6">
-                        <div className="p-12 border-2 border-dashed border-indigo-500/10 rounded-3xl flex flex-col items-center justify-center text-center space-y-4 bg-indigo-500/[0.02] group transition-colors hover:border-indigo-500/20">
-                            <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-muted-foreground group-hover:bg-indigo-500/10 group-hover:text-indigo-400 transition-all">
+                        <div className="p-12 border-2 border-dashed border-amber-500/10 rounded-3xl flex flex-col items-center justify-center text-center space-y-4 bg-amber-500/[0.02] group transition-colors hover:border-amber-500/20">
+                            <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-muted-foreground group-hover:bg-amber-500/10 group-hover:text-amber-400 transition-all">
                                <Upload size={32} />
                             </div>
                             <div className="space-y-1">
@@ -332,7 +332,7 @@ export default function IssuanceWizard() {
                             />
                         </div>
                         <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
-                           <FileText size={20} className="text-violet-400" />
+                           <FileText size={20} className="text-orange-400" />
                            <div className="text-xs">
                               <p className="font-bold text-white">Requirement:</p>
                               <p className="text-muted-foreground italic">CSV must include: recipient_name, recipient_email, course_name</p>
@@ -341,7 +341,7 @@ export default function IssuanceWizard() {
                      </div>
                    ) : (
                      <div className="space-y-6">
-                        <div className="card-surface p-8 border-indigo-500/10 rounded-3xl space-y-6">
+                        <div className="card-surface p-8 border-amber-500/10 rounded-3xl space-y-6">
                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <InputGroup label="Recipient Full Name" placeholder="e.g. John Doe" value={data[0]?.recipient_name || ""} onChange={(v: string) => updateRow(0, { recipient_name: v })} />
                               <InputGroup label="Recipient Email" placeholder="e.g. john@example.com" value={data[0]?.recipient_email || ""} onChange={(v: string) => updateRow(0, { recipient_email: v })} />
@@ -355,7 +355,7 @@ export default function IssuanceWizard() {
                 
                 {/* Visual Help Side */}
                 <div className="w-full md:w-[400px] h-fit sticky top-24">
-                   <div className="card-surface border-indigo-500/10 p-6 rounded-[2.5rem] space-y-4">
+                   <div className="card-surface border-amber-500/10 p-6 rounded-[2.5rem] space-y-4">
                       <div className="h-56 bg-black/40 rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center relative">
                          <div className="absolute inset-0 scale-[0.6] origin-center -rotate-6">
                            <CertificatePreview 
@@ -368,7 +368,7 @@ export default function IssuanceWizard() {
                          </div>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="text-xs font-black uppercase text-indigo-400 tracking-widest leading-none">Template Preview</h4>
+                        <h4 className="text-xs font-black uppercase text-amber-400 tracking-widest leading-none">Template Preview</h4>
                         <p className="text-[10px] text-muted-foreground leading-relaxed italic uppercase italic">A stylized simulation of the immutable asset effectively confined to the ledger.</p>
                       </div>
                    </div>
@@ -389,10 +389,10 @@ export default function IssuanceWizard() {
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-8">
              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-6">
-                   <div className="card-surface border-indigo-500/10 rounded-3xl overflow-hidden">
+                   <div className="card-surface border-amber-500/10 rounded-3xl overflow-hidden">
                       <div className="bg-white/5 p-4 flex items-center justify-between border-b border-white/5">
                          <div className="flex items-center gap-2">
-                            <Table size={16} className="text-violet-400" />
+                            <Table size={16} className="text-orange-400" />
                             <span className="text-xs font-black uppercase tracking-widest text-slate-300">Data Validation Matrix</span>
                          </div>
                          <span className="text-[10px] font-bold text-muted-foreground uppercase">{data.length} Records Detected</span>
@@ -414,16 +414,16 @@ export default function IssuanceWizard() {
                                   onClick={() => setSelectedRowIndex(i)}
                                   className={cn(
                                     "transition-colors cursor-pointer group",
-                                    selectedRowIndex === i ? "bg-indigo-500/[0.03]" : "hover:bg-white/[0.01]",
+                                    selectedRowIndex === i ? "bg-amber-500/[0.03]" : "hover:bg-white/[0.01]",
                                     !row.isValid && "border-l-4 border-l-rose-500/50"
                                   )}
                                 >
                                    <td className="p-4 pl-6 text-sm font-bold text-white">{row.recipient_name || "---"}</td>
                                    <td className="p-4 text-xs text-muted-foreground italic">{row.recipient_email || "---"}</td>
-                                   <td className="p-4 text-xs font-bold text-indigo-400">{row.course_name || "---"}</td>
+                                   <td className="p-4 text-xs font-bold text-amber-400">{row.course_name || "---"}</td>
                                    <td className="p-4 pr-6 text-right">
                                       {row.isValid ? (
-                                        <BadgeCheck size={16} className="ml-auto text-indigo-500" />
+                                        <BadgeCheck size={16} className="ml-auto text-amber-500" />
                                       ) : (
                                         <AlertCircle size={16} className="ml-auto text-rose-500" />
                                       )}
@@ -445,9 +445,9 @@ export default function IssuanceWizard() {
 
                 {/* Focus Preview */}
                 <div className="space-y-6 h-fit sticky top-24">
-                   <div className="card-surface border-indigo-500/10 p-4 rounded-[2.5rem] relative overflow-hidden group">
+                   <div className="card-surface border-amber-500/10 p-4 rounded-[2.5rem] relative overflow-hidden group">
                       <div className="absolute top-4 right-4 z-20">
-                         <div className="badge-violet badge text-[8px] italic">Focus Preview</div>
+                         <div className="badge-orange badge text-[8px] italic">Focus Preview</div>
                       </div>
                       <div className="aspect-[1.4/1] rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl">
                          <div className="absolute inset-0 scale-[0.7] transform-gpu">
@@ -462,7 +462,7 @@ export default function IssuanceWizard() {
                       </div>
                    </div>
 
-                   <div className="card-surface border-indigo-500/10 p-8 rounded-3xl space-y-6 bg-gradient-to-br from-indigo-500/5 to-transparent">
+                   <div className="card-surface border-amber-500/10 p-8 rounded-3xl space-y-6 bg-gradient-to-br from-amber-500/5 to-transparent">
                       <div className="space-y-2">
                         <h4 className="text-xs font-black uppercase text-white tracking-[0.2em] leading-none">Execute Issuance</h4>
                         <p className="text-[10px] text-muted-foreground leading-relaxed italic uppercase italic">Commence the cryptographical settlement of effectively verified credentials on the Stellar ledger.</p>
@@ -506,7 +506,7 @@ function InputGroup({ label, placeholder, value, onChange, type = "text" }: any)
          placeholder={placeholder}
          value={value}
          onChange={(e) => onChange(e.target.value)}
-         className="w-full bg-white/5 border border-white/5 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500/40 transition-all placeholder:text-muted-foreground/30 font-medium"
+         className="w-full bg-white/5 border border-white/5 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500/40 transition-all placeholder:text-muted-foreground/30 font-medium"
        />
     </div>
   );

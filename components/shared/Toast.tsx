@@ -7,16 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const icons = {
-  success: <CheckCircle2 className="text-emerald-500" size={18} />,
+  success: <CheckCircle2 className="text-amber-500" size={18} />,
   error: <XCircle className="text-rose-500" size={18} />,
-  info: <Info className="text-indigo-500" size={18} />,
+  info: <Info className="text-amber-500" size={18} />,
   warning: <AlertTriangle className="text-amber-500" size={18} />,
 };
 
 const borders = {
-  success: "border-l-4 border-l-emerald-500",
+  success: "border-l-4 border-l-amber-500",
   error: "border-l-4 border-l-rose-500",
-  info: "border-l-4 border-l-indigo-500",
+  info: "border-l-4 border-l-amber-500",
   warning: "border-l-4 border-l-amber-500",
 };
 

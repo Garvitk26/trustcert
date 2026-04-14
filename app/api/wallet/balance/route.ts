@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Server } from '@stellar/stellar-sdk'
+import { Horizon } from '@stellar/stellar-sdk'
 
 const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON || 'https://horizon-testnet.stellar.org'
-const server = new Server(HORIZON_URL)
+const server = new Horizon.Server(HORIZON_URL)
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -12,9 +12,11 @@ export async function GET(req: NextRequest) {
 
   try {
     const account = await server.loadAccount(address)
-    const nativeBalance = account.balances.find(b => b.asset_type === 'native')
-    const balance = nativeBalance ? parseFloat(nativeBalance.balance) : 0
-    return NextResponse.json({ address, balance, funded: true })
+    const balances = account.balances.map((b: any) => ({
+      asset: b.asset_type === 'native' ? 'XLM' : b.asset_code,
+      balance: b.balance
+    }));
+    return NextResponse.json({ address, balances, funded: true })
   } catch (error: any) {
     if (error.response?.status === 404) {
       return NextResponse.json({ address, balance: 0, funded: false })

@@ -37,7 +37,7 @@ export default function InstitutionSettings() {
   // Form states
   const [name, setName] = useState("");
   const [certPrefix, setCertPrefix] = useState("");
-  const [accentColor, setAccentColor] = useState("#6366f1");
+  const [accentColor, setAccentColor] = useState("#f59e0b");
   const [walletAddress, setWalletAddress] = useState("");
   const [verifiedDomain, setVerifiedDomain] = useState("");
 
@@ -50,7 +50,7 @@ export default function InstitutionSettings() {
         setInstitution(data);
         setName(data.name);
         setCertPrefix(data.certPrefix || "");
-        setAccentColor(data.accentColor || "#6366f1");
+        setAccentColor(data.accentColor || "#f59e0b");
         setWalletAddress(data.walletAddress || "");
         setVerifiedDomain(data.verifiedDomain || "");
       } catch (err: any) {
@@ -88,14 +88,14 @@ export default function InstitutionSettings() {
 
   if (loading) return (
      <div className="min-h-screen bg-bg-base flex items-center justify-center">
-        <Loader2 className="animate-spin text-indigo-500" />
+        <Loader2 className="animate-spin text-amber-500" />
      </div>
   );
 
   return (
     <div className="min-h-screen bg-bg-base flex flex-col relative overflow-hidden">
       <Navbar />
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-violet-500/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[100px] -z-10" />
 
       <main className="flex-1 max-w-5xl mx-auto w-full px-6 py-12 lg:py-20">
         
@@ -103,8 +103,8 @@ export default function InstitutionSettings() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 mb-16">
            <div className="space-y-4">
               <div className="flex items-center gap-2">
-                 <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Institutional Configuration</span>
+                 <div className="h-2 w-12 bg-amber-500 rounded-full" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Institutional Configuration</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase leading-none">Hub Settings</h1>
               <p className="text-sm text-muted-foreground italic max-w-lg">
@@ -134,28 +134,28 @@ export default function InstitutionSettings() {
            <div className="lg:col-span-2 space-y-8">
               
               {/* General Section */}
-              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-indigo-500/[0.01] space-y-8">
+              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-amber-500/[0.01] space-y-8">
                  <div className="flex items-center gap-3 border-b border-white/5 pb-4">
-                    <Palette size={18} className="text-indigo-500" />
+                    <Palette size={18} className="text-amber-500" />
                     <h3 className="text-lg font-black text-white italic tracking-widest uppercase">General Identity</h3>
                  </div>
 
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Organization Name</label>
-                       <Input value={name} onChange={e => setName(e.target.value)} className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-indigo-500/30" />
+                       <Input value={name} onChange={e => setName(e.target.value)} className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-amber-500/30" />
                     </div>
                     <div className="space-y-3">
                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Stellar Wallet (Identity)</label>
-                       <Input value={walletAddress} onChange={e => setWalletAddress(e.target.value)} placeholder="G..." className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-indigo-500/30 font-mono" />
+                       <Input value={walletAddress} onChange={e => setWalletAddress(e.target.value)} placeholder="G..." className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-amber-500/30 font-mono" />
                     </div>
                     <div className="space-y-3">
                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Ledger Prefix</label>
-                       <Input value={certPrefix} onChange={e => setCertPrefix(e.target.value)} placeholder="e.g. TC-2026-" className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-indigo-500/30 uppercase" />
+                       <Input value={certPrefix} onChange={e => setCertPrefix(e.target.value)} placeholder="e.g. TC-2026-" className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-amber-500/30 uppercase" />
                     </div>
                     <div className="space-y-3">
                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Verified Domain</label>
-                       <Input value={verifiedDomain} onChange={e => setVerifiedDomain(e.target.value)} placeholder="e.g. institution.edu" className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-indigo-500/30" />
+                       <Input value={verifiedDomain} onChange={e => setVerifiedDomain(e.target.value)} placeholder="e.g. institution.edu" className="bg-white/5 border-white/5 h-12 rounded-xl focus:border-amber-500/30" />
                     </div>
                     <div className="space-y-3">
                        <label className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Brand Accent</label>
@@ -168,13 +168,13 @@ export default function InstitutionSettings() {
               </section>
 
               {/* Developer / API Keys Section */}
-              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-fuchsia-500/[0.01] space-y-8">
+              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-yellow-500/[0.01] space-y-8">
                  <div className="flex items-center justify-between border-b border-white/5 pb-4">
                     <div className="flex items-center gap-3">
-                       <Key size={18} className="text-fuchsia-500" />
+                       <Key size={18} className="text-yellow-500" />
                        <h3 className="text-lg font-black text-white italic tracking-widest uppercase">Developer API Keys</h3>
                     </div>
-                    <Button onClick={() => handleUpdate(true)} variant="ghost" className="h-10 px-4 text-[10px] items-center gap-2 flex font-black uppercase text-fuchsia-400 hover:text-fuchsia-300">
+                    <Button onClick={() => handleUpdate(true)} variant="ghost" className="h-10 px-4 text-[10px] items-center gap-2 flex font-black uppercase text-yellow-400 hover:text-yellow-300">
                        <RefreshCw size={12} /> Regenerate Key
                     </Button>
                  </div>
@@ -185,7 +185,7 @@ export default function InstitutionSettings() {
                     </p>
                     {institution?.metadata?.secretKey ? (
                        <div className="relative group">
-                          <div className="bg-black/40 border border-white/5 p-5 pr-14 rounded-2xl font-mono text-sm text-fuchsia-400/80 truncate">
+                          <div className="bg-black/40 border border-white/5 p-5 pr-14 rounded-2xl font-mono text-sm text-yellow-400/80 truncate">
                              {institution.metadata.secretKey}
                           </div>
                           <Button onClick={copyKey} variant="ghost" size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 h-10 w-10 text-muted-foreground hover:text-white">
@@ -201,10 +201,10 @@ export default function InstitutionSettings() {
               </section>
 
               {/* Team Section */}
-              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-indigo-500/[0.01] space-y-8">
+              <section className="card-surface border-white/5 p-8 rounded-[2.5rem] bg-amber-500/[0.01] space-y-8">
                  <div className="flex items-center justify-between border-b border-white/5 pb-4">
                     <div className="flex items-center gap-3">
-                       <Users size={18} className="text-indigo-500" />
+                       <Users size={18} className="text-amber-500" />
                        <h3 className="text-lg font-black text-white italic tracking-widest uppercase">Team Management</h3>
                     </div>
                     <Button variant="outline" className="h-10 px-4 rounded-xl border-white/10 bg-white/5 text-[10px] font-black uppercase tracking-widest">
@@ -213,15 +213,15 @@ export default function InstitutionSettings() {
                  </div>
 
                  <div className="space-y-4">
-                    <div className="flex items-center justify-between p-5 bg-white/[0.02] border border-white/5 rounded-2xl group transition-all hover:border-indigo-500/20">
+                    <div className="flex items-center justify-between p-5 bg-white/[0.02] border border-white/5 rounded-2xl group transition-all hover:border-amber-500/20">
                        <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 bg-indigo-500/20 text-indigo-400 rounded-full flex items-center justify-center font-black">PK</div>
+                          <div className="h-10 w-10 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center font-black">PK</div>
                           <div>
                              <p className="text-sm font-bold text-white uppercase italic">Parth Karan</p>
                              <p className="text-[10px] text-muted-foreground uppercase tracking-widest flex items-center gap-1.5"><Mail size={10} /> parth@trustcert.io</p>
                           </div>
                        </div>
-                       <span className="badge-violet badge text-[8px] uppercase tracking-widest">Owner / Administrator</span>
+                       <span className="badge-orange badge text-[8px] uppercase tracking-widest">Owner / Administrator</span>
                     </div>
                  </div>
               </section>
@@ -239,10 +239,10 @@ function SettingsTab({ icon: Icon, label, active }: any) {
       <button className={cn(
          "w-full flex items-center gap-4 px-6 py-4 rounded-2xl transition-all text-left group",
          active 
-            ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shadow-lg" 
+            ? "bg-amber-500/10 text-amber-400 border border-amber-500/20 shadow-lg" 
             : "text-muted-foreground hover:text-white hover:bg-white/5"
       )}>
-         <Icon size={20} className={active ? "text-indigo-400" : "text-muted-foreground group-hover:text-white"} />
+         <Icon size={20} className={active ? "text-amber-400" : "text-muted-foreground group-hover:text-white"} />
          <span className="text-sm font-black uppercase tracking-widest italic">{label}</span>
       </button>
    );

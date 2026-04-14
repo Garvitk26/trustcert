@@ -107,7 +107,7 @@ export default function CertificateManagement() {
       <Navbar />
       
       {/* Ambience */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px] -z-10" />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 lg:py-20">
         
@@ -115,8 +115,8 @@ export default function CertificateManagement() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 mb-12">
            <div className="space-y-4">
               <div className="flex items-center gap-2">
-                 <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Institutional Registry Master List</span>
+                 <div className="h-2 w-12 bg-amber-500 rounded-full" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Institutional Registry Master List</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase leading-none">Management Center</h1>
               <p className="text-sm text-muted-foreground italic max-w-lg">
@@ -125,20 +125,20 @@ export default function CertificateManagement() {
            </div>
            
            <div className="flex items-center p-1 bg-white/5 rounded-2xl border border-white/5">
-              <Button variant="ghost" className="h-12 px-6 rounded-xl text-xs font-black uppercase tracking-widest text-indigo-400">Master Audit</Button>
+              <Button variant="ghost" className="h-12 px-6 rounded-xl text-xs font-black uppercase tracking-widest text-amber-400">Master Audit</Button>
               <Button variant="ghost" className="h-12 px-6 rounded-xl text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-white transition-all">Audit Vault</Button>
            </div>
         </div>
 
         {/* Global Filter Bar */}
-        <div className="card-surface border-indigo-500/10 p-6 rounded-[2.5rem] bg-indigo-500/[0.02] flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
+        <div className="card-surface border-amber-500/10 p-6 rounded-[2.5rem] bg-amber-500/[0.02] flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
            <div className="relative w-full md:max-w-xl">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-500/40" size={20} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500/40" size={20} />
               <Input 
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search by Recipient Identity or Ledger Hash..." 
-                className="h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:border-indigo-500/30 text-white font-bold"
+                className="h-14 pl-12 bg-white/5 border-white/10 rounded-2xl focus:border-amber-500/30 text-white font-bold"
               />
            </div>
            
@@ -157,11 +157,11 @@ export default function CertificateManagement() {
            <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                  <thead>
-                    <tr className="border-b border-indigo-500/10 bg-indigo-500/[0.03]">
-                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Recipient Identity</th>
-                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Ledger Status</th>
-                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400">Master Hash</th>
-                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-indigo-400 text-right">Settlement Controls</th>
+                    <tr className="border-b border-amber-500/10 bg-amber-500/[0.03]">
+                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">Recipient Identity</th>
+                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">Ledger Status</th>
+                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-amber-400">Master Hash</th>
+                       <th className="p-8 text-[10px] font-black uppercase tracking-[0.3em] text-amber-400 text-right">Settlement Controls</th>
                     </tr>
                  </thead>
                  <tbody className="divide-y divide-white/5">
@@ -169,8 +169,8 @@ export default function CertificateManagement() {
                        {loading ? (
                           <tr>
                              <td colSpan={4} className="p-20 text-center">
-                                <Loader2 className="animate-spin text-indigo-500 mx-auto mb-4" />
-                                <p className="text-[10px] font-black text-indigo-400/50 uppercase tracking-widest animate-pulse">Synchronizing Ledger Registry...</p>
+                                <Loader2 className="animate-spin text-amber-500 mx-auto mb-4" />
+                                <p className="text-[10px] font-black text-amber-400/50 uppercase tracking-widest animate-pulse">Synchronizing Ledger Registry...</p>
                              </td>
                           </tr>
                        ) : filteredCerts.map((cert, i) => (
@@ -184,13 +184,13 @@ export default function CertificateManagement() {
                              <td className="p-8">
                                 <div className="space-y-1">
                                    <p className="text-sm font-bold text-white uppercase italic">{cert.recipientName}</p>
-                                   <p className="text-[10px] items-center gap-1.5 flex font-bold text-muted-foreground tracking-widest"><Award size={10} className="text-indigo-500/40" /> {cert.courseTitle}</p>
+                                   <p className="text-[10px] items-center gap-1.5 flex font-bold text-muted-foreground tracking-widest"><Award size={10} className="text-amber-500/40" /> {cert.courseTitle}</p>
                                 </div>
                              </td>
                              <td className="p-8">
                                 <span className={cn(
                                    "badge text-[9px]",
-                                   cert.status === "issued" ? "badge-violet" : "badge-rose glitch-text"
+                                   cert.status === "issued" ? "badge-orange" : "badge-rose glitch-text"
                                 )}>
                                    {cert.status === "issued" ? "Ledger Settled" : "Registry Nullified"}
                                 </span>
@@ -229,7 +229,7 @@ export default function CertificateManagement() {
               <p className="text-[10px] font-black text-muted-foreground/40 uppercase tracking-widest">Confined Registry: {filteredCerts.length} Entires</p>
               <div className="flex items-center gap-2">
                  <Button variant="ghost" size="icon" className="h-10 w-10 border border-white/5 rounded-xl"><ChevronLeft size={16} /></Button>
-                 <Button variant="ghost" size="icon" className="h-10 w-10 border border-white/5 rounded-xl bg-indigo-500 text-white">01</Button>
+                 <Button variant="ghost" size="icon" className="h-10 w-10 border border-white/5 rounded-xl bg-amber-500 text-white">01</Button>
                  <Button variant="ghost" size="icon" className="h-10 w-10 border border-white/5 rounded-xl"><ChevronRight size={16} /></Button>
               </div>
            </div>

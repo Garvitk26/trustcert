@@ -31,11 +31,11 @@ export default function InstitutionDashboard() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div className="space-y-1">
           <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Command Center</h1>
-          <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.4em] italic leading-none">
+          <p className="text-[10px] font-black text-amber-400 uppercase tracking-[0.4em] italic leading-none">
              Established for {activeInstitution?.name}
           </p>
         </div>
-        <Button asChild className="h-14 px-8 btn-primary rounded-2xl shadow-lg shadow-indigo-500/20 font-black uppercase tracking-widest italic text-xs">
+        <Button asChild className="h-14 px-8 btn-primary rounded-2xl shadow-lg shadow-amber-500/20 font-black uppercase tracking-widest italic text-xs">
            <Link href="/institution/issue">
               <Plus size={18} className="mr-2" />
               Issue New Ledger
@@ -51,7 +51,7 @@ export default function InstitutionDashboard() {
           icon={FileCheck} 
           trend="+12% Settlement Velocity"
           trendUp={true} 
-          color="indigo"
+          color="amber"
         />
         <StatCard 
           title="Identity Nodes" 
@@ -59,7 +59,7 @@ export default function InstitutionDashboard() {
           icon={Users} 
           trend="+5.2% Consensus"
           trendUp={true} 
-          color="violet"
+          color="orange"
         />
         <StatCard 
           title="Blockchain Auth" 
@@ -67,7 +67,7 @@ export default function InstitutionDashboard() {
           icon={ShieldCheck} 
           trend="Secured on Stellar"
           trendUp={true} 
-          color="fuchsia"
+          color="yellow"
         />
         <StatCard 
           title="Registry Uptime" 
@@ -90,12 +90,12 @@ export default function InstitutionDashboard() {
         <div className="lg:col-span-1">
           <div className="p-8 rounded-[2.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-sm h-full flex flex-col">
             <h3 className="text-sm font-black text-white italic tracking-tighter uppercase mb-6 flex items-center gap-2">
-              <History size={16} className="text-indigo-400" />
+              <History size={16} className="text-amber-400" />
               On-Chain Ledger
             </h3>
             <div className="flex-1 flex flex-col items-center justify-center gap-4 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all">
-                <div className="p-4 rounded-full bg-indigo-500/10 border border-indigo-500/20">
-                    <Activity size={32} className="text-indigo-400 animate-pulse" />
+                <div className="p-4 rounded-full bg-amber-500/10 border border-amber-500/20">
+                    <Activity size={32} className="text-amber-400 animate-pulse" />
                 </div>
                 <p className="text-[10px] font-black uppercase tracking-widest italic text-center leading-relaxed">
                     Connect wallet to decode<br/>live transaction stream
@@ -109,12 +109,12 @@ export default function InstitutionDashboard() {
         {/* Recent Activity */}
         <div className="p-10 rounded-[3rem] border border-white/5 bg-white/[0.02] backdrop-blur-xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
-             <Zap size={120} className="text-indigo-500" />
+             <Zap size={120} className="text-amber-500" />
           </div>
           
           <div className="flex justify-between items-center mb-10 relative z-10">
             <h3 className="text-xl font-black text-white italic tracking-tighter uppercase leading-none flex items-center gap-3">
-              <TrendingUp size={24} className="text-indigo-400" />
+              <TrendingUp size={24} className="text-amber-400" />
               Recent Issuances
             </h3>
             <Link href="/institution/certificates">
@@ -124,9 +124,9 @@ export default function InstitutionDashboard() {
           
           <div className="space-y-6 relative z-10">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 hover:border-indigo-500/20 transition-all cursor-pointer group/item">
+              <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-white/5 border border-white/5 hover:border-amber-500/20 transition-all cursor-pointer group/item">
                 <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 bg-indigo-500/10 rounded-xl flex items-center justify-center text-indigo-400 group-hover/item:scale-110 transition-transform">
+                  <div className="h-10 w-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-400 group-hover/item:scale-110 transition-transform">
                      <FileCheck size={20} />
                   </div>
                   <div>
@@ -134,7 +134,7 @@ export default function InstitutionDashboard() {
                     <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Enrolled Consensus Protocol</p>
                   </div>
                 </div>
-                <ArrowUpRight size={18} className="text-indigo-500 opacity-20 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
+                <ArrowUpRight size={18} className="text-amber-500 opacity-20 group-hover/item:opacity-100 group-hover/item:translate-x-1 group-hover/item:-translate-y-1 transition-all" />
               </div>
             ))}
           </div>
@@ -143,16 +143,16 @@ export default function InstitutionDashboard() {
         {/* Global Reach */}
         <div className="p-10 rounded-[3rem] border border-white/5 bg-white/[0.02] backdrop-blur-xl relative overflow-hidden group">
            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
-             <Globe size={120} className="text-fuchsia-500" />
+             <Globe size={120} className="text-yellow-500" />
           </div>
           
           <h3 className="text-xl font-black text-white italic tracking-tighter uppercase leading-none mb-10 flex items-center gap-3 relative z-10">
-            <Activity size={24} className="text-fuchsia-400" />
+            <Activity size={24} className="text-yellow-400" />
             Vitals Analytics
           </h3>
           
-          <div className="flex flex-col items-center justify-center h-64 border border-dashed border-white/10 rounded-[2rem] gap-4 relative z-10 group-hover:border-fuchsia-500/20 transition-colors bg-white/[0.01]">
-             <div className="h-12 w-12 bg-fuchsia-500/10 rounded-2xl flex items-center justify-center text-fuchsia-500 animate-pulse">
+          <div className="flex flex-col items-center justify-center h-64 border border-dashed border-white/10 rounded-[2rem] gap-4 relative z-10 group-hover:border-yellow-500/20 transition-colors bg-white/[0.01]">
+             <div className="h-12 w-12 bg-yellow-500/10 rounded-2xl flex items-center justify-center text-yellow-500 animate-pulse">
                 <TrendingUp size={24} />
              </div>
              <p className="text-[10px] text-muted-foreground uppercase font-black tracking-[0.2em] italic">Real-time Coordination Confined</p>
@@ -162,8 +162,8 @@ export default function InstitutionDashboard() {
              <div className="space-y-1">
                 <p className="text-[8px] font-black text-white/30 uppercase tracking-widest">Protocol Check</p>
                 <div className="flex items-center gap-2">
-                   <div className="h-1.5 w-1.5 bg-fuchsia-500 rounded-full animate-ping" />
-                   <span className="text-[10px] font-black italic uppercase tracking-widest text-fuchsia-400">Node Synchronized</span>
+                   <div className="h-1.5 w-1.5 bg-yellow-500 rounded-full animate-ping" />
+                   <span className="text-[10px] font-black italic uppercase tracking-widest text-yellow-400">Node Synchronized</span>
                 </div>
              </div>
              <Button variant="ghost" className="h-10 px-6 btn-ghost rounded-xl uppercase font-black text-[10px] tracking-widest italic">
@@ -178,9 +178,9 @@ export default function InstitutionDashboard() {
 
 function StatCard({ title, value, icon: Icon, trend, trendUp, color }: any) {
   const colorMap: any = {
-    indigo: "text-indigo-400 bg-indigo-500/10 border-indigo-500/10 hover:border-indigo-500/30",
-    violet: "text-violet-400 bg-violet-500/10 border-violet-500/10 hover:border-violet-500/30",
-    fuchsia: "text-fuchsia-400 bg-fuchsia-500/10 border-fuchsia-500/10 hover:border-fuchsia-500/30",
+    amber: "text-amber-400 bg-amber-500/10 border-amber-500/10 hover:border-amber-500/30",
+    orange: "text-orange-400 bg-orange-500/10 border-orange-500/10 hover:border-orange-500/30",
+    yellow: "text-yellow-400 bg-yellow-500/10 border-yellow-500/10 hover:border-yellow-500/30",
     sky: "text-sky-400 bg-sky-500/10 border-sky-500/10 hover:border-sky-500/30",
   };
 

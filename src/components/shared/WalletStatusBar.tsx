@@ -5,7 +5,6 @@ import { getXLMBalance } from '@/lib/stellar'
 import { Button } from '@/components/ui/button'
 import { RefreshCw, Send, ExternalLink } from 'lucide-react'
 import SendXLMPanel from './SendXLMPanel'
-import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -60,7 +59,7 @@ export default function WalletStatusBar() {
         </div>
 
         <Dialog>
-          <DialogTrigger asChild>
+          <DialogTrigger>
             <Button size="sm" className="bg-primary hover:bg-primary/90 text-white h-9 px-4 font-bold shadow-lg shadow-primary/20">
               <Send className="h-3.5 w-3.5 mr-2" />
               Send XLM

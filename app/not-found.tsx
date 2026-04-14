@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-bg-base p-6 text-center relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-indigo-500/5 rounded-full blur-[80px] -z-10" />
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-[80px] -z-10" />
 
       <div className="card-surface border-rose-500/20 p-12 md:p-16 rounded-[3rem] bg-bg-surface/50 backdrop-blur-2xl max-w-xl space-y-8 shadow-2xl relative">
         <div className="relative mx-auto w-24 h-24 mb-10">
@@ -38,8 +38,8 @@ export default function NotFound() {
         <div className="pt-8 flex flex-col items-center gap-2">
            <span className="text-[8px] font-bold text-muted-foreground/30 uppercase tracking-widest">Network Status</span>
            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 rounded-full bg-indigo-500 animate-pulse" />
-              <span className="text-[9px] font-black text-indigo-400 uppercase tracking-widest">Operational Hub</span>
+              <div className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+              <span className="text-[9px] font-black text-amber-400 uppercase tracking-widest">Operational Hub</span>
            </div>
         </div>
       </div>

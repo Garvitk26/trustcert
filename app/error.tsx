@@ -17,7 +17,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#020d0a] p-4 text-center text-emerald-500">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#020d0a] p-4 text-center text-amber-500">
       <div className="mb-8 rounded-full bg-rose-500/10 p-4 text-rose-500">
         <AlertTriangle size={48} />
       </div>
@@ -26,12 +26,12 @@ export default function Error({
         An error occurred during communication with the network protocol.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
-        <Button onClick={() => reset()} className="gap-2 bg-emerald-600 hover:bg-emerald-500">
+        <Button onClick={() => reset()} className="gap-2 bg-amber-600 hover:bg-amber-500">
           <RefreshCcw size={16} />
           Try Again
         </Button>
         <Link href="/">
-          <Button variant="outline" className="gap-2 border-emerald-500/20 text-emerald-400">
+          <Button variant="outline" className="gap-2 border-amber-500/20 text-amber-400">
             <Home size={16} />
             Back to Home
           </Button>

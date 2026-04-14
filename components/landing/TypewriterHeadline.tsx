@@ -50,13 +50,13 @@ export default function TypewriterHeadline({
 
   return (
     <span className="relative inline-block min-h-[1.2em]">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400">
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400">
         {currentText}
       </span>
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-        className="absolute -right-1 bottom-1 w-[3px] h-[80%] bg-indigo-500 typewriter-cursor"
+        className="absolute -right-1 bottom-1 w-[3px] h-[80%] bg-amber-500 typewriter-cursor"
       />
     </span>
   );

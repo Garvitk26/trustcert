@@ -70,9 +70,9 @@ export default function IssuanceProgress({ currentStage, error, onClose }: Issua
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-lg card-surface border-indigo-500/20 p-8 rounded-3xl shadow-2xl relative overflow-hidden"
+        className="w-full max-w-lg card-surface border-amber-500/20 p-8 rounded-3xl shadow-2xl relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 opacity-50" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 opacity-50" />
         
         <div className="flex justify-between items-start mb-8">
           <div>
@@ -95,8 +95,8 @@ export default function IssuanceProgress({ currentStage, error, onClose }: Issua
                 <div className="flex items-start gap-4">
                   <div className={cn(
                     "mt-1 p-2 rounded-xl transition-all duration-500",
-                    stage.status === "completed" ? "bg-indigo-500/10 text-indigo-400" :
-                    stage.status === "processing" ? "bg-violet-500/10 text-violet-400 animate-pulse border border-violet-500/30" :
+                    stage.status === "completed" ? "bg-amber-500/10 text-amber-400" :
+                    stage.status === "processing" ? "bg-orange-500/10 text-orange-400 animate-pulse border border-orange-500/30" :
                     stage.status === "error" ? "bg-rose-500/10 text-rose-400" :
                     "bg-white/5 text-muted-foreground"
                   )}>
@@ -110,7 +110,7 @@ export default function IssuanceProgress({ currentStage, error, onClose }: Issua
                        )}>
                          {stage.label}
                        </span>
-                       {stage.status === "completed" && <CheckCircle2 size={16} className="text-indigo-400" />}
+                       {stage.status === "completed" && <CheckCircle2 size={16} className="text-amber-400" />}
                        {stage.status === "error" && <AlertCircle size={16} className="text-rose-400" />}
                     </div>
                     <p className="text-[10px] text-muted-foreground/60 leading-relaxed mt-1 italic">
@@ -122,7 +122,7 @@ export default function IssuanceProgress({ currentStage, error, onClose }: Issua
                 {stage.id < 4 && (
                   <div className={cn(
                     "absolute left-5 top-11 w-0.5 h-6 transition-colors duration-500",
-                    stage.status === "completed" ? "bg-indigo-500/20" : "bg-white/5"
+                    stage.status === "completed" ? "bg-amber-500/20" : "bg-white/5"
                   )} />
                 )}
              </div>
@@ -133,10 +133,10 @@ export default function IssuanceProgress({ currentStage, error, onClose }: Issua
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-10 p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-center"
+            className="mt-10 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-center"
           >
-             <p className="text-xs font-bold text-indigo-400 uppercase tracking-[0.2em]">Credential Secured Effectively</p>
-             <p className="text-[10px] text-indigo-300/60 mt-1 uppercase italic">Ledger Confirmation Received</p>
+             <p className="text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">Credential Secured Effectively</p>
+             <p className="text-[10px] text-amber-300/60 mt-1 uppercase italic">Ledger Confirmation Received</p>
           </motion.div>
         )}
       </motion.div>

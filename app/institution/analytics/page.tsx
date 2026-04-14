@@ -36,7 +36,7 @@ import Footer from "@/components/shared/Footer";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-const COLORS = ["#6366f1", "#8b5cf6", "#d946ef", "#06b6d4", "#f59e0b"];
+const COLORS = ["#f59e0b", "#f97316", "#eab308", "#06b6d4", "#f59e0b"];
 
 export default function AnalyticsDashboard() {
   const { showToast } = useToast();
@@ -76,8 +76,8 @@ export default function AnalyticsDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen bg-bg-base flex flex-col items-center justify-center">
-        <Loader2 className="animate-spin text-indigo-500 mb-4" size={40} />
-        <p className="text-sm font-mono text-indigo-500/50 uppercase tracking-[0.2em] animate-pulse">Synchronizing Command Center...</p>
+        <Loader2 className="animate-spin text-amber-500 mb-4" size={40} />
+        <p className="text-sm font-mono text-amber-500/50 uppercase tracking-[0.2em] animate-pulse">Synchronizing Command Center...</p>
       </div>
     );
   }
@@ -89,7 +89,7 @@ export default function AnalyticsDashboard() {
       <Navbar />
       
       {/* Background Ambience */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-indigo-500/5 to-transparent -z-10" />
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-amber-500/5 to-transparent -z-10" />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 lg:py-20">
         
@@ -97,8 +97,8 @@ export default function AnalyticsDashboard() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-10 mb-16">
            <div className="space-y-4">
               <div className="flex items-center gap-2">
-                 <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Institutional Intelligence Hub</span>
+                 <div className="h-2 w-12 bg-amber-500 rounded-full" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Institutional Intelligence Hub</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase leading-none">Analytics Dashboard</h1>
               <p className="text-sm text-muted-foreground italic max-w-lg">
@@ -113,9 +113,9 @@ export default function AnalyticsDashboard() {
 
         {/* Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-           <StatCard icon={Award} label="Total Issued" value={stats.totalIssued} color="indigo" />
-           <StatCard icon={Activity} label="Verification Hits" value={stats.totalHits} color="violet" />
-           <StatCard icon={Users} label="Active Students" value={stats.activeStudents} color="fuchsia" />
+           <StatCard icon={Award} label="Total Issued" value={stats.totalIssued} color="amber" />
+           <StatCard icon={Activity} label="Verification Hits" value={stats.totalHits} color="orange" />
+           <StatCard icon={Users} label="Active Students" value={stats.activeStudents} color="yellow" />
            <StatCard icon={TrendingUp} label="Institutional Trust" value={`${Math.min(100, stats.activeStudents * 10)}%`} color="cyan" />
         </div>
 
@@ -125,14 +125,14 @@ export default function AnalyticsDashboard() {
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
-             className="lg:col-span-2 card-surface border-indigo-500/10 p-8 rounded-[2.5rem] bg-indigo-500/[0.02] space-y-8"
+             className="lg:col-span-2 card-surface border-amber-500/10 p-8 rounded-[2.5rem] bg-amber-500/[0.02] space-y-8"
            >
               <div className="flex items-center justify-between">
                  <div>
                     <h3 className="text-xl font-black text-white italic tracking-widest uppercase">Verification Trends</h3>
                     <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Inquiries settled on established ledger (Last 14 Days)</p>
                  </div>
-                 <div className="p-3 bg-white/5 rounded-xl"><BarChartIcon size={20} className="text-indigo-400" /></div>
+                 <div className="p-3 bg-white/5 rounded-xl"><BarChartIcon size={20} className="text-amber-400" /></div>
               </div>
 
               <div className="h-[350px] w-full">
@@ -140,8 +140,8 @@ export default function AnalyticsDashboard() {
                     <AreaChart data={charts.hitsOverTime}>
                        <defs>
                           <linearGradient id="colorHits" x1="0" y1="0" x2="0" y2="1">
-                             <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
-                             <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                             <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3}/>
+                             <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
                           </linearGradient>
                        </defs>
                        <XAxis dataKey="date" stroke="#475569" fontSize={10} axisLine={false} tickLine={false} />
@@ -150,7 +150,7 @@ export default function AnalyticsDashboard() {
                          contentStyle={{ backgroundColor: "#0d0d1f", border: "1px solid rgba(99,102,241,0.1)", borderRadius: "12px" }}
                          itemStyle={{ color: "#f1f5f9", fontSize: "12px", fontWeight: "bold" }}
                        />
-                       <Area type="monotone" dataKey="hits" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorHits)" />
+                       <Area type="monotone" dataKey="hits" stroke="#f59e0b" strokeWidth={3} fillOpacity={1} fill="url(#colorHits)" />
                     </AreaChart>
                  </ResponsiveContainer>
               </div>
@@ -160,11 +160,11 @@ export default function AnalyticsDashboard() {
            <motion.div 
              initial={{ opacity: 0, scale: 0.9 }}
              animate={{ opacity: 1, scale: 1 }}
-             className="card-surface border-indigo-500/10 p-8 rounded-[2.5rem] bg-violet-500/[0.02] space-y-8 flex flex-col items-center"
+             className="card-surface border-amber-500/10 p-8 rounded-[2.5rem] bg-orange-500/[0.02] space-y-8 flex flex-col items-center"
            >
               <div className="w-full flex items-center justify-between">
                  <h3 className="text-xl font-black text-white italic tracking-widest uppercase">Templates</h3>
-                 <div className="p-3 bg-white/5 rounded-xl"><PieChartIcon size={20} className="text-violet-400" /></div>
+                 <div className="p-3 bg-white/5 rounded-xl"><PieChartIcon size={20} className="text-orange-400" /></div>
               </div>
 
               <div className="h-[300px] w-full flex-1">
@@ -199,17 +199,17 @@ export default function AnalyticsDashboard() {
                  {charts.topCourses.map((course: any, i: number) => (
                     <div key={i} className="card-surface border-white/5 p-6 rounded-2xl flex items-center justify-between group hover:bg-white/5 transition-all">
                        <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 flex items-center justify-center text-xs font-black text-indigo-400 bg-indigo-500/10 rounded-xl">0{i+1}</div>
+                          <div className="h-10 w-10 flex items-center justify-center text-xs font-black text-amber-400 bg-amber-500/10 rounded-xl">0{i+1}</div>
                           <span className="text-sm font-bold text-white uppercase tracking-tight">{course._id}</span>
                        </div>
-                       <span className="badge-indigo badge text-[10px]">{course.count} Issued</span>
+                       <span className="badge-amber badge text-[10px]">{course.count} Issued</span>
                     </div>
                  ))}
               </div>
            </div>
 
-           <div className="card-surface border-indigo-500/5 p-10 rounded-[3rem] bg-indigo-500/[0.01] flex flex-col items-center justify-center text-center space-y-6">
-              <div className="h-20 w-20 bg-indigo-500/10 rounded-3xl flex items-center justify-center text-indigo-500"><TrendingUp size={32} /></div>
+           <div className="card-surface border-amber-500/5 p-10 rounded-[3rem] bg-amber-500/[0.01] flex flex-col items-center justify-center text-center space-y-6">
+              <div className="h-20 w-20 bg-amber-500/10 rounded-3xl flex items-center justify-center text-amber-500"><TrendingUp size={32} /></div>
               <div className="space-y-2">
                  <h4 className="text-xl font-black text-white italic uppercase italic">Regional Settlement Insights</h4>
                  <p className="text-xs text-muted-foreground italic leading-relaxed uppercase italic">Verification effectively confined to global hubs. Settlements reaching consensus in established identities.</p>
@@ -226,9 +226,9 @@ export default function AnalyticsDashboard() {
 
 function StatCard({ icon: Icon, label, value, color }: any) {
   const colors: any = {
-    indigo: "text-indigo-400 bg-indigo-500/10",
-    violet: "text-violet-400 bg-violet-500/10",
-    fuchsia: "text-fuchsia-400 bg-fuchsia-500/10",
+    amber: "text-amber-400 bg-amber-500/10",
+    orange: "text-orange-400 bg-orange-500/10",
+    yellow: "text-yellow-400 bg-yellow-500/10",
     cyan: "text-cyan-400 bg-cyan-500/10"
   };
 

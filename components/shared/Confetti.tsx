@@ -12,7 +12,7 @@ export function triggerConfetti(options: ConfettiOptions = {}) {
   const {
     particleCount = 150,
     duration = 3000,
-    colors = ["#6366f1", "#8b5cf6", "#d946ef", "#f59e0b", "#06b6d4", "#f43f5e", "#0ea5e9", "#ffffff"]
+    colors = ["#f59e0b", "#f97316", "#eab308", "#f59e0b", "#06b6d4", "#f43f5e", "#0ea5e9", "#ffffff"]
   } = options;
 
   const canvas = document.createElement("canvas");

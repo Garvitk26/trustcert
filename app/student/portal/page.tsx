@@ -16,7 +16,9 @@ import {
   Link as LinkIcon,
   Plus,
   History,
-  Settings
+  Settings,
+  Globe,
+  Zap
 } from "lucide-react";
 import WalletManager from "@/src/components/shared/WalletManager";
 import SendXLMPanel from "@/src/components/shared/SendXLMPanel";
@@ -109,7 +111,7 @@ export default function StudentPortal() {
   return (
     <div className="min-h-screen bg-bg-base flex flex-col relative overflow-hidden">
       <Navbar />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-fuchsia-500/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[100px] -z-10" />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 lg:py-20">
         
@@ -117,8 +119,8 @@ export default function StudentPortal() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-16">
            <div className="space-y-4">
               <div className="flex items-center gap-2">
-                 <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Student Identity Registry</span>
+                 <div className="h-2 w-12 bg-amber-500 rounded-full" />
+                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Student Identity Registry</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase leading-none">Management Hub</h1>
               <p className="text-sm text-muted-foreground italic max-w-lg">
@@ -127,15 +129,15 @@ export default function StudentPortal() {
            </div>
 
            <div className="flex gap-4">
-              <div className="card-surface border-indigo-500/10 p-4 md:p-6 rounded-3xl flex items-center gap-6 bg-indigo-500/[0.03]">
+              <div className="card-surface border-amber-500/10 p-4 md:p-6 rounded-3xl flex items-center gap-6 bg-amber-500/[0.03]">
                  <div className="text-center">
                     <p className="text-[8px] font-black text-muted-foreground/60 uppercase tracking-widest mb-1">Portfolio Size</p>
                     <p className="text-2xl font-black text-white uppercase italic">{linkedCount}</p>
                  </div>
-                 <div className="w-px h-10 bg-indigo-500/10" />
+                 <div className="w-px h-10 bg-amber-500/10" />
                  <div className="text-center">
                     <p className="text-[8px] font-black text-muted-foreground/60 uppercase tracking-widest mb-1">Incoming</p>
-                    <p className="text-2xl font-black text-violet-400 uppercase italic">{pendingCount}</p>
+                    <p className="text-2xl font-black text-orange-400 uppercase italic">{pendingCount}</p>
                  </div>
               </div>
            </div>
@@ -146,10 +148,10 @@ export default function StudentPortal() {
           <WalletManager />
           <div className="space-y-8">
             <SendXLMPanel compact />
-            <div className="card-surface border-indigo-500/10 p-8 rounded-[2rem] bg-indigo-500/[0.02] relative overflow-hidden group">
+            <div className="card-surface border-amber-500/10 p-8 rounded-[2rem] bg-amber-500/[0.02] relative overflow-hidden group">
                <div className="flex justify-between items-center mb-6">
                   <h3 className="text-sm font-black text-white italic tracking-widest uppercase flex items-center gap-2">
-                    <History size={16} className="text-indigo-400" />
+                    <History size={16} className="text-amber-400" />
                     Ledger Events
                   </h3>
                </div>
@@ -165,19 +167,19 @@ export default function StudentPortal() {
         {/* Dashboard Actions */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
            <div className="relative w-full md:max-w-md">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-500/40" size={18} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500/40" size={18} />
               <Input 
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search Identity Registry..." 
-                className="h-14 pl-12 bg-white/5 border-white/5 rounded-2xl focus:border-indigo-500/30 text-white placeholder:text-muted-foreground/30 font-bold"
+                className="h-14 pl-12 bg-white/5 border-white/5 rounded-2xl focus:border-amber-500/30 text-white placeholder:text-muted-foreground/30 font-bold"
               />
            </div>
 
            <div className="flex items-center gap-4">
               <div className="flex bg-white/5 p-1 rounded-2xl border border-white/5">
-                 <button onClick={() => setView("grid")} className={cn("p-3 rounded-xl transition-all", view === "grid" ? "bg-indigo-500 text-white shadow-lg" : "text-slate-500 hover:text-slate-300")}><LayoutGrid size={20} /></button>
-                 <button onClick={() => setView("list")} className={cn("p-3 rounded-xl transition-all", view === "list" ? "bg-indigo-500 text-white shadow-lg" : "text-slate-500 hover:text-slate-300")}><List size={20} /></button>
+                 <button onClick={() => setView("grid")} className={cn("p-3 rounded-xl transition-all", view === "grid" ? "bg-amber-500 text-white shadow-lg" : "text-slate-500 hover:text-slate-300")}><LayoutGrid size={20} /></button>
+                 <button onClick={() => setView("list")} className={cn("p-3 rounded-xl transition-all", view === "list" ? "bg-amber-500 text-white shadow-lg" : "text-slate-500 hover:text-slate-300")}><List size={20} /></button>
               </div>
               <Button asChild variant="outline" className="h-14 px-6 rounded-2xl border-white/5 bg-white/5 text-xs font-black uppercase tracking-widest">
                  <Link href={`/student/${wallet || "connect"}`} className="flex items-center gap-2">
@@ -190,8 +192,8 @@ export default function StudentPortal() {
         {/* Content Section */}
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center space-y-4">
-             <Loader2 className="animate-spin text-indigo-500" size={32} />
-             <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest animate-pulse">Synchronizing with Registry...</p>
+             <Loader2 className="animate-spin text-amber-500" size={32} />
+             <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest animate-pulse">Synchronizing with Registry...</p>
           </div>
         ) : (
           <div className="space-y-12">
@@ -226,7 +228,7 @@ export default function StudentPortal() {
             <section className="space-y-8">
                <div className="flex items-center justify-between border-b border-white/5 pb-4">
                   <div className="flex items-center gap-3">
-                     <ShieldCheck size={20} className="text-fuchsia-500" />
+                     <ShieldCheck size={20} className="text-yellow-500" />
                      <h3 className="text-lg font-black text-white italic tracking-widest uppercase">Secured Portfolio</h3>
                   </div>
                </div>
@@ -260,7 +262,7 @@ export default function StudentPortal() {
                                  <button onClick={() => toggleVisibility(cert._id, cert.visibility)} className="h-10 w-10 rounded-full bg-black/80 border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all">
                                     {cert.visibility === "public" ? <Eye size={18} /> : <EyeOff size={18} />}
                                  </button>
-                                 <Link href={`/verify/${cert.certId}`} className="h-10 w-10 rounded-full bg-black/80 border border-white/10 flex items-center justify-center text-white hover:bg-indigo-500 transition-all">
+                                 <Link href={`/verify/${cert.certId}`} className="h-10 w-10 rounded-full bg-black/80 border border-white/10 flex items-center justify-center text-white hover:bg-amber-500 transition-all">
                                     <ExternalLink size={18} />
                                  </Link>
                               </div>
@@ -283,8 +285,8 @@ export default function StudentPortal() {
 
 function PortalListRow({ cert, onToggle }: any) {
   return (
-    <div className="card-surface border-white/5 p-6 rounded-3xl flex flex-col md:flex-row items-center gap-8 group hover:border-indigo-500/20 transition-all">
-       <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/10 transition-all shrink-0">
+    <div className="card-surface border-white/5 p-6 rounded-3xl flex flex-col md:flex-row items-center gap-8 group hover:border-amber-500/20 transition-all">
+       <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-amber-400 group-hover:bg-amber-500/10 transition-all shrink-0">
           <Award size={32} />
        </div>
        <div className="flex-1 text-center md:text-left space-y-1">
@@ -292,7 +294,7 @@ function PortalListRow({ cert, onToggle }: any) {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
              <span className="text-[10px] items-center gap-1.5 flex font-black text-muted-foreground/60 uppercase tracking-widest"><Globe size={10} /> {cert.institutionId?.name || "Registry"}</span>
              <span className="text-[10px] items-center gap-1.5 flex font-black text-muted-foreground/60 uppercase tracking-widest"><LinkIcon size={10} /> {cert.certId}</span>
-             <span className="badge-violet badge text-[8px]">{cert.visibility.toUpperCase()}</span>
+             <span className="badge-orange badge text-[8px]">{cert.visibility.toUpperCase()}</span>
           </div>
        </div>
        <div className="flex items-center gap-2">

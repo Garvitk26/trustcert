@@ -27,12 +27,12 @@ export default function QRCodeDisplay({
   const { showToast } = useToast();
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (canvasRef.current && data) {
       QRCode.toCanvas(canvasRef.current, data, {
         width: size,
         margin: 2,
         color: {
-          dark: "#6366f1", // Indigo
+          dark: "#f59e0b", // Indigo
           light: "#0d0d1f" // Surface
         }
       });
@@ -59,9 +59,9 @@ export default function QRCodeDisplay({
 
   return (
     <div className={cn("flex flex-col items-center gap-4", className)}>
-      <div className="p-3 bg-[#0d0d1f] border border-indigo-500/15 rounded-2xl shadow-2xl relative overflow-hidden group">
+      <div className="p-3 bg-[#0d0d1f] border border-amber-500/15 rounded-2xl shadow-2xl relative overflow-hidden group">
         <canvas ref={canvasRef} className="rounded-lg" />
-        <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+        <div className="absolute inset-0 bg-amber-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       </div>
 
       {label && <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">{label}</p>}

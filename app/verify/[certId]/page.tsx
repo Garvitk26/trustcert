@@ -105,11 +105,11 @@ export default function VerifyPage() {
     return (
       <div className="min-h-screen bg-bg-base flex flex-col items-center justify-center p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.05)_0%,_transparent_70%)]" />
-        <div className="relative w-full max-w-md card-surface border-indigo-500/10 p-12 rounded-[3rem] text-center space-y-8 backdrop-blur-xl shadow-2xl">
+        <div className="relative w-full max-w-md card-surface border-amber-500/10 p-12 rounded-[3rem] text-center space-y-8 backdrop-blur-xl shadow-2xl">
            <div className="relative mx-auto w-24 h-24">
-              <div className="absolute inset-0 border-4 border-indigo-500/20 rounded-full animate-spin-ring" />
-              <div className="absolute inset-2 border-2 border-dashed border-violet-500/40 rounded-full animate-pulse" />
-              <div className="absolute inset-0 flex items-center justify-center text-indigo-400">
+              <div className="absolute inset-0 border-4 border-amber-500/20 rounded-full animate-spin-ring" />
+              <div className="absolute inset-2 border-2 border-dashed border-orange-500/40 rounded-full animate-pulse" />
+              <div className="absolute inset-0 flex items-center justify-center text-amber-400">
                  <ShieldCheck size={40} className="animate-pulse" />
               </div>
            </div>
@@ -122,7 +122,7 @@ export default function VerifyPage() {
            </div>
 
            <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
+              <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-500 animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
            </div>
         </div>
       </div>
@@ -151,8 +151,8 @@ export default function VerifyPage() {
       <Navbar />
       
       {/* Background Ambience */}
-      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-fuchsia-500/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-amber-500/5 rounded-full blur-[120px] -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-yellow-500/5 rounded-full blur-[100px] -z-10" />
 
       {/* PHISHING WARNING BANNER */}
       {isPhishing && (
@@ -185,9 +185,9 @@ export default function VerifyPage() {
                     animate={{ opacity: 1, rotateX: 0, scale: 1 }}
                     className="relative"
                   >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-violet-600 to-fuchsia-500 rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-40 transition-all duration-1000" />
+                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 rounded-[2.5rem] blur-xl opacity-20 group-hover:opacity-40 transition-all duration-1000" />
                     
-                    <div id="certificate-visual" className="relative h-[380px] md:h-[520px] w-full card-surface border-indigo-500/10 rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-md">
+                    <div id="certificate-visual" className="relative h-[380px] md:h-[520px] w-full card-surface border-amber-500/10 rounded-[2.5rem] overflow-hidden shadow-2xl backdrop-blur-md">
                        {/* Identity Reveal Animation Overlay */}
                        <div className="absolute inset-0 bg-black/40 z-20 pointer-events-none transition-opacity duration-1000 opacity-0 group-hover:opacity-10" />
                        
@@ -196,8 +196,8 @@ export default function VerifyPage() {
 
                        {/* Status Indicator (Inside Cert) */}
                        <div className="absolute top-8 right-8 z-40 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full flex items-center gap-2">
-                          <div className={cn("h-2 w-2 rounded-full", isValid ? "bg-indigo-400 animate-pulse" : "bg-rose-500 animate-pulse")} />
-                          <span className={cn("text-[9px] font-black uppercase tracking-widest", isValid ? "text-indigo-300" : "text-rose-400")}>
+                          <div className={cn("h-2 w-2 rounded-full", isValid ? "bg-amber-400 animate-pulse" : "bg-rose-500 animate-pulse")} />
+                          <span className={cn("text-[9px] font-black uppercase tracking-widest", isValid ? "text-amber-300" : "text-rose-400")}>
                              {isValid ? "Ledger Verified" : "Settlement Nullified"}
                           </span>
                        </div>
@@ -207,7 +207,7 @@ export default function VerifyPage() {
                           <div className="space-y-4">
                              <div className={cn(
                                "h-16 w-16 mx-auto rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-700 group-hover:rotate-[360deg]",
-                               isValid ? "bg-gradient-to-tr from-indigo-500 to-violet-500" : "bg-gradient-to-tr from-rose-500 to-orange-500"
+                               isValid ? "bg-gradient-to-tr from-amber-500 to-orange-500" : "bg-gradient-to-tr from-rose-500 to-orange-500"
                              )}>
                                 {isValid ? <ShieldCheck size={32} /> : <AlertCircle size={32} />}
                              </div>
@@ -222,8 +222,8 @@ export default function VerifyPage() {
                              )}>
                                 {certData.recipientName}
                              </h1>
-                             <div className="h-1 w-24 bg-indigo-500/20 mx-auto rounded-full" />
-                             <h2 className="text-lg md:text-2xl font-bold text-indigo-400 uppercase tracking-[0.2em]">{certData.courseTitle}</h2>
+                             <div className="h-1 w-24 bg-amber-500/20 mx-auto rounded-full" />
+                             <h2 className="text-lg md:text-2xl font-bold text-amber-400 uppercase tracking-[0.2em]">{certData.courseTitle}</h2>
                           </div>
 
                           <div className="pt-8 border-t border-white/5 w-full flex items-center justify-between px-4 md:px-12">
@@ -260,18 +260,18 @@ export default function VerifyPage() {
           {/* Verification Sidebar */}
           <div className="w-full lg:w-[420px] space-y-8 order-1 lg:order-2">
              <Card className={cn(
-               "card-surface border-indigo-500/10 rounded-[2.5rem] overflow-hidden backdrop-blur-2xl shadow-2xl",
-               isValid ? "border-indigo-500/20" : "border-rose-500/20"
+               "card-surface border-amber-500/10 rounded-[2.5rem] overflow-hidden backdrop-blur-2xl shadow-2xl",
+               isValid ? "border-amber-500/20" : "border-rose-500/20"
              )}>
                 <div className={cn(
                   "h-2 w-full",
-                  isValid ? "bg-gradient-to-r from-indigo-500 to-fuchsia-500" : "bg-rose-500"
+                  isValid ? "bg-gradient-to-r from-amber-500 to-yellow-500" : "bg-rose-500"
                 )} />
                 <CardContent className="p-8 md:p-10 space-y-10">
                    <div className="flex items-center gap-4">
                       <div className={cn(
                         "p-3 rounded-2xl",
-                        isValid ? "bg-indigo-500/10 text-indigo-400" : "bg-rose-500/10 text-rose-500"
+                        isValid ? "bg-amber-500/10 text-amber-400" : "bg-rose-500/10 text-rose-500"
                       )}>
                          {isValid ? <ShieldCheck size={28} /> : <AlertCircle size={28} />}
                       </div>
@@ -292,16 +292,16 @@ export default function VerifyPage() {
                    {/* Live Proof Section */}
                    <div className="p-6 rounded-3xl bg-black/40 border border-white/5 space-y-4">
                       <div className="flex items-center justify-between">
-                         <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest uppercase">Live Proof</span>
+                         <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest uppercase">Live Proof</span>
                          {stellarProof ? (
-                           <span className="badge-violet animate-pulse text-[8px]">Connected</span>
+                           <span className="badge-orange animate-pulse text-[8px]">Connected</span>
                          ) : (
                            <span className="badge-amber bg-amber-500/10 text-amber-500 text-[8px]">Fetching...</span>
                          )}
                       </div>
                       <div className="h-40 flex items-center justify-center bg-[#08080f] rounded-2xl border border-white/5 relative group">
                          <QRCodeDisplay data={typeof window !== "undefined" ? window.location.href : ""} size={140} />
-                         {!stellarProof && <div className="absolute inset-0 bg-black/60 rounded-2xl backdrop-blur-[2px] flex items-center justify-center"><Loader2 className="animate-spin text-indigo-500" /></div>}
+                         {!stellarProof && <div className="absolute inset-0 bg-black/60 rounded-2xl backdrop-blur-[2px] flex items-center justify-center"><Loader2 className="animate-spin text-amber-500" /></div>}
                       </div>
                       <p className="text-[9px] text-muted-foreground/60 text-center uppercase tracking-[0.2em] italic">Identity Mirror effectively confined to block {stellarProof?.ledger || "---"}</p>
                    </div>
@@ -317,8 +317,8 @@ export default function VerifyPage() {
              </Card>
 
              {/* Verification Seal */}
-             <div className="p-8 rounded-[2rem] bg-indigo-500/[0.03] border border-indigo-500/10 flex items-center gap-6 group hover:bg-indigo-500/5 transition-all">
-                <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform">
+             <div className="p-8 rounded-[2rem] bg-amber-500/[0.03] border border-amber-500/10 flex items-center gap-6 group hover:bg-amber-500/5 transition-all">
+                <div className="h-16 w-16 bg-white/5 rounded-2xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
                    <ShieldCheck size={32} />
                 </div>
                 <div className="space-y-1">
@@ -332,22 +332,22 @@ export default function VerifyPage() {
                 <motion.div 
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="card-surface border-fuchsia-500/20 rounded-[2.5rem] p-10 bg-fuchsia-500/[0.02] border-t-4 border-t-fuchsia-500 space-y-8 shadow-2xl relative mt-8"
+                  className="card-surface border-yellow-500/20 rounded-[2.5rem] p-10 bg-yellow-500/[0.02] border-t-4 border-t-yellow-500 space-y-8 shadow-2xl relative mt-8"
                 >
                    <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                         <div className="h-12 w-12 bg-fuchsia-500/10 text-fuchsia-400 rounded-2xl flex items-center justify-center"><Settings size={28} /></div>
+                         <div className="h-12 w-12 bg-yellow-500/10 text-yellow-400 rounded-2xl flex items-center justify-center"><Settings size={28} /></div>
                          <div>
                             <h4 className="text-xl font-black text-white italic tracking-tighter uppercase leading-none">Command Overlay</h4>
-                            <p className="text-[9px] font-bold text-fuchsia-400 uppercase tracking-widest mt-1">Institutional Oversight View</p>
+                            <p className="text-[9px] font-bold text-yellow-400 uppercase tracking-widest mt-1">Institutional Oversight View</p>
                          </div>
                       </div>
-                      <span className="badge badge-fuchsia text-[8px] animate-pulse">ADMIN_SESSION</span>
+                      <span className="badge badge-yellow text-[8px] animate-pulse">ADMIN_SESSION</span>
                    </div>
 
                    <div className="space-y-6">
                       <div className="space-y-3">
-                         <label className="text-[8px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2"><Mail size={12} className="text-fuchsia-500/40" /> Recipient Private Mail</label>
+                         <label className="text-[8px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2"><Mail size={12} className="text-yellow-500/40" /> Recipient Private Mail</label>
                          <div className="p-4 bg-black/40 border border-white/5 rounded-2xl font-mono text-sm text-white/90">{certData.recipientEmail}</div>
                       </div>
                    </div>
@@ -375,11 +375,11 @@ function AuditField({ icon: Icon, label, value, secondary }: any) {
   return (
     <div className="space-y-2 group/field">
        <div className="flex items-center gap-2">
-          <Icon size={12} className="text-indigo-500/40" />
+          <Icon size={12} className="text-amber-500/40" />
           <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-none uppercase">{label}</span>
        </div>
        <div className="relative">
-          <p className="text-[10px] font-mono text-white/70 break-all select-all leading-relaxed hover:text-indigo-300 transition-colors cursor-pointer">{value || "PENDING_NULL"}</p>
+          <p className="text-[10px] font-mono text-white/70 break-all select-all leading-relaxed hover:text-amber-300 transition-colors cursor-pointer">{value || "PENDING_NULL"}</p>
           <span className="text-[8px] font-bold text-muted-foreground/40 absolute -bottom-4 right-0 uppercase tracking-tighter italic opacity-0 group-hover/field:opacity-100 transition-opacity uppercase">{secondary}</span>
        </div>
     </div>

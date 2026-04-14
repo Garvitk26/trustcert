@@ -247,7 +247,7 @@ export default function WalletManager() {
               {address.slice(0, 8)}...{address.slice(-8)}
             </code>
             <Button variant="ghost" size="icon" className="h-9 w-9" onClick={copyAddress}>
-              {copied ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
+              {copied ? <CheckCircle2 className="h-4 w-4 text-amber-500" /> : <Copy className="h-4 w-4" />}
             </Button>
             <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => window.open(`https://stellar.expert/explorer/testnet/account/${address}`, '_blank')}>
               <ExternalLink className="h-4 w-4" />

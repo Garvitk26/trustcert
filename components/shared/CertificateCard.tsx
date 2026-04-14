@@ -67,9 +67,9 @@ export default function CertificateCard({ cert, delay = 0 }: CertificateCardProp
              
              {/* Top Banner */}
              <div className="flex justify-between items-start mb-6">
-                <div className="badge-indigo badge">{cert.institution}</div>
+                <div className="badge-amber badge">{cert.institution}</div>
                 {cert.status === "verified" ? (
-                  <div className="badge-violet badge flex items-center gap-1">
+                  <div className="badge-orange badge flex items-center gap-1">
                     <CheckCircle2 size={10} /> Verified
                   </div>
                 ) : (
@@ -85,7 +85,7 @@ export default function CertificateCard({ cert, delay = 0 }: CertificateCardProp
                 <h2 className="text-3xl font-black text-white leading-tight break-words">{cert.course}</h2>
                 <div className="space-y-1">
                    <p className="text-xs text-muted-foreground font-serif italic">This certifies that</p>
-                   <p className="text-xl font-bold text-indigo-400">{cert.studentName}</p>
+                   <p className="text-xl font-bold text-amber-400">{cert.studentName}</p>
                 </div>
              </div>
 
@@ -96,7 +96,7 @@ export default function CertificateCard({ cert, delay = 0 }: CertificateCardProp
                       <Calendar size={10} /> {cert.issueDate}
                    </p>
                 </div>
-                <div className="flex items-center gap-2 text-muted-foreground/40 group-hover:text-indigo-400 transition-colors">
+                <div className="flex items-center gap-2 text-muted-foreground/40 group-hover:text-amber-400 transition-colors">
                    <QrCode size={18} />
                    <span className="text-[10px] font-bold uppercase tracking-widest">Flip to Verify</span>
                 </div>
@@ -105,8 +105,8 @@ export default function CertificateCard({ cert, delay = 0 }: CertificateCardProp
         </div>
 
         {/* Back Face */}
-        <div className="flip-card-back absolute inset-0 rounded-2xl border border-indigo-500/10 bg-[#0d0d1f] shadow-2xl overflow-hidden">
-          <div className="h-1 lg:h-2 w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
+        <div className="flip-card-back absolute inset-0 rounded-2xl border border-amber-500/10 bg-[#0d0d1f] shadow-2xl overflow-hidden">
+          <div className="h-1 lg:h-2 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500" />
           <div className="p-8 h-full flex flex-col items-center text-center">
              <QRCodeDisplay 
                 data={origin ? `${origin}/verify/${cert.id}` : ""} 

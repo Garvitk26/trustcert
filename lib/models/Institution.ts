@@ -13,7 +13,7 @@ const InstitutionSchema = new Schema(
         addedAt: { type: Date, default: Date.now },
       },
     ],
-    accentColor: { type: String, default: "#6366f1" },
+    accentColor: { type: String, default: "#f59e0b" },
     certPrefix: { type: String, default: "CERT" },
     verifiedDomain: { type: String }, // e.g. "thapar.edu"
     secretKeyHash: { type: String }, // Hashed API key

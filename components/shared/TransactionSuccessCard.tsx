@@ -124,7 +124,7 @@ export default function TransactionSuccessCard({
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs text-white uppercase">{truncateAddress(walletAddress || "")}</span>
-                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
               </div>
             </div>
             
@@ -145,7 +145,7 @@ export default function TransactionSuccessCard({
                 className="font-mono text-[10px] text-white/60 hover:text-white flex items-center gap-2 transition-colors bg-white/5 px-2 py-1 rounded"
               >
                 {txHash.slice(0, 12)}...{txHash.slice(-12)}
-                {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                {copied ? <Check size={12} className="text-amber-400" /> : <Copy size={12} />}
               </button>
             </div>
 

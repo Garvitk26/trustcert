@@ -75,8 +75,8 @@ export default function TeamSettingsPage() {
   if (loading) {
      return (
        <div className="flex flex-col items-center justify-center h-[500px] gap-4">
-          <Loader2 className="animate-spin text-indigo-500" size={32} />
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-500/50 animate-pulse">Syncing Governance Layer...</p>
+          <Loader2 className="animate-spin text-amber-500" size={32} />
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500/50 animate-pulse">Syncing Governance Layer...</p>
        </div>
      );
   }
@@ -88,8 +88,8 @@ export default function TeamSettingsPage() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
          <div className="space-y-3">
             <div className="flex items-center gap-2">
-               <div className="h-2 w-12 bg-indigo-500 rounded-full" />
-               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Institutional Governance</span>
+               <div className="h-2 w-12 bg-amber-500 rounded-full" />
+               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-amber-400">Institutional Governance</span>
             </div>
             <h1 className="text-4xl font-black text-white italic tracking-tighter uppercase leading-none">Team Management</h1>
             <p className="text-xs text-muted-foreground italic uppercase tracking-widest leading-relaxed italic">
@@ -97,14 +97,14 @@ export default function TeamSettingsPage() {
             </p>
          </div>
          
-         <div className="flex items-center gap-4 bg-indigo-500/5 border border-indigo-500/10 p-4 rounded-2xl backdrop-blur-md">
+         <div className="flex items-center gap-4 bg-amber-500/5 border border-amber-500/10 p-4 rounded-2xl backdrop-blur-md">
             <div className="text-right">
-               <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Active Members</p>
+               <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Active Members</p>
                <p className="text-2xl font-black text-white italic leading-none">{members.length}</p>
             </div>
-            <div className="h-10 w-[1px] bg-indigo-500/10" />
+            <div className="h-10 w-[1px] bg-amber-500/10" />
             <div className="text-right">
-               <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Pending</p>
+               <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Pending</p>
                <p className="text-2xl font-black text-white italic leading-none">{pendingInvites.length}</p>
             </div>
          </div>
@@ -114,11 +114,11 @@ export default function TeamSettingsPage() {
          
          {/* MEMBER LIST */}
          <div className="lg:col-span-2 space-y-8">
-            <Card className="card-surface border-indigo-500/10 rounded-[2.5rem] overflow-hidden bg-indigo-500/[0.01]">
-               <CardHeader className="p-8 border-b border-indigo-500/5">
+            <Card className="card-surface border-amber-500/10 rounded-[2.5rem] overflow-hidden bg-amber-500/[0.01]">
+               <CardHeader className="p-8 border-b border-amber-500/5">
                   <div className="flex items-center justify-between">
                      <CardTitle className="text-xl font-black text-white uppercase italic tracking-widest">Verified Personnel</CardTitle>
-                     <Users size={20} className="text-indigo-500/40" />
+                     <Users size={20} className="text-amber-500/40" />
                   </div>
                </CardHeader>
                <CardContent className="p-0">
@@ -142,7 +142,7 @@ export default function TeamSettingsPage() {
                               >
                                  <td className="px-8 py-6">
                                     <div className="flex items-center gap-4">
-                                       <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 font-black text-xs">
+                                       <div className="h-10 w-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 font-black text-xs">
                                           {member.name.charAt(0)}
                                        </div>
                                        <div>
@@ -154,8 +154,8 @@ export default function TeamSettingsPage() {
                                  <td className="px-8 py-6">
                                     <div className={cn(
                                        "inline-flex items-center gap-2 px-3 py-1 rounded-lg border text-[9px] font-black uppercase tracking-widest",
-                                       member.role === "owner" ? "bg-fuchsia-500/10 border-fuchsia-500/20 text-fuchsia-400" :
-                                       member.role === "admin" ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-400" :
+                                       member.role === "owner" ? "bg-yellow-500/10 border-yellow-500/20 text-yellow-400" :
+                                       member.role === "admin" ? "bg-amber-500/10 border-amber-500/20 text-amber-400" :
                                        "bg-slate-500/10 border-slate-500/20 text-slate-400"
                                     )}>
                                        {member.role === "owner" && <Shield size={10} />}
@@ -184,7 +184,7 @@ export default function TeamSettingsPage() {
                  <h3 className="text-sm font-black text-white italic tracking-widest uppercase">Pending Authorization Nodes</h3>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {pendingInvites.map((invite, i) => (
-                       <div key={i} className="card-surface border-indigo-500/5 p-6 rounded-2xl flex items-center justify-between bg-white/[0.01]">
+                       <div key={i} className="card-surface border-amber-500/5 p-6 rounded-2xl flex items-center justify-between bg-white/[0.01]">
                           <div className="flex items-center gap-4">
                              <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-500"><Mail size={14} /></div>
                              <div>
@@ -192,7 +192,7 @@ export default function TeamSettingsPage() {
                                 <p className="text-[9px] text-slate-500 uppercase tracking-widest">{invite.role} • Expires {new Date(invite.expiresAt).toLocaleDateString()}</p>
                              </div>
                           </div>
-                          <Clock size={14} className="text-indigo-500/20 animate-pulse" />
+                          <Clock size={14} className="text-amber-500/20 animate-pulse" />
                        </div>
                     ))}
                  </div>
@@ -202,7 +202,7 @@ export default function TeamSettingsPage() {
 
          {/* INVITE FORM */}
          <div className="space-y-8">
-            <Card className="card-surface border-indigo-500/10 p-8 rounded-[2.5rem] bg-indigo-500/[0.02] space-y-8 sticky top-32">
+            <Card className="card-surface border-amber-500/10 p-8 rounded-[2.5rem] bg-amber-500/[0.02] space-y-8 sticky top-32">
                <div className="space-y-2">
                   <h3 className="text-xl font-black text-white italic uppercase tracking-tighter">Expand Access</h3>
                   <p className="text-[9px] text-muted-foreground uppercase tracking-widest font-bold italic">Assign additional identity verification nodes.</p>
@@ -210,19 +210,19 @@ export default function TeamSettingsPage() {
                
                <form onSubmit={handleInvite} className="space-y-6">
                   <div className="space-y-3">
-                     <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block">Recipient Mail Identity</label>
+                     <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block">Recipient Mail Identity</label>
                      <input 
                         type="email" 
                         required
                         value={inviteEmail}
                         onChange={(e) => setInviteEmail(e.target.value)}
                         placeholder="colleague@institution.edu"
-                        className="w-full bg-black/40 border border-white/5 rounded-xl px-5 py-4 text-sm text-white focus:border-indigo-500/40 transition-all outline-none italic"
+                        className="w-full bg-black/40 border border-white/5 rounded-xl px-5 py-4 text-sm text-white focus:border-amber-500/40 transition-all outline-none italic"
                      />
                   </div>
 
                   <div className="space-y-3">
-                     <label className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] leading-none mb-2 block">Permissions Level</label>
+                     <label className="text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] leading-none mb-2 block">Permissions Level</label>
                      <div className="grid grid-cols-2 gap-3">
                         {["admin", "viewer"].map(role => (
                            <button
@@ -231,7 +231,7 @@ export default function TeamSettingsPage() {
                              onClick={() => setInviteRole(role)}
                              className={cn(
                                 "py-3 rounded-xl border text-[10px] font-black uppercase tracking-widest transition-all",
-                                inviteRole === role ? "bg-indigo-500/10 border-indigo-500/40 text-indigo-400" : "bg-white/5 border-white/5 text-slate-500 hover:bg-white/10"
+                                inviteRole === role ? "bg-amber-500/10 border-amber-500/40 text-amber-400" : "bg-white/5 border-white/5 text-slate-500 hover:bg-white/10"
                              )}
                            >
                               {role}

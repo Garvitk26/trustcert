@@ -38,8 +38,8 @@ export default function OnboardingComplete() {
       {showConfetti && <Confetti />}
 
       {/* Hero Background Ambience */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-indigo-500/5 rounded-full blur-[150px] -z-10" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-fuchsia-500/5 rounded-full blur-[100px] -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-amber-500/5 rounded-full blur-[150px] -z-10" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-yellow-500/5 rounded-full blur-[100px] -z-10" />
 
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-20 lg:py-40 text-center space-y-12">
         
@@ -50,14 +50,14 @@ export default function OnboardingComplete() {
           transition={{ type: "spring", damping: 12, stiffness: 100, delay: 0.2 }}
           className="relative inline-flex mb-8"
         >
-           <div className="absolute -inset-6 bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-violet-500 rounded-full blur-2xl opacity-20 animate-pulse" />
-           <div className="h-28 w-28 bg-bg-surface border-2 border-indigo-500/20 rounded-[2rem] flex items-center justify-center text-indigo-400 shadow-2xl relative z-10 rotate-3 group hover:rotate-0 transition-transform">
-              <Trophy size={56} className="text-indigo-400 group-hover:scale-110 transition-transform" />
+           <div className="absolute -inset-6 bg-gradient-to-tr from-amber-500 via-yellow-500 to-orange-500 rounded-full blur-2xl opacity-20 animate-pulse" />
+           <div className="h-28 w-28 bg-bg-surface border-2 border-amber-500/20 rounded-[2rem] flex items-center justify-center text-amber-400 shadow-2xl relative z-10 rotate-3 group hover:rotate-0 transition-transform">
+              <Trophy size={56} className="text-amber-400 group-hover:scale-110 transition-transform" />
            </div>
            <motion.div 
              animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
              transition={{ duration: 3, repeat: Infinity }}
-             className="absolute -top-4 -right-4 h-10 w-10 bg-fuchsia-500/10 text-fuchsia-500 rounded-xl flex items-center justify-center"
+             className="absolute -top-4 -right-4 h-10 w-10 bg-yellow-500/10 text-yellow-500 rounded-xl flex items-center justify-center"
            >
               <Star size={20} fill="currentColor" />
            </motion.div>
@@ -72,7 +72,7 @@ export default function OnboardingComplete() {
               <h1 className="text-5xl md:text-7xl font-black text-white italic tracking-tighter uppercase leading-none mb-4">
                 Trust Established
               </h1>
-              <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.4em] italic leading-relaxed">
+              <p className="text-[10px] font-black text-amber-400 uppercase tracking-[0.4em] italic leading-relaxed">
                  Institutional Registry Effectively Confined to Global Ledger
               </p>
            </motion.div>
@@ -118,9 +118,9 @@ export default function OnboardingComplete() {
           transition={{ delay: 1.2 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-20 max-w-4xl"
         >
-           <OnboardingStat icon={ShieldCheck} label="Identity Integrity" value="Verified" color="text-indigo-400" />
-           <OnboardingStat icon={Cpu} label="Stellar Consensus" value="Established" color="text-fuchsia-400" />
-           <OnboardingStat icon={CheckCircle2} label="Network Status" value="Operational" color="text-violet-400" />
+           <OnboardingStat icon={ShieldCheck} label="Identity Integrity" value="Verified" color="text-amber-400" />
+           <OnboardingStat icon={Cpu} label="Stellar Consensus" value="Established" color="text-yellow-400" />
+           <OnboardingStat icon={CheckCircle2} label="Network Status" value="Operational" color="text-orange-400" />
         </motion.div>
 
       </main>
@@ -132,7 +132,7 @@ export default function OnboardingComplete() {
 
 function OnboardingStat({ icon: Icon, label, value, color }: any) {
    return (
-      <div className="p-6 rounded-[2.5rem] bg-indigo-500/[0.02] border border-indigo-500/10 flex flex-col items-center gap-3 space-y-1">
+      <div className="p-6 rounded-[2.5rem] bg-amber-500/[0.02] border border-amber-500/10 flex flex-col items-center gap-3 space-y-1">
          <Icon size={24} className={color} />
          <div className="text-center">
             <p className="text-[8px] font-black text-muted-foreground/40 uppercase tracking-widest mb-1">{label}</p>

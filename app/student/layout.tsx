@@ -60,7 +60,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
       <nav className="h-20 bg-[#0a1a14] border-b border-white/5 sticky top-0 z-50 flex items-center justify-between px-8 md:px-12 backdrop-blur-xl bg-opacity-80">
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 bg-gradient-to-tr from-cyan-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+            <div className="h-8 w-8 bg-gradient-to-tr from-cyan-600 to-amber-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                <ShieldCheck size={20} className="text-white" />
             </div>
             <span className="text-xl font-black gradient-text-2">TrustCert</span>
@@ -127,7 +127,7 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
        {/* Ambient Blobs */}
        <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-5">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-amber-500 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4" />
       </div>
     </div>
   );

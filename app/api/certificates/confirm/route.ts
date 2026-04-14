@@ -107,7 +107,7 @@ export async function PATCH(req: Request) {
     }
 
     const { buildIssuanceTransaction } = await import("@/lib/stellar");
-    const xdr = await buildIssuanceTransaction(issuer, studentWallet, certId, certHash);
+    const xdr = await buildIssuanceTransaction(issuer, studentWallet || "", certHash);
 
     return NextResponse.json({ success: true, xdr });
 

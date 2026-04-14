@@ -52,7 +52,7 @@ export function DashboardSkeleton() {
         <Skeleton className="h-12 w-40 rounded-xl bg-white/5" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-32 rounded-[2rem] bg-indigo-500/5 border border-indigo-500/10" />)}
+        {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-32 rounded-[2rem] bg-amber-500/5 border border-amber-500/10" />)}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Skeleton className="h-64 rounded-[2.5rem] bg-white/[0.02] border border-white/5" />

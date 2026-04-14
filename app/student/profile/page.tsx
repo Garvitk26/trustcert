@@ -55,40 +55,40 @@ export default function StudentProfile() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Left Column: Personal Info */}
         <div className="md:col-span-2 space-y-8">
-          <Card className="bg-black/40 border-emerald-500/10">
+          <Card className="bg-black/40 border-amber-500/10">
             <CardHeader>
               <CardTitle className="text-white text-lg">Personal Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-emerald-500/50">Full Name</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-amber-500/50">Full Name</label>
                   <Input 
                     defaultValue="Parth Karan" 
-                    className="bg-black/20 border-emerald-500/10" 
+                    className="bg-black/20 border-amber-500/10" 
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold uppercase tracking-widest text-emerald-500/50">Email Address</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-amber-500/50">Email Address</label>
                   <Input 
                     defaultValue="parth@example.com" 
                     disabled 
-                    className="bg-black/10 border-emerald-500/5 text-muted-foreground" 
+                    className="bg-black/10 border-amber-500/5 text-muted-foreground" 
                   />
                 </div>
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="outline" className="border-emerald-500/10 text-emerald-400 hover:bg-emerald-500/10">
+              <Button variant="outline" className="border-amber-500/10 text-amber-400 hover:bg-amber-500/10">
                 Update Profile
               </Button>
             </CardFooter>
           </Card>
 
-          <Card className="bg-black/40 border-emerald-500/10">
+          <Card className="bg-black/40 border-amber-500/10">
             <CardHeader>
               <CardTitle className="text-white text-lg font-black flex items-center gap-2">
-                <Bell className="text-emerald-500" /> Notifications
+                <Bell className="text-amber-500" /> Notifications
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -112,28 +112,28 @@ export default function StudentProfile() {
 
         {/* Right Column: Wallet & Security */}
         <div className="space-y-8">
-          <Card className="bg-black/40 border-emerald-500/10 overflow-hidden relative group">
+          <Card className="bg-black/40 border-amber-500/10 overflow-hidden relative group">
             {isLinked && (
               <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
-                <div className="bg-emerald-500/10 text-emerald-500 p-1 rounded-md">
+                <div className="bg-amber-500/10 text-amber-500 p-1 rounded-md">
                    <LinkIcon size={12} />
                 </div>
               </div>
             )}
             <CardHeader>
               <CardTitle className="text-white text-lg font-black flex items-center gap-2">
-                <Shield className="text-emerald-500" /> Wallet Connection
+                <Shield className="text-amber-500" /> Wallet Connection
               </CardTitle>
               <CardDescription>Link your Stellar wallet to receive credentials.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               {isLinked ? (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
-                    <p className="text-[10px] uppercase font-bold text-emerald-500/50 mb-1">Linked Wallet</p>
+                  <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/20">
+                    <p className="text-[10px] uppercase font-bold text-amber-500/50 mb-1">Linked Wallet</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-emerald-400 truncate max-w-[150px]">{wallet}</span>
-                      <CheckCircle size={14} className="text-emerald-500" />
+                      <span className="text-xs font-mono text-amber-400 truncate max-w-[150px]">{wallet}</span>
+                      <CheckCircle size={14} className="text-amber-500" />
                     </div>
                   </div>
                   <Button 
@@ -148,7 +148,7 @@ export default function StudentProfile() {
                 <div className="space-y-4">
                    <Button 
                     onClick={handleToggleLink}
-                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black flex items-center justify-center gap-2 h-12 shadow-[0_0_20px_rgba(16,185,129,0.2)]"
+                    className="w-full bg-amber-500 hover:bg-amber-400 text-black font-black flex items-center justify-center gap-2 h-12 shadow-[0_0_20px_rgba(16,185,129,0.2)]"
                   >
                     {isLinking ? <Loader2 className="animate-spin" size={18} /> : <LinkIcon size={18} />}
                     Connect Wallet
@@ -159,7 +159,7 @@ export default function StudentProfile() {
             </CardContent>
           </Card>
 
-          <Card className="bg-black/40 border-indigo-500/10">
+          <Card className="bg-black/40 border-amber-500/10">
             <CardHeader>
               <CardTitle className="text-white text-lg font-black">Quick Tools</CardTitle>
             </CardHeader>
@@ -177,7 +177,7 @@ export default function StudentProfile() {
 function PreferenceItem({ title, desc, defaultChecked }: any) {
   return (
     <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
-      <Checkbox defaultChecked={defaultChecked} className="mt-1 border-emerald-500/20 data-[state=checked]:bg-emerald-500" />
+      <Checkbox defaultChecked={defaultChecked} className="mt-1 border-amber-500/20 data-[state=checked]:bg-amber-500" />
       <div>
         <h4 className="text-sm font-bold text-white">{title}</h4>
         <p className="text-xs text-muted-foreground">{desc}</p>
@@ -194,7 +194,7 @@ function ToolLink({ icon: Icon, label, href }: any) {
       className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-colors text-xs text-muted-foreground hover:text-white"
     >
       <div className="flex items-center gap-2 font-black uppercase tracking-widest text-[10px]">
-        <Icon size={14} className="text-emerald-500" /> {label}
+        <Icon size={14} className="text-amber-500" /> {label}
       </div>
       <ChevronRight size={14} />
     </a>
