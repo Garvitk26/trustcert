@@ -44,8 +44,11 @@ export function InstitutionProvider({ children }: { children: ReactNode }) {
 
       // Validate sync
       if (activeInstitution) {
-        const stillExists = data.find((i: Institution) => i._id === activeInstitution._id);
-        if (!stillExists && data.length > 0) {
+        const freshData = data.find((i: Institution) => i._id === activeInstitution._id);
+        if (freshData) {
+          // Update active institution with fresh data from server
+          setActiveInstitution(freshData);
+        } else if (data.length > 0) {
           setActiveInstitution(data[0]);
         }
       } else if (data.length > 0) {
