@@ -39,7 +39,6 @@ const navItems = [
 const colors: Record<string, string> = {
   amber: "text-amber-400",
   orange: "text-orange-400",
-  amber: "text-amber-400",
   cyan: "text-cyan-400",
 };
 
