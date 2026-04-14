@@ -35,11 +35,13 @@ interface CertificateCardProps {
 
 export default function CertificateCard({ cert, delay = 0 }: CertificateCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [origin, setOrigin] = useState("");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setOrigin(window.location.origin);
+    setMounted(true);
   }, []);
+
+  const origin = mounted ? window.location.origin : "";
 
   const flip = () => setIsFlipped(!isFlipped);
 

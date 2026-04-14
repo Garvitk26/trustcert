@@ -174,7 +174,7 @@ function Sidebar({ session, isOpen, setIsOpen }: { session: any, isOpen: boolean
           </div>
           <div className="overflow-hidden">
             <p className="text-sm font-bold text-white truncate">{session.user.name}</p>
-            <p className="text-[10px] text-muted-foreground truncate italic">Last login: {formatDistanceToNow(new Date(session.user.lastLogin || Date.now()))} ago</p>
+            <p className="text-[10px] text-muted-foreground truncate italic">Last login: {formatDistanceToNow(new Date(session.user.lastLogin || 0))} ago</p>
           </div>
         </div>
         <button 

@@ -40,8 +40,10 @@ export default function SendXLMPanel({ defaultMemo = '', onSuccess, compact = fa
   const [errors, setErrors] = useState<{ destination?: string; amount?: string }>({})
   const [txResult, setTxResult] = useState<SendXLMResult | null>(null)
   const [copied, setCopied] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const savedAddress = localStorage.getItem('stellar_address')
     if (savedAddress) {
       setAddress(savedAddress)

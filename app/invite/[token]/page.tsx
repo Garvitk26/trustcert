@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Building2, UserPlus, ShieldCheck, Loader2, XCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/lib/context/ToastContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -70,7 +71,7 @@ export default function InvitePage() {
 
         <h1 className="text-3xl font-black text-white mb-2 tracking-tight">Team Invitation</h1>
         <p className="text-muted-foreground mb-10 leading-relaxed">
-          You've been invited to join <span className="text-white font-bold">{invite.institutionName}</span> as a <span className="text-amber-400 font-bold uppercase tracking-widest text-xs">{invite.role}</span>.
+          You&apos;ve been invited to join <span className="text-white font-bold">{invite.institutionName}</span> as a <span className="text-amber-400 font-bold uppercase tracking-widest text-xs">{invite.role}</span>.
         </p>
 
         <div className="space-y-4">
@@ -109,7 +110,7 @@ function ErrorState() {
         <h2 className="text-xl font-bold text-white mb-2">Invitation Expired</h2>
         <p className="text-sm text-muted-foreground mb-8">This invite link is no longer valid or has already been used.</p>
         <Button asChild variant="outline" className="w-full border-rose-500/20 text-rose-400 hover:bg-rose-500/10">
-           <a href="/">Back to Home</a>
+           <Link href="/">Back to Home</Link>
         </Button>
       </div>
     </div>

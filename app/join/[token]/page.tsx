@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { GraduationCap, UserPlus, ShieldCheck, Loader2, XCircle, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/lib/context/ToastContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -109,7 +110,7 @@ function ErrorState() {
         <h2 className="text-xl font-bold text-white mb-2">Invalid Link</h2>
         <p className="text-sm text-muted-foreground mb-8">This join link is no longer valid or has expired.</p>
         <Button asChild variant="outline" className="w-full border-rose-500/20 text-rose-400 hover:bg-rose-500/10">
-           <a href="/">Back to Home</a>
+           <Link href="/">Back to Home</Link>
         </Button>
       </div>
     </div>

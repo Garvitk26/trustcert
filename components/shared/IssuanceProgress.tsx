@@ -21,45 +21,36 @@ interface IssuanceProgressProps {
 }
 
 export default function IssuanceProgress({ currentStage, error, onClose }: IssuanceProgressProps) {
-  const [stages, setStages] = useState<Stage[]>([
+  const stages: Stage[] = [
     { 
       id: 1, 
       label: "Metadata Preparation", 
       icon: Cpu, 
-      status: "waiting", 
+      status: error && currentStage === 1 ? "error" : currentStage > 1 ? "completed" : currentStage === 1 ? "processing" : "waiting", 
       description: "Encrypting certificate details and generating identifiers..." 
     },
     { 
       id: 2, 
       label: "Wallet Signature", 
       icon: Wallet, 
-      status: "waiting", 
+      status: error && currentStage === 2 ? "error" : currentStage > 2 ? "completed" : currentStage === 2 ? "processing" : "waiting", 
       description: "Please sign the transaction in your Freighter wallet extension." 
     },
     { 
       id: 3, 
       label: "Ledger Settlement", 
       icon: Send, 
-      status: "waiting", 
+      status: error && currentStage === 3 ? "error" : currentStage > 3 ? "completed" : currentStage === 3 ? "processing" : "waiting", 
       description: "Broadcasting your certificate to the Stellar network..." 
     },
     { 
       id: 4, 
       label: "Verification Lock", 
       icon: ShieldCheck, 
-      status: "waiting", 
+      status: error && currentStage === 4 ? "error" : currentStage > 4 ? "completed" : currentStage === 4 ? "processing" : "waiting", 
       description: "Confining immutable proof to the global certificate registry." 
     },
-  ]);
-
-  useEffect(() => {
-    setStages(prev => prev.map(stage => {
-      if (error && stage.id === currentStage) return { ...stage, status: "error" };
-      if (stage.id < currentStage) return { ...stage, status: "completed" };
-      if (stage.id === currentStage) return { ...stage, status: "processing" };
-      return { ...stage, status: "waiting" };
-    }));
-  }, [currentStage, error]);
+  ];
 
   const allCompleted = currentStage > 4 && !error;
 

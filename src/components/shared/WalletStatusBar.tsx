@@ -16,14 +16,6 @@ export default function WalletStatusBar() {
   const [balance, setBalance] = useState<number | null>(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  useEffect(() => {
-    const savedAddress = localStorage.getItem('stellar_address')
-    if (savedAddress) {
-      setAddress(savedAddress)
-      refresh()
-    }
-  }, [])
-
   const refresh = async () => {
     const savedAddress = localStorage.getItem('stellar_address')
     if (!savedAddress) return
@@ -32,6 +24,14 @@ export default function WalletStatusBar() {
     setBalance(bal)
     setTimeout(() => setIsRefreshing(false), 800)
   }
+
+  useEffect(() => {
+    const savedAddress = localStorage.getItem('stellar_address')
+    if (savedAddress) {
+      setAddress(savedAddress)
+      refresh()
+    }
+  }, [])
 
   if (!address) return null
 

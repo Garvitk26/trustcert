@@ -14,9 +14,13 @@ export default function SessionWatcher() {
   const { data: session, status } = useSession();
   const [isWarning, setIsWarning] = useState(false);
   const [countdown, setCountdown] = useState(300); // 5 minutes in seconds
-  const lastActivityRef = useRef<number>(Date.now());
+  const lastActivityRef = useRef<number>(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    lastActivityRef.current = Date.now();
+  }, []);
 
   const resetTimer = useCallback(() => {
     lastActivityRef.current = Date.now();
