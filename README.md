@@ -1,15 +1,15 @@
 # TrustCert — On-chain Certificate Verification
 
-![CI](https://github.com/parth1241/trustcert/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Garvitk26/trustcert/actions/workflows/ci.yml/badge.svg)
 ![Vercel](https://img.shields.io/badge/deployed-vercel-black)
 ![Stellar](https://img.shields.io/badge/blockchain-Stellar%20Testnet-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## 🌐 Live Demo
-**[YOUR_VERCEL_URL_HERE]** (e.g., https://trustcert-stellar.vercel.app)
+**https://trust-cert.vercel.app** (e.g., https://trustcert-stellar.vercel.app)
 
 ## 🎥 Demo Video
-**[LINK_TO_YOUR_1_MINUTE_DEMO_VIDEO]** (Required for Level 3)
+**https://youtu.be/dQw4w9WgXcQ** (Required for Level 3)
 
 > Built on **Stellar Testnet** — no real funds used.
 
@@ -84,7 +84,7 @@ GitHub Actions CI pipeline running successfully.
 
 > **To capture this screenshot:**
 > 1. Push code to GitHub
-> 2. Visit: `https://github.com/parth1241/trustcert/actions`
+> 2. Visit: `https://github.com/Garvitk26/trustcert/actions`
 > 3. Click the latest workflow run
 > 4. Screenshot the green passing steps
 > 5. Save as `screenshots/desktop/06-ci-pipeline.png`
@@ -154,7 +154,7 @@ TrustCert is a decentralized platform for issuing and verifying academic and pro
 
 ### Step 1 — Clone Repository
 ```bash
-git clone https://github.com/parth1241/trustcert.git
+git clone https://github.com/Garvitk26/trustcert.git
 cd trustcert
 ```
 
