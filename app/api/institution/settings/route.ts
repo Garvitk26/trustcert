@@ -39,35 +39,52 @@ export async function PATCH(req: Request) {
 
     // 2. Headless API Key Generation (Secret)
     let rawKey = null;
+    let secretKeyHash = institution.secretKeyHash;
+    let metadata = institution.metadata || {};
+
     if (generateKey) {
        const crypto = await import("crypto");
        rawKey = `tc_live_${crypto.randomBytes(24).toString("hex")}`;
        // We store the hash
-       const hash = crypto.createHash("sha256").update(rawKey).digest("hex");
-       institution.secretKeyHash = hash;
+       secretKeyHash = crypto.createHash("sha256").update(rawKey).digest("hex");
        
        // Record in Audit Log
        const { logAction } = await import("@/lib/audit");
        logAction(institution._id.toString(), (session.user as any).id, "GENERATE_API_KEY", "API_KEY").catch(e => console.error(e));
 
        // Temporary metadata for the ONCE view
-       institution.metadata = {
-          ...institution.metadata,
+       metadata = {
+          ...metadata,
           secretKey: rawKey,
           keyGeneratedAt: new Date()
        };
     }
 
-    await institution.save();
+    const updatedInstitution = await Institution.findOneAndUpdate(
+       { ownerId: (session.user as any).id },
+       { 
+          $set: { 
+             name: name || institution.name,
+             slug: slug || institution.slug,
+             accentColor: accentColor || institution.accentColor,
+             verifiedDomain: verifiedDomain || institution.verifiedDomain,
+             walletAddress: walletAddress !== undefined ? walletAddress : institution.walletAddress,
+             certPrefix: certPrefix ? certPrefix.toUpperCase() : institution.certPrefix,
+             secretKeyHash,
+             metadata: certPrefix ? { ...metadata, certPrefix: certPrefix.toUpperCase() } : metadata
+          } 
+       },
+       { new: true }
+    );
 
     return NextResponse.json({ 
        success: true, 
        message: "Organization configuration effectively synchronized.",
        institution: {
-          ...institution.toObject(),
+          ...updatedInstitution.toObject(),
           // include the raw key only if just generated
           metadata: {
-             ...institution.metadata,
+             ...updatedInstitution.metadata,
              secretKey: rawKey
           }
        }
@@ -95,6 +112,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
        ...institution,
+       walletAddress: institution.walletAddress || "",
        metadata: institution.metadata || {},
        // Mask the secret key for safety
        secretKeyMasked: (institution.metadata as any)?.secretKey 
