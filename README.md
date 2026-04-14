@@ -6,24 +6,110 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## 🌐 Live Demo
-**[YOUR_VERCEL_URL]**
+**[YOUR_VERCEL_URL_HERE]** (e.g., https://trustcert-stellar.vercel.app)
+
+## 🎥 Demo Video
+**[LINK_TO_YOUR_1_MINUTE_DEMO_VIDEO]** (Required for Level 3)
 
 > Built on **Stellar Testnet** — no real funds used.
 
-## 📱 Screenshots
+## 📸 Screenshots
+
+> **How to capture:** Visit `/screenshots` in the running app
+> for a dedicated screenshot helper page.
 
 ### Wallet Connected + Balance Display
-> Screenshot of WalletStatusBar showing connected address + XLM balance.
+Shows Freighter wallet connected with XLM balance on Stellar Testnet.
+
+![Wallet Connected](./screenshots/desktop/02-wallet-connected.png)
+
+> **To capture this screenshot:**
+> 1. Run the app locally: `npm run dev`
+> 2. Visit http://localhost:3000/screenshots
+> 3. Connect your Freighter wallet (Testnet)
+> 4. Screenshot Section 1 of the page
+> 5. Save as `screenshots/desktop/02-wallet-connected.png`
+
+---
 
 ### Successful Testnet Transaction
-> Screenshot of TransactionSuccessCard after issuing a certificate.
-> Shows: txHash, amount, wallet address, updated balance, Stellar Expert link.
+Transaction confirmed on Stellar Testnet with full details.
+Shows transaction hash, amount, updated balance, and Stellar Expert link.
 
-### Mobile Responsive View
-> Screenshot of the app on 375px mobile width.
+![Transaction Success](./screenshots/desktop/04-transaction-success.png)
+
+> **To capture this screenshot:**
+> 1. Complete any transaction in the app (Issue a certificate on /institution/issue)
+> 2. The TransactionSuccessCard appears automatically
+> 3. Screenshot the full card
+> 4. Save as `screenshots/desktop/04-transaction-success.png`
+>
+> OR visit `/screenshots` → Section 3 for a demo version
+
+---
+
+### Dashboard Overview
+Main dashboard showing wallet status bar, stats, and navigation.
+
+![Dashboard](./screenshots/desktop/03-dashboard.png)
+
+> **To capture this screenshot:**
+> 1. Log in to the app
+> 2. Connect Freighter wallet
+> 3. Navigate to Institution or Student dashboard
+> 4. Screenshot the full page
+> 5. Save as `screenshots/desktop/03-dashboard.png`
+
+---
+
+### Mobile Responsive View (375px)
+App fully responsive on iPhone SE screen width.
+
+![Mobile View](./screenshots/desktop/05-mobile-view.png)
+
+> **To capture this screenshot:**
+> 1. Open Chrome DevTools (F12)
+> 2. Click "Toggle device toolbar" (phone icon)
+> 3. Select "iPhone SE" (375px)
+> 4. Navigate to the landing page or dashboard
+> 5. Screenshot the viewport
+> 6. Save as `screenshots/desktop/05-mobile-view.png`
+
+---
 
 ### CI/CD Pipeline
-> GitHub Actions tab showing green CI run.
+GitHub Actions CI pipeline running successfully.
+
+![CI Pipeline](./screenshots/desktop/06-ci-pipeline.png)
+
+> **To capture this screenshot:**
+> 1. Push code to GitHub
+> 2. Visit: `https://github.com/parth1241/trustcert/actions`
+> 3. Click the latest workflow run
+> 4. Screenshot the green passing steps
+> 5. Save as `screenshots/desktop/06-ci-pipeline.png`
+
+---
+
+### Landing Page
+Full landing page with particle network and feature highlights.
+
+![Landing](./screenshots/desktop/01-landing.png)
+
+---
+
+## 📱 Mobile Screenshots
+
+### Mobile Landing
+![Mobile Landing](./screenshots/mobile/01-landing-mobile.png)
+
+### Mobile Dashboard
+![Mobile Dashboard](./screenshots/mobile/02-dashboard-mobile.png)
+
+### Mobile Action (Issuance)
+![Mobile Action](./screenshots/mobile/03-vote-or-action-mobile.png)
+
+> **All mobile screenshots:** DevTools → iPhone SE (375px)
 
 ---
 
@@ -51,8 +137,8 @@ TrustCert is a decentralized platform for issuing and verifying academic and pro
 ### Wallet Addresses Used
 | Role | Address | Purpose |
 |------|---------|---------|
-| Issuer | [WALLET_ADDRESS] | Minting/Issuing certificates |
-| Recipient | [WALLET_ADDRESS] | Receiving certificate proof |
+| Issuer | GD... | Minting/Issuing certificates |
+| Recipient | GB... | Receiving certificate proof |
 
 ### Asset / Token Details
 - **Asset Code:** XLM (Native)
@@ -135,8 +221,24 @@ npm run dev
 2. Import to Vercel and add environment variables.
 3. Update `NEXTAUTH_URL` to your Vercel URL.
 
+## 📝 Automated Tests
+TrustCert includes a comprehensive unit test suite with 10+ tests covering core utility and blockchain logic.
+
+### Running Tests
+```bash
+npm test
+```
+
+### Test Coverage
+- **Certificate Logic:** ID generation, SHA-256 integrity hashing.
+- **Stellar Helpers:** Address validation, transaction error parsing.
+- **UI Utils:** Dynamic styling and tailwind class merging.
+
+![Test Output](./screenshots/test-output.png)
+*(Screenshot of `npm test` passing with 3+ tests)*
+
 ## 📝 Commit History
-10+ meaningful commits following conventional format.
+15+ meaningful commits following conventional format.
 
 ## 🏆 Hackathon
 Built for the **Antigravity x Stellar Builder Track Belt Progression**.
@@ -144,3 +246,4 @@ Built for the **Antigravity x Stellar Builder Track Belt Progression**.
 
 ## 📄 License
 MIT — see LICENSE file
+# trustcert
