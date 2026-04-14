@@ -6,8 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## 🌐 Live Demo
-**https://trust-cert.vercel.app**
-
+**https://trustcert2.vercel.app/**
 ## 🎥 Demo Video
 **https://youtu.be/dQw4w9WgXcQ** (Required for Level 3)
 

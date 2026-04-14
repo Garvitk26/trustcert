@@ -14,7 +14,7 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json();
-    const { name, slug, accentColor, certPrefix, generateKey, verifiedDomain } = body;
+    const { name, slug, accentColor, certPrefix, generateKey, verifiedDomain, walletAddress } = body;
 
     await dbConnect();
 
@@ -28,6 +28,7 @@ export async function PATCH(req: Request) {
     if (slug) institution.slug = slug;
     if (accentColor) institution.accentColor = accentColor;
     if (verifiedDomain) institution.verifiedDomain = verifiedDomain;
+    if (walletAddress) institution.walletAddress = walletAddress;
     if (certPrefix) {
        institution.metadata = { 
           ...institution.metadata, 

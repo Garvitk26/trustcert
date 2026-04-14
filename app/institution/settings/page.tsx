@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/lib/context/ToastContext";
+import { useInstitution } from "@/lib/context/InstitutionContext";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import { cn } from "@/lib/utils";
@@ -30,6 +31,7 @@ import Link from "next/link";
 
 export default function InstitutionSettings() {
   const { showToast } = useToast();
+  const { refreshInstitutions } = useInstitution();
   const [loading, setLoading] = useState(true);
   const [institution, setInstitution] = useState<any>(null);
   const [copied, setCopied] = useState(false);
@@ -72,6 +74,7 @@ export default function InstitutionSettings() {
       if (!res.ok) throw new Error("Failed to synchronize organization metadata.");
       const data = await res.json();
       setInstitution(data.institution);
+      await refreshInstitutions();
       showToast("Configuration effectively synchronized.", "success");
     } catch (err: any) {
       showToast(err.message, "error");
