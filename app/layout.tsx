@@ -22,9 +22,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Warming up the database connection
-  await dbConnect();
-
   return (
     <html lang="en" className="dark">
       <body className={`${jetbrainsMono.variable} font-mono antialiased`}>
