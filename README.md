@@ -8,7 +8,7 @@
 ## 🌐 Live Demo
 **https://trustcert2.vercel.app/**
 ## 🎥 Demo Video
-**https://youtu.be/dQw4w9WgXcQ** (Required for Level 3)
+**https://youtu.be/dQw4w9WgXcQ**
 
 > Built on **Stellar Testnet** — no real funds used.
 

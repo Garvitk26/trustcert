@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+let MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   if (process.env.NODE_ENV === "development") {
@@ -43,8 +43,26 @@ async function dbConnect() {
       family: 4, // Use IPv4
     };
 
-    cached!.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
+    // Ensure a database name is specified; default to 'trustcert'
+    let uri = MONGODB_URI!;
+    if (uri.includes('mongodb.net/') && uri.includes('mongodb.net/?')) {
+      uri = uri.replace('mongodb.net/?', 'mongodb.net/trustcert?');
+    } else if (uri.includes('mongodb.net') && !uri.match(/mongodb\.net\/[a-zA-Z]/)) {
+      uri = uri.replace('mongodb.net/', 'mongodb.net/trustcert/');
+    }
+
+    cached!.promise = mongoose.connect(uri, opts).then(async (mongoose) => {
       console.log("✅ TrustCert Registry effectively settled on MongoDB.");
+      // Sync indexes to ensure schema changes (like sparse:true) are applied
+      try {
+        const models = mongoose.modelNames();
+        for (const modelName of models) {
+          await mongoose.model(modelName).syncIndexes();
+        }
+        console.log("✅ Indexes synchronized.");
+      } catch (indexErr) {
+        console.warn("⚠️ Index sync warning:", indexErr);
+      }
       return mongoose;
     });
   }

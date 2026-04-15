@@ -35,7 +35,8 @@ export async function POST(req: Request) {
 
     let institution = null;
     if (role === "institution") {
-      const slug = orgName.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
+      const suffix = Math.random().toString(36).substring(2, 6);
+      const slug = orgName.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "") + "-" + suffix;
       institution = await Institution.create({
         name: orgName,
         slug,
