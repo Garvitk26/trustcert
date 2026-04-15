@@ -92,7 +92,14 @@ export async function PATCH(req: Request) {
 
   } catch (error: any) {
     console.error("Settings Update Error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    // Handle MongoDB duplicate key error
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern || {})[0] || "unknown";
+      return NextResponse.json({ 
+        error: `Duplicate value for ${field}. This value is already in use by another institution.` 
+      }, { status: 409 });
+    }
+    return NextResponse.json({ error: error.message || "Internal Server Error" }, { status: 500 });
   }
 }
 

@@ -71,7 +71,10 @@ export default function InstitutionSettings() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, certPrefix, accentColor, walletAddress, verifiedDomain, generateKey })
       });
-      if (!res.ok) throw new Error("Failed to synchronize organization metadata.");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Failed to synchronize organization metadata.");
+      }
       const data = await res.json();
       setInstitution(data.institution);
       await refreshInstitutions();

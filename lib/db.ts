@@ -51,19 +51,29 @@ async function dbConnect() {
       uri = uri.replace('mongodb.net/', 'mongodb.net/trustcert/');
     }
 
-    cached!.promise = mongoose.connect(uri, opts).then(async (mongoose) => {
+    cached!.promise = mongoose.connect(uri, opts).then(async (mongooseInstance) => {
       console.log("✅ TrustCert Registry effectively settled on MongoDB.");
-      // Sync indexes to ensure schema changes (like sparse:true) are applied
+      // Fix stale indexes: drop walletAddress_1 unique index (without sparse)
+      // so Mongoose can recreate it with sparse:true from the schema
       try {
-        const models = mongoose.modelNames();
-        for (const modelName of models) {
-          await mongoose.model(modelName).syncIndexes();
+        const db = mongooseInstance.connection.db;
+        if (db) {
+          const collections = await db.listCollections({ name: 'institutions' }).toArray();
+          if (collections.length > 0) {
+            const indexes = await db.collection('institutions').indexes();
+            const walletIdx = indexes.find((idx: any) => 
+              idx.key?.walletAddress && idx.unique && !idx.sparse
+            );
+            if (walletIdx) {
+              await db.collection('institutions').dropIndex(walletIdx.name);
+              console.log("✅ Dropped stale walletAddress index. Will be recreated with sparse:true.");
+            }
+          }
         }
-        console.log("✅ Indexes synchronized.");
       } catch (indexErr) {
-        console.warn("⚠️ Index sync warning:", indexErr);
+        console.warn("⚠️ Index fix warning:", indexErr);
       }
-      return mongoose;
+      return mongooseInstance;
     });
   }
 
