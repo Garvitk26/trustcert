@@ -28,7 +28,6 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const body = await req.json();
-  const { name, accentColor, certPrefix, walletAddress } = body;
 
   await dbConnect();
 
@@ -40,9 +39,17 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 
   if (!institution) return NextResponse.json({ error: "Unauthorized access" }, { status: 403 });
 
+  // Only $set fields that were actually provided, to avoid wiping fields like walletAddress
+  const updateFields: Record<string, any> = {};
+  if (body.name !== undefined) updateFields.name = body.name;
+  if (body.accentColor !== undefined) updateFields.accentColor = body.accentColor;
+  if (body.certPrefix !== undefined) updateFields.certPrefix = body.certPrefix;
+  if (body.walletAddress !== undefined) updateFields.walletAddress = body.walletAddress;
+  if (body.verifiedDomain !== undefined) updateFields.verifiedDomain = body.verifiedDomain;
+
   const updated = await Institution.findByIdAndUpdate(
     id,
-    { $set: { name, accentColor, certPrefix, walletAddress } },
+    { $set: updateFields },
     { new: true }
   );
 

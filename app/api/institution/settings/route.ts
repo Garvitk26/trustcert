@@ -28,7 +28,7 @@ export async function PATCH(req: Request) {
     if (slug) institution.slug = slug;
     if (accentColor) institution.accentColor = accentColor;
     if (verifiedDomain) institution.verifiedDomain = verifiedDomain;
-    if (walletAddress) institution.walletAddress = walletAddress;
+    if (walletAddress !== undefined) institution.walletAddress = walletAddress;
     if (certPrefix) {
        institution.metadata = { 
           ...institution.metadata, 

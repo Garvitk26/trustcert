@@ -4,7 +4,7 @@ const InstitutionSchema = new Schema(
   {
     name: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
-    walletAddress: { type: String, unique: true },
+    walletAddress: { type: String, unique: true, sparse: true },
     ownerId: { type: String, required: true },
     members: [
       {

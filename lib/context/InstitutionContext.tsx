@@ -10,7 +10,11 @@ export interface Institution {
   accentColor: string;
   walletAddress?: string;
   ownerId: string;
+  certPrefix?: string;
+  verifiedDomain?: string;
+  metadata?: Record<string, any>;
   members: Array<{ userId: string; role: "owner" | "admin" | "viewer" }>;
+  [key: string]: any; // Allow additional fields from MongoDB
 }
 
 interface InstitutionContextType {
