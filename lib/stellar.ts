@@ -247,15 +247,27 @@ export async function buildIssuanceTransaction(
   certHash: string
 ): Promise<string> {
   const account = await server.loadAccount(institutionAddress);
-  const tx = new TransactionBuilder(account, {
+  const builder = new TransactionBuilder(account, {
     fee: BASE_FEE,
     networkPassphrase: NETWORK_PASSPHRASE,
-  })
-    .addOperation(Operation.payment({
+  });
+
+  // If a valid student wallet is provided, send a micro-payment as proof
+  // Otherwise, use manageData to anchor the cert hash on-chain
+  if (studentAddress && studentAddress.startsWith('G') && studentAddress.length === 56) {
+    builder.addOperation(Operation.payment({
       destination: studentAddress,
       asset: Asset.native(),
       amount: "0.00001"
-    }))
+    }));
+  } else {
+    builder.addOperation(Operation.manageData({
+      name: `cert_${certHash.slice(0, 16)}`,
+      value: certHash.slice(0, 28)
+    }));
+  }
+
+  const tx = builder
     .addMemo(Memo.text(`TC-${certHash.slice(0, 20)}`))
     .setTimeout(60)
     .build();
