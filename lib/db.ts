@@ -65,7 +65,7 @@ async function dbConnect() {
               idx.key?.walletAddress && idx.unique && !idx.sparse
             );
             if (walletIdx) {
-              await db.collection('institutions').dropIndex(walletIdx.name);
+              await db.collection('institutions').dropIndex(walletIdx.name!);
               console.log("✅ Dropped stale walletAddress index. Will be recreated with sparse:true.");
             }
           }
