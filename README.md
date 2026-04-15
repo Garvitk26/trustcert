@@ -8,7 +8,12 @@
 ## 🌐 Live Demo
 **https://trustcert2.vercel.app/**
 ## 🎥 Demo Video
-**https://youtu.be/dQw4w9WgXcQ**
+
+<video src="./video/Screen Recording 2026-04-15 at 12.33.35 PM.mov" controls width="100%">
+  Your browser does not support the video tag.
+</video>
+
+> 📹 If the video doesn't load above, [click here to download and watch](./video/Screen%20Recording%202026-04-15%20at%2012.33.35%20PM.mov)
 
 > Built on **Stellar Testnet** — no real funds used.
 
