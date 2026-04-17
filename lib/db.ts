@@ -50,6 +50,9 @@ async function dbConnect() {
     } else if (uri && uri.includes('mongodb.net') && !uri.match(/mongodb\.net\/[a-zA-Z]/)) {
       uri = uri.replace('mongodb.net/', 'mongodb.net/trustcert/');
     }
+    if (!uri) {
+      throw new Error("MONGODB_URI is required to connect to the database.");
+    }
 
     cached!.promise = mongoose.connect(uri, opts).then(async (mongooseInstance) => {
       console.log("✅ TrustCert Registry effectively settled on MongoDB.");
