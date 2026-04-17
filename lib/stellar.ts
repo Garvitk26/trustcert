@@ -1,5 +1,6 @@
 import {
   Horizon,
+  rpc,
   Networks,
   Operation,
   TransactionBuilder,
@@ -10,7 +11,8 @@ import {
   Contract,
   Address,
   scValToNative,
-  xdr
+  xdr,
+  Account
 } from '@stellar/stellar-sdk'
 import { 
   isConnected, 
@@ -21,8 +23,11 @@ import {
 
 const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON 
   || 'https://horizon-testnet.stellar.org'
+const SOROBAN_RPC_URL = process.env.NEXT_PUBLIC_SOROBAN_RPC
+  || 'https://soroban-testnet.stellar.org'
 const NETWORK_PASSPHRASE = Networks.TESTNET
 export const server = new Horizon.Server(HORIZON_URL)
+export const rpcServer = new rpc.Server(SOROBAN_RPC_URL)
 
 // ── 0. CONTRACT CONFIG ──────────────────────────────────────
 const CONTRACT_ID = process.env.NEXT_PUBLIC_CONTRACT_ID || 'CC...PLACEHOLDER';
@@ -350,18 +355,18 @@ export async function buildContractRevocationXDR(
 export async function getContractCertData(certHash: string): Promise<any> {
   try {
     const contract = new Contract(CONTRACT_ID);
-    const result = await server.simulateTransaction(
-      new TransactionBuilder(
-        await server.loadAccount(Keypair.random().publicKey()), // Dummy source for simulation
-        { fee: BASE_FEE, networkPassphrase: NETWORK_PASSPHRASE }
-      )
-        .addOperation(contract.call("get_cert", xdr.ScVal.scvString(certHash)))
-        .setTimeout(30)
-        .build()
-    );
+    const tx = new TransactionBuilder(
+      new Account(Keypair.random().publicKey(), "0"), // Dummy account with seq 0
+      { fee: BASE_FEE, networkPassphrase: NETWORK_PASSPHRASE }
+    )
+      .addOperation(contract.call("get_cert", xdr.ScVal.scvString(certHash)))
+      .setTimeout(30)
+      .build();
 
-    if (Horizon.isSimulationSuccess(result)) {
-       return scValToNative(result.result.retval);
+    const result = await rpcServer.simulateTransaction(tx);
+
+    if (rpc.Api.isSimulationSuccess(result)) {
+       return scValToNative(result.result!.retval);
     }
     return null;
   } catch (err) {
