@@ -137,6 +137,14 @@ TrustCert is a decentralized platform for issuing and verifying academic and pro
 - **Network:** Stellar Testnet
 - **Horizon:** https://horizon-testnet.stellar.org
 - **Explorer:** https://stellar.expert/explorer/testnet
+- **Contract ID:** `CC...` (Soroban)
+
+### 📜 Smart Contract (Soroban)
+TrustCert leverages a Rust-based Soroban smart contract for secure certificate management.
+- **Location:** `./smartcontract`
+- **Logic:** Certificate issuance, revocation, and on-chain verification.
+- **Tests:** 6 intensive Rust unit tests covering all core functions.
+
 
 ### Wallet Addresses Used
 | Role | Address | Purpose |
@@ -226,7 +234,21 @@ npm run dev
 3. Update `NEXTAUTH_URL` to your Vercel URL.
 
 ## 📝 Automated Tests
-TrustCert includes a comprehensive unit test suite with 10+ tests covering core utility and blockchain logic.
+TrustCert includes a comprehensive test suite covering both frontend utilities and the Soroban smart contract.
+
+### Smart Contract Tests (Rust)
+```bash
+cd smartcontract/contracts/trustcert
+cargo test
+```
+*Output: 6 passed; 0 failed.*
+
+### Frontend Tests (Vitest)
+```bash
+npm test
+```
+*Vitest suite for utility and SDK integration.*
+
 
 ### Running Tests
 ```bash

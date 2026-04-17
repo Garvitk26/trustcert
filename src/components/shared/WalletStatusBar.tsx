@@ -59,12 +59,14 @@ export default function WalletStatusBar() {
         </div>
 
         <Dialog>
-          <DialogTrigger>
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-white h-9 px-4 font-bold shadow-lg shadow-primary/20">
-              <Send className="h-3.5 w-3.5 mr-2" />
-              Send XLM
-            </Button>
-          </DialogTrigger>
+          <DialogTrigger
+            render={
+              <Button size="sm" className="bg-primary hover:bg-primary/90 text-white h-9 px-4 font-bold shadow-lg shadow-primary/20">
+                <Send className="h-3.5 w-3.5 mr-2" />
+                Send XLM
+              </Button>
+            }
+          />
           <DialogContent className="sm:max-w-[480px] p-0 border-none bg-transparent">
             <SendXLMPanel />
           </DialogContent>

@@ -44,10 +44,10 @@ async function dbConnect() {
     };
 
     // Ensure a database name is specified; default to 'trustcert'
-    let uri = MONGODB_URI!;
-    if (uri.includes('mongodb.net/') && uri.includes('mongodb.net/?')) {
+    let uri = MONGODB_URI;
+    if (uri && uri.includes('mongodb.net/') && uri.includes('mongodb.net/?')) {
       uri = uri.replace('mongodb.net/?', 'mongodb.net/trustcert?');
-    } else if (uri.includes('mongodb.net') && !uri.match(/mongodb\.net\/[a-zA-Z]/)) {
+    } else if (uri && uri.includes('mongodb.net') && !uri.match(/mongodb\.net\/[a-zA-Z]/)) {
       uri = uri.replace('mongodb.net/', 'mongodb.net/trustcert/');
     }
 
@@ -83,7 +83,7 @@ async function dbConnect() {
     cached!.promise = null;
     
     // Provide a more descriptive error for Atlas IP whitelisting
-    if (e.name === 'MongooseServerSelectionError' || e.message.includes('whitelist')) {
+    if (e.name === 'MongooseServerSelectionError' || (e.message && e.message.includes('whitelist'))) {
       console.error("\n❌ TRUSTCERT_DATABASE_FATAL: MongoDB Atlas IP Access Denied.");
       console.error("👉 Please ensure your IP address is effectively whitelisted on the Atlas cluster.");
       console.error("👉 Visit: https://www.mongodb.com/docs/atlas/security-whitelist/\n");

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { validateStellarAddress, parseStellarError } from '../stellar'
+import { validateStellarAddress, parseStellarError, buildContractIssuanceXDR, server } from '../stellar'
+import { vi } from 'vitest'
 import { Keypair } from '@stellar/stellar-sdk'
 
 describe('TrustCert Stellar Helpers', () => {
@@ -42,6 +42,30 @@ describe('TrustCert Stellar Helpers', () => {
     it('should handle custom error messages', () => {
       const mockError = { message: 'Something went wrong' }
       expect(parseStellarError(mockError)).toBe('Something went wrong')
+    })
+  })
+
+  describe('Contract Helpers', () => {
+    it('should build issuance XDR correctly (mocked)', async () => {
+      const institution = Keypair.random().publicKey()
+      const student = Keypair.random().publicKey()
+      
+      // Mock server.loadAccount
+      vi.spyOn(server, 'loadAccount').mockResolvedValue({
+        sequenceNumber: () => "1",
+        accountId: () => institution,
+        sequence: "1",
+      } as any)
+
+      const xdr = await buildContractIssuanceXDR(
+        institution,
+        student,
+        'hash123',
+        '{}'
+      )
+      
+      expect(xdr).toBeDefined()
+      expect(typeof xdr).toBe('string')
     })
   })
 })

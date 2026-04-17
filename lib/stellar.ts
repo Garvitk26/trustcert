@@ -6,7 +6,11 @@ import {
   BASE_FEE,
   Memo,
   Asset,
-  Keypair
+  Keypair,
+  Contract,
+  Address,
+  scValToNative,
+  xdr
 } from '@stellar/stellar-sdk'
 import { 
   isConnected, 
@@ -19,6 +23,10 @@ const HORIZON_URL = process.env.NEXT_PUBLIC_STELLAR_HORIZON
   || 'https://horizon-testnet.stellar.org'
 const NETWORK_PASSPHRASE = Networks.TESTNET
 export const server = new Horizon.Server(HORIZON_URL)
+
+// ── 0. CONTRACT CONFIG ──────────────────────────────────────
+const CONTRACT_ID = process.env.NEXT_PUBLIC_CONTRACT_ID || 'CC...PLACEHOLDER';
+
 
 // ── 1. WALLET SETUP ──────────────────────────────────────────
 
@@ -59,7 +67,9 @@ export async function connectFreighter(): Promise<{
     if (network !== 'TESTNET') throw new Error('Please switch Freighter to Stellar Testnet');
     return { publicKey: address, network };
   } catch (error: any) {
-    if (error.message.includes('User rejected')) throw new Error('User rejected connection');
+    if (error?.message && typeof error.message === 'string' && error.message.includes('User rejected')) {
+      throw new Error('User rejected connection');
+    }
     throw error;
   }
 }
@@ -273,3 +283,90 @@ export async function buildIssuanceTransaction(
     .build();
   return tx.toXDR();
 }
+
+// ── 5. SOROBAN CONTRACT INTERACTIONS ─────────────────────────
+
+/**
+ * Invoke the issue_cert function on the Soroban contract
+ */
+export async function buildContractIssuanceXDR(
+  institutionAddress: string,
+  studentAddress: string,
+  certHash: string,
+  metadata: string
+): Promise<string> {
+  const account = await server.loadAccount(institutionAddress);
+  const contract = new Contract(CONTRACT_ID);
+
+  const tx = new TransactionBuilder(account, {
+    fee: BASE_FEE,
+    networkPassphrase: NETWORK_PASSPHRASE,
+  })
+    .addOperation(
+      contract.call(
+        "issue_cert",
+        new Address(institutionAddress).toScVal(),
+        new Address(studentAddress).toScVal(),
+        xdr.ScVal.scvString(certHash),
+        xdr.ScVal.scvString(metadata)
+      )
+    )
+    .setTimeout(60)
+    .build();
+
+  return tx.toXDR();
+}
+
+/**
+ * Invoke the revoke_cert function on the Soroban contract
+ */
+export async function buildContractRevocationXDR(
+  institutionAddress: string,
+  certHash: string
+): Promise<string> {
+  const account = await server.loadAccount(institutionAddress);
+  const contract = new Contract(CONTRACT_ID);
+
+  const tx = new TransactionBuilder(account, {
+    fee: BASE_FEE,
+    networkPassphrase: NETWORK_PASSPHRASE,
+  })
+    .addOperation(
+      contract.call(
+        "revoke_cert",
+        new Address(institutionAddress).toScVal(),
+        xdr.ScVal.scvString(certHash)
+      )
+    )
+    .setTimeout(60)
+    .build();
+
+  return tx.toXDR();
+}
+
+/**
+ * Fetch certificate data from the contract
+ */
+export async function getContractCertData(certHash: string): Promise<any> {
+  try {
+    const contract = new Contract(CONTRACT_ID);
+    const result = await server.simulateTransaction(
+      new TransactionBuilder(
+        await server.loadAccount(Keypair.random().publicKey()), // Dummy source for simulation
+        { fee: BASE_FEE, networkPassphrase: NETWORK_PASSPHRASE }
+      )
+        .addOperation(contract.call("get_cert", xdr.ScVal.scvString(certHash)))
+        .setTimeout(30)
+        .build()
+    );
+
+    if (Horizon.isSimulationSuccess(result)) {
+       return scValToNative(result.result.retval);
+    }
+    return null;
+  } catch (err) {
+    console.error("Error fetching cert from contract:", err);
+    return null;
+  }
+}
+
